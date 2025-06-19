@@ -789,4 +789,4 @@ st.markdown("""
         <p style="margin: 0; font-family: 'Montserrat', sans-serif;">
             © 2024 <strong>Wilton Weavers</strong> - All Rights Reserved
         </p>
-        <p style="margin: 0.5rem 0 0 0; opacity: 0.8
+        <p style="margin: 0.5rem 0 0 0; opacity: 0.8""")
