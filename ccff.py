@@ -38,7 +38,402 @@ if 'search_history' not in st.session_state:
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&family=Crimson+Text:wght@400;600&display=swap');
-    /* ... (CSS omitted for brevity, see prompt for full CSS) ... */
+    
+    .main-header {
+        background: linear-gradient(135deg, #0d1421 0%, #1a2332 25%, #2c3e50 50%, #34495e 75%, #2c3e50 100%);
+        background-size: 400% 400%;
+        animation: gradientShift 8s ease infinite;
+        padding: 3rem 2rem;
+        border-radius: 20px;
+        color: #ffffff;
+        text-align: center;
+        margin-bottom: 2rem;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.15), 0 0 80px rgba(52, 73, 94, 0.3);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    
+    .main-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="carpet-pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><rect fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.5" width="20" height="20"/><circle fill="rgba(255,255,255,0.03)" cx="10" cy="10" r="2"/></pattern></defs><rect width="100" height="100" fill="url(%23carpet-pattern)"/></svg>');
+        opacity: 0.4;
+    }
+    
+    .main-header h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 4.5rem;
+        font-weight: 700;
+        margin: 0;
+        text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+        letter-spacing: -2px;
+        position: relative;
+        z-index: 2;
+    }
+    
+    .company-location {
+        font-family: 'Inter', sans-serif;
+        font-size: 1.4rem;
+        font-weight: 600;
+        margin: 0.5rem 0;
+        color: #ecf0f1;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        position: relative;
+        z-index: 2;
+    }
+    
+    .company-tagline {
+        font-family: 'Crimson Text', serif;
+        font-size: 1.3rem;
+        font-weight: 400;
+        margin: 1.5rem auto 0;
+        max-width: 800px;
+        line-height: 1.6;
+        color: #bdc3c7;
+        font-style: italic;
+        position: relative;
+        z-index: 2;
+    }
+    
+    .heritage-badge {
+        background: linear-gradient(135deg, #e74c3c, #c0392b);
+        color: white;
+        padding: 0.5rem 1.5rem;
+        border-radius: 50px;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin: 1rem auto;
+        display: inline-block;
+        box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+        position: relative;
+        z-index: 2;
+    }
+    
+    .upload-section {
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        padding: 2.5rem;
+        border-radius: 20px;
+        margin-bottom: 2rem;
+        border: 3px solid transparent;
+        background-clip: padding-box;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .upload-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #3498db, #e74c3c, #f39c12, #27ae60);
+        border-radius: 20px 20px 0 0;
+    }
+    
+    .upload-section:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+    
+    .upload-section h3 {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 1rem;
+    }
+    
+    .search-container {
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        padding: 3rem;
+        border-radius: 20px;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        margin-bottom: 2rem;
+        border-left: 6px solid #3498db;
+        position: relative;
+    }
+    
+    .search-container::before {
+        content: '🔍';
+        position: absolute;
+        top: -10px;
+        right: 20px;
+        font-size: 2rem;
+        background: linear-gradient(135deg, #3498db, #2980b9);
+        padding: 10px;
+        border-radius: 50%;
+        box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+    }
+    
+    .search-container h3 {
+        font-family: 'Playfair Display', serif;
+        font-size: 2rem;
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 1rem;
+    }
+    
+    .metric-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 2rem;
+        border-radius: 15px;
+        color: white;
+        text-align: center;
+        margin: 0.5rem;
+        box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .metric-card::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+        transform: rotate(45deg);
+        transition: all 0.6s ease;
+        opacity: 0;
+    }
+    
+    .metric-card:hover::before {
+        animation: shimmer 0.6s ease-in-out;
+        opacity: 1;
+    }
+    
+    @keyframes shimmer {
+        0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+        100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+    }
+    
+    .metric-card:hover {
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+    }
+    
+    .metric-number {
+        font-family: 'Inter', sans-serif;
+        font-size: 3rem;
+        font-weight: 700;
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+    
+    .metric-label {
+        font-family: 'Inter', sans-serif;
+        font-size: 1rem;
+        font-weight: 500;
+        opacity: 0.9;
+    }
+    
+    .success-message {
+        background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+        color: white;
+        padding: 1.5rem 2rem;
+        border-radius: 15px;
+        margin: 1.5rem 0;
+        text-align: center;
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        font-size: 1.1rem;
+        box-shadow: 0 8px 25px rgba(39, 174, 96, 0.3);
+        animation: slideInFromTop 0.5s ease-out;
+    }
+    
+    @keyframes slideInFromTop {
+        0% { transform: translateY(-20px); opacity: 0; }
+        100% { transform: translateY(0); opacity: 1; }
+    }
+    
+    .error-message {
+        background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        color: white;
+        padding: 1.5rem 2rem;
+        border-radius: 15px;
+        margin: 1.5rem 0;
+        text-align: center;
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        font-size: 1.1rem;
+        box-shadow: 0 8px 25px rgba(231, 76, 60, 0.3);
+    }
+    
+    .dataframe-container {
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        margin: 1.5rem 0;
+        border: 1px solid #e9ecef;
+    }
+    
+    .sidebar-content {
+        background: linear-gradient(135deg, #74b9ff 0%, #55a3ff 100%);
+        padding: 1.5rem;
+        border-radius: 15px;
+        margin-bottom: 1.5rem;
+        color: white;
+        box-shadow: 0 6px 20px rgba(116, 185, 255, 0.3);
+    }
+    
+    .sidebar-content h3 {
+        font-family: 'Playfair Display', serif;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+    
+    .welcome-section {
+        text-align: center;
+        padding: 4rem 2rem;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border-radius: 20px;
+        margin: 2rem 0;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .welcome-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="welcome-pattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse"><rect fill="none" stroke="rgba(52,73,94,0.05)" stroke-width="1" width="40" height="40"/><circle fill="rgba(52,73,94,0.03)" cx="20" cy="20" r="3"/></pattern></defs><rect width="100" height="100" fill="url(%23welcome-pattern)"/></svg>');
+        opacity: 0.6;
+    }
+    
+    .welcome-section h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.5rem;
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 1rem;
+        position: relative;
+        z-index: 2;
+    }
+    
+    .feature-card {
+        text-align: center;
+        padding: 2rem;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        margin: 1rem;
+        position: relative;
+        z-index: 2;
+    }
+    
+    .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    }
+    
+    .feature-icon {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        display: block;
+    }
+    
+    .feature-card h4 {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 0.5rem;
+    }
+    
+    .footer {
+        text-align: center;
+        padding: 3rem 2rem;
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        color: #ecf0f1;
+        font-family: 'Inter', sans-serif;
+        margin-top: 4rem;
+        border-radius: 20px 20px 0 0;
+    }
+    
+    .footer a {
+        color: #3498db;
+        text-decoration: none;
+        font-weight: 500;
+    }
+    
+    .footer a:hover {
+        color: #5dade2;
+        text-decoration: underline;
+    }
+    
+    .stSelectbox > label, .stTextInput > label {
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        color: #2c3e50;
+        font-size: 1.1rem;
+    }
+    
+    .stButton > button {
+        background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+        color: white;
+        border: none;
+        border-radius: 50px;
+        padding: 0.75rem 2.5rem;
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 0 6px 20px rgba(52, 152, 219, 0.3);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .stButton > button:hover {
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 10px 30px rgba(52, 152, 219, 0.4);
+        background: linear-gradient(135deg, #2980b9 0%, #3498db 100%);
+    }
+    
+    .stTabs [data-baseweb="tab-list"] {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border-radius: 15px;
+        padding: 0.5rem;
+    }
+    
+    .stTabs [data-baseweb="tab"] {
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        border-radius: 10px;
+        color: #2c3e50;
+    }
+    
+    .aviation-badge {
+        background: linear-gradient(135deg, #f39c12, #e67e22);
+        color: white;
+        padding: 0.3rem 1rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin-left: 1rem;
+        display: inline-block;
+    }
 </style>
 """, unsafe_allow_html=True)
 
