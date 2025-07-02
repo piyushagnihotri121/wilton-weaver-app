@@ -34,44 +34,43 @@ if 'selected_colors' not in st.session_state:
 if 'search_history' not in st.session_state:
     st.session_state.search_history = []
 
-# Professional Aviation Carpet Manufacturing Dashboard CSS
+# Premium Professional Aviation Carpet Manufacturing Dashboard CSS
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&family=Crimson+Text:wght@400;600&family=Merriweather:wght@300;400;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700&family=Source+Sans+Pro:wght@300;400;600;700&display=swap');
     
-    /* Global Styles */
+    /* Global Professional Styling */
     .stApp {
-        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+        color: #e5e5e5;
     }
     
-    /* Main Header - Aviation Carpet Heritage */
+    /* Executive Header */
     .main-header {
-        background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 25%, #2563eb 50%, #3b82f6 75%, #60a5fa 100%);
-        background-size: 400% 400%;
-        animation: aviationGradient 12s ease infinite;
+        background: linear-gradient(135deg, #1e293b 0%, #334155 25%, #475569 50%, #64748b 75%, #475569 100%);
+        background-size: 300% 300%;
+        animation: subtleGradient 15s ease infinite;
         padding: 4rem 3rem;
-        border-radius: 25px;
+        border-radius: 16px;
         color: #ffffff;
         text-align: center;
         margin-bottom: 3rem;
         box-shadow: 
-            0 25px 50px rgba(30, 58, 138, 0.2),
-            0 0 0 1px rgba(255,255,255,0.1),
-            inset 0 1px 0 rgba(255,255,255,0.2);
+            0 24px 48px rgba(0,0,0,0.4),
+            0 0 0 1px rgba(255,255,255,0.05),
+            inset 0 1px 0 rgba(255,255,255,0.1);
         position: relative;
         overflow: hidden;
-        border: 2px solid rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.08);
     }
     
-    @keyframes aviationGradient {
+    @keyframes subtleGradient {
         0% { background-position: 0% 50%; }
-        25% { background-position: 100% 25%; }
         50% { background-position: 100% 50%; }
-        75% { background-position: 0% 75%; }
         100% { background-position: 0% 50%; }
     }
     
-    /* Aviation Pattern Overlay */
+    /* Subtle Technical Pattern */
     .main-header::before {
         content: '';
         position: absolute;
@@ -79,169 +78,118 @@ st.markdown("""
         left: 0;
         right: 0;
         bottom: 0;
-        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><pattern id="aviation-weave" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse"><rect fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="0.5" width="40" height="40"/><path d="M0,20 Q10,10 20,20 Q30,30 40,20" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/><path d="M20,0 Q30,10 20,20 Q10,30 20,40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.04)"/></pattern></defs><rect width="200" height="200" fill="url(%23aviation-weave)"/></svg>');
-        opacity: 0.6;
-    }
-    
-    /* Company Logo Accent */
-    .main-header::after {
-        content: '✈️';
-        position: absolute;
-        top: 20px;
-        right: 30px;
-        font-size: 2.5rem;
-        opacity: 0.7;
-        animation: float 3s ease-in-out infinite;
-    }
-    
-    @keyframes float {
-        0%, 100% { transform: translateY(0px) rotate(0deg); }
-        50% { transform: translateY(-10px) rotate(5deg); }
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="tech-grid" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse"><rect fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="0.5" width="10" height="10"/><circle cx="5" cy="5" r="0.5" fill="rgba(255,255,255,0.02)"/></pattern></defs><rect width="100" height="100" fill="url(%23tech-grid)"/></svg>');
+        opacity: 0.4;
     }
     
     .main-header h1 {
-        font-family: 'Playfair Display', serif;
-        font-size: 4.8rem;
-        font-weight: 900;
+        font-family: 'Inter', sans-serif;
+        font-size: 3.8rem;
+        font-weight: 800;
         margin: 0;
-        text-shadow: 
-            2px 2px 4px rgba(0,0,0,0.3),
-            0 0 20px rgba(255,255,255,0.2);
-        letter-spacing: -2px;
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+        letter-spacing: -1px;
         position: relative;
-        z-index: 3;
-        background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        z-index: 2;
+        color: #ffffff;
     }
     
     .company-location {
-        font-family: 'Inter', sans-serif;
-        font-size: 1.5rem;
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: 1.1rem;
         font-weight: 600;
-        margin: 1rem 0;
-        color: #e0e7ff;
-        letter-spacing: 3px;
+        margin: 1.2rem 0;
+        color: #cbd5e1;
+        letter-spacing: 4px;
         text-transform: uppercase;
         position: relative;
-        z-index: 3;
-    }
-    
-    .company-location::before {
-        content: '🌴';
-        margin-right: 10px;
-    }
-    
-    .company-location::after {
-        content: '🌴';
-        margin-left: 10px;
+        z-index: 2;
     }
     
     .company-tagline {
-        font-family: 'Merriweather', serif;
-        font-size: 1.4rem;
-        font-weight: 300;
+        font-family: 'Inter', sans-serif;
+        font-size: 1.1rem;
+        font-weight: 400;
         margin: 2rem auto 0;
-        max-width: 900px;
-        line-height: 1.7;
-        color: #cbd5e1;
-        font-style: italic;
+        max-width: 700px;
+        line-height: 1.6;
+        color: #94a3b8;
         position: relative;
-        z-index: 3;
+        z-index: 2;
     }
     
     .heritage-badge {
-        background: linear-gradient(135deg, #dc2626 0%, #b91c1c 50%, #991b1b 100%);
-        color: white;
-        padding: 0.8rem 2rem;
-        border-radius: 50px;
+        background: linear-gradient(135deg, #8b4513 0%, #a0522d 50%, #654321 100%);
+        color: #ffffff;
+        padding: 0.8rem 2.5rem;
+        border-radius: 6px;
         font-family: 'Inter', sans-serif;
-        font-size: 1rem;
+        font-size: 0.9rem;
         font-weight: 700;
-        margin: 1.5rem auto;
+        margin: 2rem auto;
         display: inline-block;
-        box-shadow: 
-            0 6px 20px rgba(220, 38, 38, 0.4),
-            0 0 0 1px rgba(255,255,255,0.1);
+        box-shadow: 0 4px 16px rgba(139, 69, 19, 0.3);
         position: relative;
-        z-index: 3;
+        z-index: 2;
         text-transform: uppercase;
-        letter-spacing: 1px;
+        letter-spacing: 2px;
+        border: 1px solid rgba(255,255,255,0.1);
     }
     
     .aviation-badge {
-        background: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #b45309 100%);
-        color: white;
-        padding: 0.6rem 1.5rem;
-        border-radius: 25px;
-        font-size: 0.9rem;
+        background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+        color: #ffffff;
+        padding: 0.6rem 1.8rem;
+        border-radius: 6px;
+        font-size: 0.8rem;
         font-weight: 600;
         margin-left: 1rem;
         display: inline-block;
-        box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+        box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
         text-transform: uppercase;
         letter-spacing: 1px;
+        border: 1px solid rgba(255,255,255,0.1);
     }
     
-    /* Professional Section Containers */
+    /* Executive Section Containers */
     .upload-section, .search-container {
-        background: rgba(255, 255, 255, 0.95);
+        background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
         backdrop-filter: blur(10px);
         padding: 3rem;
-        border-radius: 20px;
+        border-radius: 12px;
         margin-bottom: 2.5rem;
-        border: 1px solid rgba(255,255,255,0.2);
+        border: 1px solid rgba(255,255,255,0.08);
         box-shadow: 
-            0 20px 40px rgba(0,0,0,0.1),
-            0 0 0 1px rgba(255,255,255,0.1),
-            inset 0 1px 0 rgba(255,255,255,0.8);
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            0 20px 40px rgba(0,0,0,0.3),
+            0 0 0 1px rgba(255,255,255,0.05),
+            inset 0 1px 0 rgba(255,255,255,0.1);
+        transition: all 0.3s ease;
         position: relative;
         overflow: hidden;
     }
     
-    /* Carpet Weave Pattern for Sections */
     .upload-section::before, .search-container::before {
         content: '';
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
-        height: 6px;
-        background: linear-gradient(90deg, 
-            #1e40af 0%, 
-            #dc2626 25%, 
-            #f59e0b 50%, 
-            #059669 75%, 
-            #1e40af 100%);
-        border-radius: 20px 20px 0 0;
-    }
-    
-    .upload-section::after, .search-container::after {
-        content: '';
-        position: absolute;
-        bottom: 10px;
-        right: 10px;
-        width: 60px;
-        height: 60px;
-        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="mini-weave" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse"><rect fill="none" stroke="rgba(30,64,175,0.1)" stroke-width="0.5" width="10" height="10"/><circle cx="5" cy="5" r="1" fill="rgba(30,64,175,0.08)"/></pattern></defs><rect width="100" height="100" fill="url(%23mini-weave)"/></svg>');
-        opacity: 0.3;
-        border-radius: 10px;
+        height: 3px;
+        background: linear-gradient(90deg, #1e40af 0%, #8b4513 50%, #1e293b 100%);
     }
     
     .upload-section:hover, .search-container:hover {
-        transform: translateY(-8px) scale(1.01);
+        transform: translateY(-4px);
         box-shadow: 
-            0 30px 60px rgba(0,0,0,0.15),
-            0 0 0 1px rgba(255,255,255,0.2);
+            0 28px 56px rgba(0,0,0,0.4),
+            0 0 0 1px rgba(255,255,255,0.1);
     }
     
     .upload-section h3, .search-container h3 {
-        font-family: 'Playfair Display', serif;
-        font-size: 2.2rem;
+        font-family: 'Inter', sans-serif;
+        font-size: 1.8rem;
         font-weight: 700;
-        color: #1e40af;
+        color: #ffffff;
         margin-bottom: 1.5rem;
         position: relative;
     }
@@ -251,188 +199,159 @@ st.markdown("""
         position: absolute;
         bottom: -8px;
         left: 0;
-        width: 60px;
-        height: 3px;
-        background: linear-gradient(90deg, #1e40af, #dc2626);
-        border-radius: 2px;
+        width: 40px;
+        height: 2px;
+        background: linear-gradient(90deg, #1e40af, #8b4513);
     }
     
-    /* Enhanced Metric Cards - Professional Aviation Style */
+    /* Premium Metric Cards */
     .metric-card {
-        background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 50%, #1e293b 100%);
+        background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #475569 100%);
         padding: 2.5rem 2rem;
-        border-radius: 18px;
-        color: white;
+        border-radius: 12px;
+        color: #ffffff;
         text-align: center;
         margin: 0.8rem;
         box-shadow: 
-            0 15px 35px rgba(30, 64, 175, 0.25),
-            0 0 0 1px rgba(255,255,255,0.1),
-            inset 0 1px 0 rgba(255,255,255,0.2);
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            0 16px 32px rgba(0,0,0,0.3),
+            0 0 0 1px rgba(255,255,255,0.05),
+            inset 0 1px 0 rgba(255,255,255,0.1);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         position: relative;
         overflow: hidden;
-        border: 1px solid rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.08);
     }
     
     .metric-card::before {
         content: '';
         position: absolute;
-        top: -2px;
-        left: -2px;
-        right: -2px;
-        bottom: -2px;
-        background: linear-gradient(45deg, #3b82f6, #ef4444, #f59e0b, #10b981);
-        border-radius: 20px;
-        z-index: -1;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }
-    
-    .metric-card:hover::before {
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #1e40af, #8b4513, #1e293b);
         opacity: 0.8;
-        animation: borderRotate 2s linear infinite;
-    }
-    
-    @keyframes borderRotate {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
-    
-    .metric-card::after {
-        content: '📊';
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        font-size: 1.5rem;
-        opacity: 0.6;
     }
     
     .metric-card:hover {
-        transform: translateY(-8px) scale(1.05);
+        transform: translateY(-6px) scale(1.02);
         box-shadow: 
-            0 25px 50px rgba(30, 64, 175, 0.35),
-            0 0 50px rgba(30, 64, 175, 0.2);
+            0 24px 48px rgba(0,0,0,0.4),
+            0 0 40px rgba(30, 64, 175, 0.15);
     }
     
     .metric-number {
         font-family: 'Inter', sans-serif;
-        font-size: 3.5rem;
+        font-size: 3.2rem;
         font-weight: 800;
         display: block;
         margin-bottom: 0.8rem;
-        text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        color: #ffffff;
+        text-shadow: 0 2px 8px rgba(0,0,0,0.3);
     }
     
     .metric-label {
-        font-family: 'Inter', sans-serif;
-        font-size: 1.1rem;
-        font-weight: 500;
-        opacity: 0.95;
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: 1rem;
+        font-weight: 600;
+        color: #cbd5e1;
         text-transform: uppercase;
         letter-spacing: 1px;
     }
     
-    /* Professional Status Messages */
+    /* Executive Status Messages */
     .success-message {
-        background: linear-gradient(135deg, #059669 0%, #047857 50%, #065f46 100%);
-        color: white;
+        background: linear-gradient(135deg, #065f46 0%, #047857 50%, #059669 100%);
+        color: #ffffff;
         padding: 2rem 2.5rem;
-        border-radius: 18px;
+        border-radius: 12px;
         margin: 2rem 0;
         text-align: center;
         font-family: 'Inter', sans-serif;
         font-weight: 600;
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         box-shadow: 
-            0 12px 30px rgba(5, 150, 105, 0.3),
-            0 0 0 1px rgba(255,255,255,0.1);
-        animation: slideInSuccess 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            0 12px 24px rgba(6, 95, 70, 0.3),
+            0 0 0 1px rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.08);
         position: relative;
     }
     
     .success-message::before {
-        content: '✅';
+        content: '';
         position: absolute;
-        top: -10px;
-        right: 20px;
-        font-size: 2rem;
-        background: rgba(255,255,255,0.2);
-        padding: 8px;
-        border-radius: 50%;
-    }
-    
-    @keyframes slideInSuccess {
-        0% { transform: translateY(-30px) scale(0.9); opacity: 0; }
-        100% { transform: translateY(0) scale(1); opacity: 1; }
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #10b981, #059669);
     }
     
     .error-message {
-        background: linear-gradient(135deg, #dc2626 0%, #b91c1c 50%, #991b1b 100%);
-        color: white;
+        background: linear-gradient(135deg, #991b1b 0%, #b91c1c 50%, #dc2626 100%);
+        color: #ffffff;
         padding: 2rem 2.5rem;
-        border-radius: 18px;
+        border-radius: 12px;
         margin: 2rem 0;
         text-align: center;
         font-family: 'Inter', sans-serif;
         font-weight: 600;
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         box-shadow: 
-            0 12px 30px rgba(220, 38, 38, 0.3),
-            0 0 0 1px rgba(255,255,255,0.1);
+            0 12px 24px rgba(153, 27, 27, 0.3),
+            0 0 0 1px rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.08);
         position: relative;
     }
     
     .error-message::before {
-        content: '⚠️';
+        content: '';
         position: absolute;
-        top: -10px;
-        right: 20px;
-        font-size: 2rem;
-        background: rgba(255,255,255,0.2);
-        padding: 8px;
-        border-radius: 50%;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #dc2626, #b91c1c);
     }
     
-    /* Professional Data Display */
+    /* Executive Data Display */
     .dataframe-container {
-        background: rgba(255, 255, 255, 0.98);
+        background: linear-gradient(135deg, #374151 0%, #4b5563 100%);
         backdrop-filter: blur(10px);
         padding: 2.5rem;
-        border-radius: 20px;
+        border-radius: 12px;
         box-shadow: 
-            0 15px 35px rgba(0,0,0,0.1),
-            0 0 0 1px rgba(255,255,255,0.2),
-            inset 0 1px 0 rgba(255,255,255,0.8);
+            0 16px 32px rgba(0,0,0,0.3),
+            0 0 0 1px rgba(255,255,255,0.05),
+            inset 0 1px 0 rgba(255,255,255,0.1);
         margin: 2rem 0;
-        border: 1px solid rgba(226, 232, 240, 0.8);
+        border: 1px solid rgba(255,255,255,0.08);
         position: relative;
     }
     
     .dataframe-container::before {
-        content: '📋';
+        content: '';
         position: absolute;
-        top: -12px;
-        left: 25px;
-        font-size: 1.8rem;
-        background: linear-gradient(135deg, #1e40af, #3b82f6);
-        padding: 8px 12px;
-        border-radius: 50%;
-        box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3);
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #1e40af, #8b4513);
     }
     
-    /* Sidebar Professional Styling */
+    /* Executive Sidebar */
     .sidebar-content {
-        background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
-        padding: 2rem;
-        border-radius: 20px;
+        background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+        padding: 2.5rem;
+        border-radius: 12px;
         margin-bottom: 2rem;
-        color: white;
+        color: #ffffff;
         box-shadow: 
-            0 12px 30px rgba(30, 64, 175, 0.3),
-            0 0 0 1px rgba(255,255,255,0.1);
+            0 16px 32px rgba(0,0,0,0.3),
+            0 0 0 1px rgba(255,255,255,0.05);
         position: relative;
         overflow: hidden;
+        border: 1px solid rgba(255,255,255,0.08);
     }
     
     .sidebar-content::before {
@@ -441,31 +360,32 @@ st.markdown("""
         top: 0;
         left: 0;
         right: 0;
-        bottom: 0;
-        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="sidebar-pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><rect fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.5" width="20" height="20"/><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.03)"/></pattern></defs><rect width="100" height="100" fill="url(%23sidebar-pattern)"/></svg>');
-        opacity: 0.4;
+        height: 2px;
+        background: linear-gradient(90deg, #1e40af, #8b4513);
     }
     
     .sidebar-content h3 {
-        font-family: 'Playfair Display', serif;
+        font-family: 'Inter', sans-serif;
         font-weight: 700;
         margin-bottom: 1.5rem;
         position: relative;
         z-index: 2;
+        color: #ffffff;
     }
     
-    /* Welcome Section - Heritage Inspired */
+    /* Executive Welcome Section */
     .welcome-section {
         text-align: center;
         padding: 5rem 3rem;
-        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%);
-        border-radius: 25px;
+        background: linear-gradient(135deg, #374151 0%, #4b5563 50%, #6b7280 100%);
+        border-radius: 16px;
         margin: 3rem 0;
         position: relative;
         overflow: hidden;
         box-shadow: 
-            0 20px 40px rgba(0,0,0,0.1),
-            inset 0 1px 0 rgba(255,255,255,0.8);
+            0 20px 40px rgba(0,0,0,0.3),
+            inset 0 1px 0 rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.08);
     }
     
     .welcome-section::before {
@@ -475,70 +395,81 @@ st.markdown("""
         left: 0;
         right: 0;
         bottom: 0;
-        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><pattern id="welcome-weave" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse"><rect fill="none" stroke="rgba(30,64,175,0.06)" stroke-width="1" width="50" height="50"/><path d="M0,25 Q12.5,12.5 25,25 Q37.5,37.5 50,25" fill="none" stroke="rgba(30,64,175,0.04)" stroke-width="1.5"/><path d="M25,0 Q37.5,12.5 25,25 Q12.5,37.5 25,50" fill="none" stroke="rgba(30,64,175,0.04)" stroke-width="1.5"/><circle cx="25" cy="25" r="3" fill="rgba(30,64,175,0.03)"/></pattern></defs><rect width="200" height="200" fill="url(%23welcome-weave)"/></svg>');
-        opacity: 0.7;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="executive-pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><rect fill="none" stroke="rgba(255,255,255,0.02)" stroke-width="0.5" width="20" height="20"/><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.01)"/></pattern></defs><rect width="100" height="100" fill="url(%23executive-pattern)"/></svg>');
+        opacity: 0.5;
     }
     
     .welcome-section h2 {
-        font-family: 'Playfair Display', serif;
-        font-size: 3rem;
+        font-family: 'Inter', sans-serif;
+        font-size: 2.5rem;
         font-weight: 700;
-        color: #1e40af;
+        color: #ffffff;
         margin-bottom: 1.5rem;
         position: relative;
         z-index: 2;
     }
     
-    /* Feature Cards - Aviation Industry Style */
+    /* Executive Feature Cards */
     .feature-card {
         text-align: center;
         padding: 2.5rem 2rem;
-        background: rgba(255, 255, 255, 0.95);
+        background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
         backdrop-filter: blur(10px);
-        border-radius: 20px;
+        border-radius: 12px;
         box-shadow: 
-            0 15px 35px rgba(0,0,0,0.1),
-            0 0 0 1px rgba(255,255,255,0.2);
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            0 16px 32px rgba(0,0,0,0.3),
+            0 0 0 1px rgba(255,255,255,0.05);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         margin: 1.5rem;
         position: relative;
         z-index: 2;
-        border: 1px solid rgba(226, 232, 240, 0.8);
+        border: 1px solid rgba(255,255,255,0.08);
+    }
+    
+    .feature-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #1e40af, #8b4513);
     }
     
     .feature-card:hover {
-        transform: translateY(-12px) scale(1.02);
+        transform: translateY(-8px);
         box-shadow: 
-            0 25px 50px rgba(0,0,0,0.15),
-            0 0 50px rgba(30, 64, 175, 0.1);
+            0 24px 48px rgba(0,0,0,0.4),
+            0 0 40px rgba(30, 64, 175, 0.1);
     }
     
     .feature-icon {
-        font-size: 4rem;
+        font-size: 3rem;
         margin-bottom: 1.5rem;
         display: block;
-        filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+        color: #cbd5e1;
     }
     
     .feature-card h4 {
-        font-family: 'Playfair Display', serif;
-        font-size: 1.5rem;
+        font-family: 'Inter', sans-serif;
+        font-size: 1.3rem;
         font-weight: 700;
-        color: #1e40af;
+        color: #ffffff;
         margin-bottom: 1rem;
     }
     
-    /* Professional Footer */
+    /* Executive Footer */
     .footer {
         text-align: center;
         padding: 4rem 3rem;
-        background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #475569 100%);
-        color: #e2e8f0;
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+        color: #cbd5e1;
         font-family: 'Inter', sans-serif;
         margin-top: 5rem;
-        border-radius: 25px 25px 0 0;
+        border-radius: 16px 16px 0 0;
         position: relative;
         overflow: hidden;
+        border: 1px solid rgba(255,255,255,0.08);
     }
     
     .footer::before {
@@ -547,119 +478,108 @@ st.markdown("""
         top: 0;
         left: 0;
         right: 0;
-        height: 4px;
-        background: linear-gradient(90deg, #1e40af, #dc2626, #f59e0b, #059669);
+        height: 3px;
+        background: linear-gradient(90deg, #1e40af, #8b4513, #1e293b);
     }
     
     .footer a {
-        color: #60a5fa;
+        color: #94a3b8;
         text-decoration: none;
         font-weight: 600;
         transition: color 0.3s ease;
     }
     
     .footer a:hover {
-        color: #93c5fd;
-        text-decoration: underline;
+        color: #cbd5e1;
     }
     
-    /* Enhanced Form Controls */
+    /* Executive Form Controls */
     .stSelectbox > label, .stTextInput > label {
         font-family: 'Inter', sans-serif;
-        font-weight: 700;
-        color: #1e40af;
-        font-size: 1.2rem;
+        font-weight: 600;
+        color: #ffffff;
+        font-size: 1rem;
         margin-bottom: 0.5rem;
     }
     
     .stButton > button {
-        background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 50%, #1d4ed8 100%);
-        color: white;
+        background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+        color: #ffffff;
         border: none;
-        border-radius: 50px;
-        padding: 1rem 3rem;
+        border-radius: 8px;
+        padding: 0.875rem 2.5rem;
         font-family: 'Inter', sans-serif;
-        font-weight: 700;
-        font-size: 1.1rem;
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        font-weight: 600;
+        font-size: 1rem;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         box-shadow: 
-            0 8px 25px rgba(30, 64, 175, 0.3),
-            0 0 0 1px rgba(255,255,255,0.1);
+            0 8px 16px rgba(30, 64, 175, 0.3),
+            0 0 0 1px rgba(255,255,255,0.05);
         text-transform: uppercase;
-        letter-spacing: 1.5px;
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .stButton > button::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-        transition: left 0.5s ease;
-    }
-    
-    .stButton > button:hover::before {
-        left: 100%;
+        letter-spacing: 1px;
+        border: 1px solid rgba(255,255,255,0.08);
     }
     
     .stButton > button:hover {
-        transform: translateY(-4px) scale(1.05);
+        transform: translateY(-2px);
         box-shadow: 
-            0 15px 40px rgba(30, 64, 175, 0.4),
-            0 0 30px rgba(30, 64, 175, 0.2);
-        background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 50%, #2563eb 100%);
+            0 12px 24px rgba(30, 64, 175, 0.4),
+            0 0 20px rgba(30, 64, 175, 0.2);
+        background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
     }
     
-    /* Professional Tabs */
+    /* Executive Tabs */
     .stTabs [data-baseweb="tab-list"] {
-        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-        border-radius: 20px;
+        background: linear-gradient(135deg, #374151 0%, #4b5563 100%);
+        border-radius: 12px;
         padding: 0.8rem;
         box-shadow: 
-            0 8px 25px rgba(0,0,0,0.1),
-            inset 0 1px 0 rgba(255,255,255,0.8);
+            0 8px 16px rgba(0,0,0,0.3),
+            inset 0 1px 0 rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.08);
     }
     
     .stTabs [data-baseweb="tab"] {
         font-family: 'Inter', sans-serif;
-        font-weight: 700;
-        border-radius: 15px;
-        color: #1e40af;
+        font-weight: 600;
+        border-radius: 8px;
+        color: #cbd5e1;
         transition: all 0.3s ease;
     }
     
     .stTabs [data-baseweb="tab"]:hover {
         background: rgba(30, 64, 175, 0.1);
+        color: #ffffff;
     }
     
-    /* Custom Scrollbar */
+    /* Executive Scrollbar */
     ::-webkit-scrollbar {
-        width: 12px;
+        width: 8px;
     }
     
     ::-webkit-scrollbar-track {
-        background: #f1f5f9;
-        border-radius: 10px;
+        background: #374151;
+        border-radius: 4px;
     }
     
     ::-webkit-scrollbar-thumb {
-        background: linear-gradient(135deg, #1e40af, #3b82f6);
-        border-radius: 10px;
-        border: 2px solid #f1f5f9;
+        background: linear-gradient(135deg, #1e40af, #8b4513);
+        border-radius: 4px;
     }
     
     ::-webkit-scrollbar-thumb:hover {
-        background: linear-gradient(135deg, #1d4ed8, #2563eb);
+        background: linear-gradient(135deg, #1d4ed8, #a0522d);
     }
     
-    /* Responsive Design */
+    /* Text Colors */
+    .stMarkdown, .stText {
+        color: #e5e5e5;
+    }
+    
+    /* Responsive Executive Design */
     @media (max-width: 768px) {
         .main-header h1 {
-            font-size: 3rem;
+            font-size: 2.5rem;
         }
         
         .main-header {
