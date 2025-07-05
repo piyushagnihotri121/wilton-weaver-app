@@ -34,10 +34,648 @@ if 'selected_colors' not in st.session_state:
 if 'search_history' not in st.session_state:
     st.session_state.search_history = []
 
-# --- CSS Styling ---
+# Premium Professional Aviation Carpet Manufacturing Dashboard CSS - Enhanced Visibility
 st.markdown("""
 <style>
-/* ... (CSS omitted for brevity, use the same as in your prompt) ... */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700&family=Source+Sans+Pro:wght@300;400;600;700&display=swap');
+    
+    /* Global Professional Styling */
+    .stApp {
+        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+        color: #ffffff;
+    }
+    
+    /* Executive Header */
+    .main-header {
+        background: linear-gradient(135deg, #1e293b 0%, #334155 25%, #475569 50%, #64748b 75%, #475569 100%);
+        background-size: 300% 300%;
+        animation: subtleGradient 15s ease infinite;
+        padding: 4rem 3rem;
+        border-radius: 16px;
+        color: #ffffff;
+        text-align: center;
+        margin-bottom: 3rem;
+        box-shadow: 
+            0 24px 48px rgba(0,0,0,0.4),
+            0 0 0 1px rgba(255,255,255,0.15),
+            inset 0 1px 0 rgba(255,255,255,0.2);
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,0.2);
+    }
+    
+    @keyframes subtleGradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    
+    /* Subtle Technical Pattern */
+    .main-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="tech-grid" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse"><rect fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5" width="10" height="10"/><circle cx="5" cy="5" r="0.5" fill="rgba(255,255,255,0.08)"/></pattern></defs><rect width="100" height="100" fill="url(%23tech-grid)"/></svg>');
+        opacity: 0.6;
+    }
+    
+    .main-header h1 {
+        font-family: 'Inter', sans-serif;
+        font-size: 3.8rem;
+        font-weight: 800;
+        margin: 0;
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+        letter-spacing: -1px;
+        position: relative;
+        z-index: 2;
+        color: #ffffff;
+    }
+    
+    .company-location {
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin: 1.2rem 0;
+        color: #ffffff;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        position: relative;
+        z-index: 2;
+    }
+    
+    .company-tagline {
+        font-family: 'Inter', sans-serif;
+        font-size: 1.1rem;
+        font-weight: 400;
+        margin: 2rem auto 0;
+        max-width: 700px;
+        line-height: 1.6;
+        color: #f1f5f9;
+        position: relative;
+        z-index: 2;
+    }
+    
+    .heritage-badge {
+        background: linear-gradient(135deg, #8b4513 0%, #a0522d 50%, #654321 100%);
+        color: #ffffff;
+        padding: 0.8rem 2.5rem;
+        border-radius: 6px;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 700;
+        margin: 2rem auto;
+        display: inline-block;
+        box-shadow: 0 4px 16px rgba(139, 69, 19, 0.3);
+        position: relative;
+        z-index: 2;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        border: 1px solid rgba(255,255,255,0.2);
+    }
+    
+    .aviation-badge {
+        background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+        color: #ffffff;
+        padding: 0.6rem 1.8rem;
+        border-radius: 6px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin-left: 1rem;
+        display: inline-block;
+        box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border: 1px solid rgba(255,255,255,0.2);
+    }
+    
+    /* Executive Section Containers */
+    .upload-section, .search-container {
+        background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+        backdrop-filter: blur(10px);
+        padding: 3rem;
+        border-radius: 12px;
+        margin-bottom: 2.5rem;
+        border: 1px solid rgba(255,255,255,0.2);
+        box-shadow: 
+            0 20px 40px rgba(0,0,0,0.3),
+            0 0 0 1px rgba(255,255,255,0.15),
+            inset 0 1px 0 rgba(255,255,255,0.2);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .upload-section::before, .search-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #1e40af 0%, #8b4513 50%, #1e293b 100%);
+    }
+    
+    .upload-section:hover, .search-container:hover {
+        transform: translateY(-4px);
+        box-shadow: 
+            0 28px 56px rgba(0,0,0,0.4),
+            0 0 0 1px rgba(255,255,255,0.25);
+    }
+    
+    .upload-section h3, .search-container h3 {
+        font-family: 'Inter', sans-serif;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 1.5rem;
+        position: relative;
+    }
+    
+    .upload-section h3::after, .search-container h3::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 40px;
+        height: 2px;
+        background: linear-gradient(90deg, #1e40af, #8b4513);
+    }
+    
+    /* Premium Metric Cards */
+    .metric-card {
+        background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #475569 100%);
+        padding: 2.5rem 2rem;
+        border-radius: 12px;
+        color: #ffffff;
+        text-align: center;
+        margin: 0.8rem;
+        box-shadow: 
+            0 16px 32px rgba(0,0,0,0.3),
+            0 0 0 1px rgba(255,255,255,0.15),
+            inset 0 1px 0 rgba(255,255,255,0.2);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,0.2);
+    }
+    
+    .metric-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #1e40af, #8b4513, #1e293b);
+        opacity: 1;
+    }
+    
+    .metric-card:hover {
+        transform: translateY(-6px) scale(1.02);
+        box-shadow: 
+            0 24px 48px rgba(0,0,0,0.4),
+            0 0 40px rgba(30, 64, 175, 0.25);
+    }
+    
+    .metric-number {
+        font-family: 'Inter', sans-serif;
+        font-size: 3.2rem;
+        font-weight: 800;
+        display: block;
+        margin-bottom: 0.8rem;
+        color: #ffffff;
+        text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    
+    .metric-label {
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: 1rem;
+        font-weight: 600;
+        color: #ffffff;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    /* Executive Status Messages */
+    .success-message {
+        background: linear-gradient(135deg, #065f46 0%, #047857 50%, #059669 100%);
+        color: #ffffff;
+        padding: 2rem 2.5rem;
+        border-radius: 12px;
+        margin: 2rem 0;
+        text-align: center;
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        font-size: 1.1rem;
+        box-shadow: 
+            0 12px 24px rgba(6, 95, 70, 0.3),
+            0 0 0 1px rgba(255,255,255,0.15);
+        border: 1px solid rgba(255,255,255,0.2);
+        position: relative;
+    }
+    
+    .success-message::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #10b981, #059669);
+    }
+    
+    .error-message {
+        background: linear-gradient(135deg, #991b1b 0%, #b91c1c 50%, #dc2626 100%);
+        color: #ffffff;
+        padding: 2rem 2.5rem;
+        border-radius: 12px;
+        margin: 2rem 0;
+        text-align: center;
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        font-size: 1.1rem;
+        box-shadow: 
+            0 12px 24px rgba(153, 27, 27, 0.3),
+            0 0 0 1px rgba(255,255,255,0.15);
+        border: 1px solid rgba(255,255,255,0.2);
+        position: relative;
+    }
+    
+    .error-message::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #dc2626, #b91c1c);
+    }
+    
+    /* Executive Data Display */
+    .dataframe-container {
+        background: linear-gradient(135deg, #374151 0%, #4b5563 100%);
+        backdrop-filter: blur(10px);
+        padding: 2.5rem;
+        border-radius: 12px;
+        box-shadow: 
+            0 16px 32px rgba(0,0,0,0.3),
+            0 0 0 1px rgba(255,255,255,0.15),
+            inset 0 1px 0 rgba(255,255,255,0.2);
+        margin: 2rem 0;
+        border: 1px solid rgba(255,255,255,0.2);
+        position: relative;
+    }
+    
+    .dataframe-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #1e40af, #8b4513);
+    }
+    
+    /* Executive Sidebar */
+    .sidebar-content {
+        background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+        padding: 2.5rem;
+        border-radius: 12px;
+        margin-bottom: 2rem;
+        color: #ffffff;
+        box-shadow: 
+            0 16px 32px rgba(0,0,0,0.3),
+            0 0 0 1px rgba(255,255,255,0.15);
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,0.2);
+    }
+    
+    .sidebar-content::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #1e40af, #8b4513);
+    }
+    
+    .sidebar-content h3 {
+        font-family: 'Inter', sans-serif;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        position: relative;
+        z-index: 2;
+        color: #ffffff;
+    }
+    
+    /* Executive Welcome Section */
+    .welcome-section {
+        text-align: center;
+        padding: 5rem 3rem;
+        background: linear-gradient(135deg, #374151 0%, #4b5563 50%, #6b7280 100%);
+        border-radius: 16px;
+        margin: 3rem 0;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 
+            0 20px 40px rgba(0,0,0,0.3),
+            inset 0 1px 0 rgba(255,255,255,0.2);
+        border: 1px solid rgba(255,255,255,0.2);
+    }
+    
+    .welcome-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="executive-pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><rect fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="0.5" width="20" height="20"/><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23executive-pattern)"/></svg>');
+        opacity: 0.7;
+    }
+    
+    .welcome-section h2 {
+        font-family: 'Inter', sans-serif;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 1.5rem;
+        position: relative;
+        z-index: 2;
+    }
+    
+    /* Executive Feature Cards */
+    .feature-card {
+        text-align: center;
+        padding: 2.5rem 2rem;
+        background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+        backdrop-filter: blur(10px);
+        border-radius: 12px;
+        box-shadow: 
+            0 16px 32px rgba(0,0,0,0.3),
+            0 0 0 1px rgba(255,255,255,0.15);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        margin: 1.5rem;
+        position: relative;
+        z-index: 2;
+        border: 1px solid rgba(255,255,255,0.2);
+    }
+    
+    .feature-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #1e40af, #8b4513);
+    }
+    
+    .feature-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 
+            0 24px 48px rgba(0,0,0,0.4),
+            0 0 40px rgba(30, 64, 175, 0.2);
+    }
+    
+    .feature-icon {
+        font-size: 3rem;
+        margin-bottom: 1.5rem;
+        display: block;
+        color: #ffffff;
+    }
+    
+    .feature-card h4 {
+        font-family: 'Inter', sans-serif;
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 1rem;
+    }
+    
+    .feature-card p {
+        color: #f1f5f9;
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+    
+    /* Executive Footer */
+    .footer {
+        text-align: center;
+        padding: 4rem 3rem;
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+        color: #ffffff;
+        font-family: 'Inter', sans-serif;
+        margin-top: 5rem;
+        border-radius: 16px 16px 0 0;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,0.2);
+    }
+    
+    .footer::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #1e40af, #8b4513, #1e293b);
+    }
+    
+    .footer a {
+        color: #f1f5f9;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
+    }
+    
+    .footer a:hover {
+        color: #ffffff;
+    }
+    
+    /* Executive Form Controls */
+    .stSelectbox > label, .stTextInput > label {
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        color: #ffffff !important;
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .stSelectbox > div > div, .stTextInput > div > div {
+        background-color: #374151 !important;
+        border: 1px solid rgba(255,255,255,0.2) !important;
+        color: #ffffff !important;
+    }
+    
+    .stSelectbox > div > div input, .stTextInput > div > div input {
+        color: #ffffff !important;
+    }
+    
+    .stButton > button {
+        background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+        color: #ffffff !important;
+        border: none;
+        border-radius: 8px;
+        padding: 0.875rem 2.5rem;
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 
+            0 8px 16px rgba(30, 64, 175, 0.3),
+            0 0 0 1px rgba(255,255,255,0.15);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border: 1px solid rgba(255,255,255,0.2);
+    }
+    
+    .stButton > button:hover {
+        transform: translateY(-2px);
+        box-shadow: 
+            0 12px 24px rgba(30, 64, 175, 0.4),
+            0 0 20px rgba(30, 64, 175, 0.2);
+        background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+    }
+    
+    /* Executive Tabs */
+    .stTabs [data-baseweb="tab-list"] {
+        background: linear-gradient(135deg, #374151 0%, #4b5563 100%);
+        border-radius: 12px;
+        padding: 0.8rem;
+        box-shadow: 
+            0 8px 16px rgba(0,0,0,0.3),
+            inset 0 1px 0 rgba(255,255,255,0.2);
+        border: 1px solid rgba(255,255,255,0.2);
+    }
+    
+    .stTabs [data-baseweb="tab"] {
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        border-radius: 8px;
+        color: #ffffff !important;
+        transition: all 0.3s ease;
+    }
+    
+    .stTabs [data-baseweb="tab"]:hover {
+        background: rgba(30, 64, 175, 0.2);
+        color: #ffffff !important;
+    }
+    
+    .stTabs [data-baseweb="tab"][aria-selected="true"] {
+        background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+        color: #ffffff !important;
+    }
+    
+    /* Executive Scrollbar */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: #374151;
+        border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: linear-gradient(135deg, #1e40af, #8b4513);
+        border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(135deg, #1d4ed8, #a0522d);
+    }
+    
+    /* Enhanced Text Colors for Better Visibility */
+    .stMarkdown, .stText, p, div, span {
+        color: #ffffff !important;
+    }
+    
+    /* Data Table Styling */
+    .dataframe table {
+        background-color: #374151 !important;
+        color: #ffffff !important;
+    }
+    
+    .dataframe th {
+        background-color: #1e293b !important;
+        color: #ffffff !important;
+        border: 1px solid rgba(255,255,255,0.2) !important;
+    }
+    
+    .dataframe td {
+        background-color: #374151 !important;
+        color: #ffffff !important;
+        border: 1px solid rgba(255,255,255,0.1) !important;
+    }
+    
+    /* Streamlit Native Component Overrides */
+    .stNumberInput > label, .stDateInput > label, .stTimeInput > label {
+        color: #ffffff !important;
+    }
+    
+    .stNumberInput input, .stDateInput input, .stTimeInput input {
+        background-color: #374151 !important;
+        color: #ffffff !important;
+        border: 1px solid rgba(255,255,255,0.2) !important;
+    }
+    
+    .stCheckbox > label {
+        color: #ffffff !important;
+    }
+    
+    .stRadio > label {
+        color: #ffffff !important;
+    }
+    
+    .stSlider > label {
+        color: #ffffff !important;
+    }
+    
+    /* Multiselect Styling */
+    .stMultiSelect > label {
+        color: #ffffff !important;
+    }
+    
+    .stMultiSelect > div > div {
+        background-color: #374151 !important;
+        border: 1px solid rgba(255,255,255,0.2) !important;
+    }
+    
+    /* File Uploader */
+    .stFileUploader > label {
+        color: #ffffff !important;
+    }
+    
+    .stFileUploader > div {
+        background-color: #374151 !important;
+        border: 1px solid rgba(255,255,255,0.2) !important;
+    }
+    
+    /* Responsive Executive Design */
+    @media (max-width: 768px) {
+        .main-header h1 {
+            font-size: 2.5rem;
+        }
+        
+        .main-header {
+            padding: 2.5rem 1.5rem;
+        }
+        
+        .upload-section, .search-container {
+            padding: 2rem 1.5rem;
+        }
+        
+        .feature-card {
+            margin: 1rem 0.5rem;
+        }
+    }
 </style>
 """, unsafe_allow_html=True)
 
