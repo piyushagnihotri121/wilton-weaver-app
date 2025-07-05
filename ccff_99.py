@@ -34,7 +34,7 @@ if 'selected_colors' not in st.session_state:
 if 'search_history' not in st.session_state:
     st.session_state.search_history = []
 
-# Premium Professional Aviation Carpet Manufacturing Dashboard CSS - Enhanced Visibility
+# Enhanced Professional Aviation Carpet Manufacturing Dashboard CSS
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700&family=Source+Sans+Pro:wght@300;400;600;700&display=swap');
@@ -42,7 +42,7 @@ st.markdown("""
     /* Global Professional Styling */
     .stApp {
         background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-        color: #ffffff;
+        color: #fff;
     }
     
     /* Executive Header */
@@ -52,7 +52,7 @@ st.markdown("""
         animation: subtleGradient 15s ease infinite;
         padding: 4rem 3rem;
         border-radius: 16px;
-        color: #ffffff;
+        color: #fff;
         text-align: center;
         margin-bottom: 3rem;
         box-shadow: 
@@ -78,8 +78,9 @@ st.markdown("""
         left: 0;
         right: 0;
         bottom: 0;
-        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="tech-grid" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse"><rect fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5" width="10" height="10"/><circle cx="5" cy="5" r="0.5" fill="rgba(255,255,255,0.08)"/></pattern></defs><rect width="100" height="100" fill="url(%23tech-grid)"/></svg>');
-        opacity: 0.6;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="tech-grid" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse"><rect fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1.2" width="10" height="10"/><circle cx="5" cy="5" r="0.7" fill="rgba(255,255,255,0.13)"/></pattern></defs><rect width="100" height="100" fill="url(%23tech-grid)"/></svg>');
+        opacity: 0.8;
+        z-index: 1;
     }
     
     .main-header h1 {
@@ -87,23 +88,24 @@ st.markdown("""
         font-size: 3.8rem;
         font-weight: 800;
         margin: 0;
-        text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+        text-shadow: 2px 2px 12px #fff, 2px 2px 8px rgba(0,0,0,0.7);
         letter-spacing: -1px;
         position: relative;
         z-index: 2;
-        color: #ffffff;
+        color: #fff;
     }
     
     .company-location {
         font-family: 'Source Sans Pro', sans-serif;
         font-size: 1.1rem;
-        font-weight: 600;
+        font-weight: 700;
         margin: 1.2rem 0;
-        color: #ffffff;
+        color: #fff;
         letter-spacing: 4px;
         text-transform: uppercase;
         position: relative;
         z-index: 2;
+        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
     }
     
     .company-tagline {
@@ -116,16 +118,17 @@ st.markdown("""
         color: #f1f5f9;
         position: relative;
         z-index: 2;
+        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
     }
     
     .heritage-badge {
         background: linear-gradient(135deg, #8b4513 0%, #a0522d 50%, #654321 100%);
-        color: #ffffff;
+        color: #fff;
         padding: 0.8rem 2.5rem;
         border-radius: 6px;
         font-family: 'Inter', sans-serif;
-        font-size: 0.9rem;
-        font-weight: 700;
+        font-size: 0.95rem;
+        font-weight: 800;
         margin: 2rem auto;
         display: inline-block;
         box-shadow: 0 4px 16px rgba(139, 69, 19, 0.3);
@@ -133,22 +136,24 @@ st.markdown("""
         z-index: 2;
         text-transform: uppercase;
         letter-spacing: 2px;
-        border: 1px solid rgba(255,255,255,0.2);
+        border: 2px solid #fff;
+        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
     }
     
     .aviation-badge {
         background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
-        color: #ffffff;
+        color: #fff;
         padding: 0.6rem 1.8rem;
         border-radius: 6px;
-        font-size: 0.8rem;
-        font-weight: 600;
+        font-size: 0.85rem;
+        font-weight: 700;
         margin-left: 1rem;
         display: inline-block;
         box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
         text-transform: uppercase;
         letter-spacing: 1px;
-        border: 1px solid rgba(255,255,255,0.2);
+        border: 2px solid #fff;
+        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
     }
     
     /* Executive Section Containers */
@@ -158,7 +163,7 @@ st.markdown("""
         padding: 3rem;
         border-radius: 12px;
         margin-bottom: 2.5rem;
-        border: 1px solid rgba(255,255,255,0.2);
+        border: 2px solid #fff;
         box-shadow: 
             0 20px 40px rgba(0,0,0,0.3),
             0 0 0 1px rgba(255,255,255,0.15),
@@ -175,23 +180,25 @@ st.markdown("""
         left: 0;
         right: 0;
         height: 3px;
-        background: linear-gradient(90deg, #1e40af 0%, #8b4513 50%, #1e293b 100%);
+        background: linear-gradient(90deg, #fff 0%, #fff 50%, #fff 100%);
+        opacity: 1;
     }
     
     .upload-section:hover, .search-container:hover {
         transform: translateY(-4px);
         box-shadow: 
             0 28px 56px rgba(0,0,0,0.4),
-            0 0 0 1px rgba(255,255,255,0.25);
+            0 0 0 1px #fff;
     }
     
     .upload-section h3, .search-container h3 {
         font-family: 'Inter', sans-serif;
         font-size: 1.8rem;
-        font-weight: 700;
-        color: #ffffff;
+        font-weight: 800;
+        color: #fff;
         margin-bottom: 1.5rem;
         position: relative;
+        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
     }
     
     .upload-section h3::after, .search-container h3::after {
@@ -200,8 +207,8 @@ st.markdown("""
         bottom: -8px;
         left: 0;
         width: 40px;
-        height: 2px;
-        background: linear-gradient(90deg, #1e40af, #8b4513);
+        height: 3px;
+        background: #fff;
     }
     
     /* Premium Metric Cards */
@@ -209,17 +216,17 @@ st.markdown("""
         background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #475569 100%);
         padding: 2.5rem 2rem;
         border-radius: 12px;
-        color: #ffffff;
+        color: #fff;
         text-align: center;
         margin: 0.8rem;
         box-shadow: 
             0 16px 32px rgba(0,0,0,0.3),
-            0 0 0 1px rgba(255,255,255,0.15),
+            0 0 0 1px #fff,
             inset 0 1px 0 rgba(255,255,255,0.2);
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         position: relative;
         overflow: hidden;
-        border: 1px solid rgba(255,255,255,0.2);
+        border: 2px solid #fff;
     }
     
     .metric-card::before {
@@ -229,7 +236,7 @@ st.markdown("""
         left: 0;
         right: 0;
         height: 2px;
-        background: linear-gradient(90deg, #1e40af, #8b4513, #1e293b);
+        background: #fff;
         opacity: 1;
     }
     
@@ -237,44 +244,46 @@ st.markdown("""
         transform: translateY(-6px) scale(1.02);
         box-shadow: 
             0 24px 48px rgba(0,0,0,0.4),
-            0 0 40px rgba(30, 64, 175, 0.25);
+            0 0 40px #fff;
     }
     
     .metric-number {
         font-family: 'Inter', sans-serif;
         font-size: 3.2rem;
-        font-weight: 800;
+        font-weight: 900;
         display: block;
         margin-bottom: 0.8rem;
-        color: #ffffff;
-        text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        color: #fff;
+        text-shadow: 0 2px 12px #fff, 0 2px 8px rgba(0,0,0,0.5);
     }
     
     .metric-label {
         font-family: 'Source Sans Pro', sans-serif;
-        font-size: 1rem;
-        font-weight: 600;
-        color: #ffffff;
+        font-size: 1.1rem;
+        font-weight: 800;
+        color: #fff;
         text-transform: uppercase;
         letter-spacing: 1px;
+        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
     }
     
     /* Executive Status Messages */
     .success-message {
         background: linear-gradient(135deg, #065f46 0%, #047857 50%, #059669 100%);
-        color: #ffffff;
+        color: #fff;
         padding: 2rem 2.5rem;
         border-radius: 12px;
         margin: 2rem 0;
         text-align: center;
         font-family: 'Inter', sans-serif;
-        font-weight: 600;
+        font-weight: 800;
         font-size: 1.1rem;
         box-shadow: 
             0 12px 24px rgba(6, 95, 70, 0.3),
-            0 0 0 1px rgba(255,255,255,0.15);
-        border: 1px solid rgba(255,255,255,0.2);
+            0 0 0 1px #fff;
+        border: 2px solid #fff;
         position: relative;
+        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
     }
     
     .success-message::before {
@@ -284,24 +293,25 @@ st.markdown("""
         left: 0;
         right: 0;
         height: 2px;
-        background: linear-gradient(90deg, #10b981, #059669);
+        background: #fff;
     }
     
     .error-message {
         background: linear-gradient(135deg, #991b1b 0%, #b91c1c 50%, #dc2626 100%);
-        color: #ffffff;
+        color: #fff;
         padding: 2rem 2.5rem;
         border-radius: 12px;
         margin: 2rem 0;
         text-align: center;
         font-family: 'Inter', sans-serif;
-        font-weight: 600;
+        font-weight: 800;
         font-size: 1.1rem;
         box-shadow: 
             0 12px 24px rgba(153, 27, 27, 0.3),
-            0 0 0 1px rgba(255,255,255,0.15);
-        border: 1px solid rgba(255,255,255,0.2);
+            0 0 0 1px #fff;
+        border: 2px solid #fff;
         position: relative;
+        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
     }
     
     .error-message::before {
@@ -311,7 +321,7 @@ st.markdown("""
         left: 0;
         right: 0;
         height: 2px;
-        background: linear-gradient(90deg, #dc2626, #b91c1c);
+        background: #fff;
     }
     
     /* Executive Data Display */
@@ -322,10 +332,10 @@ st.markdown("""
         border-radius: 12px;
         box-shadow: 
             0 16px 32px rgba(0,0,0,0.3),
-            0 0 0 1px rgba(255,255,255,0.15),
+            0 0 0 1px #fff,
             inset 0 1px 0 rgba(255,255,255,0.2);
         margin: 2rem 0;
-        border: 1px solid rgba(255,255,255,0.2);
+        border: 2px solid #fff;
         position: relative;
     }
     
@@ -336,7 +346,7 @@ st.markdown("""
         left: 0;
         right: 0;
         height: 2px;
-        background: linear-gradient(90deg, #1e40af, #8b4513);
+        background: #fff;
     }
     
     /* Executive Sidebar */
@@ -345,13 +355,13 @@ st.markdown("""
         padding: 2.5rem;
         border-radius: 12px;
         margin-bottom: 2rem;
-        color: #ffffff;
+        color: #fff;
         box-shadow: 
             0 16px 32px rgba(0,0,0,0.3),
-            0 0 0 1px rgba(255,255,255,0.15);
+            0 0 0 1px #fff;
         position: relative;
         overflow: hidden;
-        border: 1px solid rgba(255,255,255,0.2);
+        border: 2px solid #fff;
     }
     
     .sidebar-content::before {
@@ -361,16 +371,17 @@ st.markdown("""
         left: 0;
         right: 0;
         height: 2px;
-        background: linear-gradient(90deg, #1e40af, #8b4513);
+        background: #fff;
     }
     
     .sidebar-content h3 {
         font-family: 'Inter', sans-serif;
-        font-weight: 700;
+        font-weight: 800;
         margin-bottom: 1.5rem;
         position: relative;
         z-index: 2;
-        color: #ffffff;
+        color: #fff;
+        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
     }
     
     /* Executive Welcome Section */
@@ -385,7 +396,7 @@ st.markdown("""
         box-shadow: 
             0 20px 40px rgba(0,0,0,0.3),
             inset 0 1px 0 rgba(255,255,255,0.2);
-        border: 1px solid rgba(255,255,255,0.2);
+        border: 2px solid #fff;
     }
     
     .welcome-section::before {
@@ -395,18 +406,19 @@ st.markdown("""
         left: 0;
         right: 0;
         bottom: 0;
-        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="executive-pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><rect fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="0.5" width="20" height="20"/><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23executive-pattern)"/></svg>');
-        opacity: 0.7;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="executive-pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><rect fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1.2" width="20" height="20"/><circle cx="10" cy="10" r="1.2" fill="rgba(255,255,255,0.13)"/></pattern></defs><rect width="100" height="100" fill="url(%23executive-pattern)"/></svg>');
+        opacity: 0.8;
     }
     
     .welcome-section h2 {
         font-family: 'Inter', sans-serif;
         font-size: 2.5rem;
-        font-weight: 700;
-        color: #ffffff;
+        font-weight: 800;
+        color: #fff;
         margin-bottom: 1.5rem;
         position: relative;
         z-index: 2;
+        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
     }
     
     /* Executive Feature Cards */
@@ -418,12 +430,12 @@ st.markdown("""
         border-radius: 12px;
         box-shadow: 
             0 16px 32px rgba(0,0,0,0.3),
-            0 0 0 1px rgba(255,255,255,0.15);
+            0 0 0 1px #fff;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         margin: 1.5rem;
         position: relative;
         z-index: 2;
-        border: 1px solid rgba(255,255,255,0.2);
+        border: 2px solid #fff;
     }
     
     .feature-card::before {
@@ -433,35 +445,38 @@ st.markdown("""
         left: 0;
         right: 0;
         height: 2px;
-        background: linear-gradient(90deg, #1e40af, #8b4513);
+        background: #fff;
     }
     
     .feature-card:hover {
         transform: translateY(-8px);
         box-shadow: 
             0 24px 48px rgba(0,0,0,0.4),
-            0 0 40px rgba(30, 64, 175, 0.2);
+            0 0 40px #fff;
     }
     
     .feature-icon {
         font-size: 3rem;
         margin-bottom: 1.5rem;
         display: block;
-        color: #ffffff;
+        color: #fff;
+        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
     }
     
     .feature-card h4 {
         font-family: 'Inter', sans-serif;
         font-size: 1.3rem;
-        font-weight: 700;
-        color: #ffffff;
+        font-weight: 800;
+        color: #fff;
         margin-bottom: 1rem;
+        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
     }
     
     .feature-card p {
         color: #f1f5f9;
         font-size: 1rem;
         line-height: 1.6;
+        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
     }
     
     /* Executive Footer */
@@ -469,13 +484,13 @@ st.markdown("""
         text-align: center;
         padding: 4rem 3rem;
         background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
-        color: #ffffff;
+        color: #fff;
         font-family: 'Inter', sans-serif;
         margin-top: 5rem;
         border-radius: 16px 16px 0 0;
         position: relative;
         overflow: hidden;
-        border: 1px solid rgba(255,255,255,0.2);
+        border: 2px solid #fff;
     }
     
     .footer::before {
@@ -485,63 +500,67 @@ st.markdown("""
         left: 0;
         right: 0;
         height: 3px;
-        background: linear-gradient(90deg, #1e40af, #8b4513, #1e293b);
+        background: #fff;
     }
     
     .footer a {
-        color: #f1f5f9;
+        color: #fff;
         text-decoration: none;
-        font-weight: 600;
+        font-weight: 800;
         transition: color 0.3s ease;
+        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
     }
     
     .footer a:hover {
-        color: #ffffff;
+        color: #fff;
+        text-decoration: underline;
     }
     
     /* Executive Form Controls */
     .stSelectbox > label, .stTextInput > label {
         font-family: 'Inter', sans-serif;
-        font-weight: 600;
-        color: #ffffff !important;
-        font-size: 1rem;
+        font-weight: 800;
+        color: #fff !important;
+        font-size: 1.1rem;
         margin-bottom: 0.5rem;
+        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
     }
     
     .stSelectbox > div > div, .stTextInput > div > div {
         background-color: #374151 !important;
-        border: 1px solid rgba(255,255,255,0.2) !important;
-        color: #ffffff !important;
+        border: 2px solid #fff !important;
+        color: #fff !important;
     }
     
     .stSelectbox > div > div input, .stTextInput > div > div input {
-        color: #ffffff !important;
+        color: #fff !important;
     }
     
     .stButton > button {
-        background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
-        color: #ffffff !important;
+        background: linear-gradient(135deg, #fff 0%, #fff 100%);
+        color: #1e293b !important;
         border: none;
         border-radius: 8px;
         padding: 0.875rem 2.5rem;
         font-family: 'Inter', sans-serif;
-        font-weight: 600;
-        font-size: 1rem;
+        font-weight: 800;
+        font-size: 1.1rem;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         box-shadow: 
-            0 8px 16px rgba(30, 64, 175, 0.3),
-            0 0 0 1px rgba(255,255,255,0.15);
+            0 8px 16px #fff,
+            0 0 0 1px #fff;
         text-transform: uppercase;
         letter-spacing: 1px;
-        border: 1px solid rgba(255,255,255,0.2);
+        border: 2px solid #fff;
     }
     
     .stButton > button:hover {
         transform: translateY(-2px);
         box-shadow: 
-            0 12px 24px rgba(30, 64, 175, 0.4),
-            0 0 20px rgba(30, 64, 175, 0.2);
-        background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+            0 12px 24px #fff,
+            0 0 20px #fff;
+        background: linear-gradient(135deg, #f1f5f9 0%, #fff 100%);
+        color: #1e293b !important;
     }
     
     /* Executive Tabs */
@@ -551,26 +570,30 @@ st.markdown("""
         padding: 0.8rem;
         box-shadow: 
             0 8px 16px rgba(0,0,0,0.3),
-            inset 0 1px 0 rgba(255,255,255,0.2);
-        border: 1px solid rgba(255,255,255,0.2);
+            inset 0 1px 0 #fff;
+        border: 2px solid #fff;
     }
     
     .stTabs [data-baseweb="tab"] {
         font-family: 'Inter', sans-serif;
-        font-weight: 600;
+        font-weight: 800;
         border-radius: 8px;
-        color: #ffffff !important;
+        color: #fff !important;
         transition: all 0.3s ease;
+        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
     }
     
     .stTabs [data-baseweb="tab"]:hover {
-        background: rgba(30, 64, 175, 0.2);
-        color: #ffffff !important;
+        background: #fff;
+        color: #1e293b !important;
+        font-weight: 900;
     }
     
     .stTabs [data-baseweb="tab"][aria-selected="true"] {
-        background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
-        color: #ffffff !important;
+        background: #fff;
+        color: #1e293b !important;
+        font-weight: 900;
+        border: 2px solid #1e293b;
     }
     
     /* Executive Scrollbar */
@@ -584,78 +607,97 @@ st.markdown("""
     }
     
     ::-webkit-scrollbar-thumb {
-        background: linear-gradient(135deg, #1e40af, #8b4513);
+        background: #fff;
         border-radius: 4px;
     }
     
     ::-webkit-scrollbar-thumb:hover {
-        background: linear-gradient(135deg, #1d4ed8, #a0522d);
+        background: #f1f5f9;
     }
     
     /* Enhanced Text Colors for Better Visibility */
     .stMarkdown, .stText, p, div, span {
-        color: #ffffff !important;
+        color: #fff !important;
+        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
     }
     
     /* Data Table Styling */
     .dataframe table {
         background-color: #374151 !important;
-        color: #ffffff !important;
+        color: #fff !important;
+        border: 2px solid #fff !important;
     }
     
     .dataframe th {
-        background-color: #1e293b !important;
-        color: #ffffff !important;
-        border: 1px solid rgba(255,255,255,0.2) !important;
+        background-color: #fff !important;
+        color: #1e293b !important;
+        border: 2px solid #1e293b !important;
+        font-weight: 900 !important;
+        text-shadow: none !important;
     }
     
     .dataframe td {
         background-color: #374151 !important;
-        color: #ffffff !important;
-        border: 1px solid rgba(255,255,255,0.1) !important;
+        color: #fff !important;
+        border: 1.5px solid #fff !important;
+        font-weight: 700 !important;
+        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
     }
     
     /* Streamlit Native Component Overrides */
     .stNumberInput > label, .stDateInput > label, .stTimeInput > label {
-        color: #ffffff !important;
+        color: #fff !important;
+        font-weight: 800 !important;
+        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
     }
     
     .stNumberInput input, .stDateInput input, .stTimeInput input {
         background-color: #374151 !important;
-        color: #ffffff !important;
-        border: 1px solid rgba(255,255,255,0.2) !important;
+        color: #fff !important;
+        border: 2px solid #fff !important;
+        font-weight: 800 !important;
     }
     
     .stCheckbox > label {
-        color: #ffffff !important;
+        color: #fff !important;
+        font-weight: 800 !important;
+        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
     }
     
     .stRadio > label {
-        color: #ffffff !important;
+        color: #fff !important;
+        font-weight: 800 !important;
+        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
     }
     
     .stSlider > label {
-        color: #ffffff !important;
+        color: #fff !important;
+        font-weight: 800 !important;
+        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
     }
     
     /* Multiselect Styling */
     .stMultiSelect > label {
-        color: #ffffff !important;
+        color: #fff !important;
+        font-weight: 800 !important;
+        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
     }
     
     .stMultiSelect > div > div {
         background-color: #374151 !important;
-        border: 1px solid rgba(255,255,255,0.2) !important;
+        border: 2px solid #fff !important;
     }
     
     /* File Uploader */
     .stFileUploader > label {
-        color: #ffffff !important;
+        color: #fff !important;
+        font-weight: 800 !important;
+        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
     }
     
     .stFileUploader > div {
         background-color: #374151 !important;
-        border: 1px solid rgba(255,255,255,0.2) !important;
+        border: 2px solid #fff !important;
     }
     
     /* Responsive Executive Design */
@@ -676,8 +718,43 @@ st.markdown("""
             margin: 1rem 0.5rem;
         }
     }
+
+    /* For white backgrounds, use dark bold lines and text */
+    .white-bg, .stApp[style*="background: #fff"], .stApp[style*="background: white"] {
+        background: #fff !important;
+        color: #1e293b !important;
+    }
+    .white-bg *, .stApp[style*="background: #fff"] *, .stApp[style*="background: white"] * {
+        color: #1e293b !important;
+        border-color: #1e293b !important;
+        font-weight: 900 !important;
+        text-shadow: none !important;
+    }
+    .white-bg th, .white-bg td,
+    .stApp[style*="background: #fff"] th, .stApp[style*="background: #fff"] td,
+    .stApp[style*="background: white"] th, .stApp[style*="background: white"] td {
+        border: 2px solid #1e293b !important;
+        color: #1e293b !important;
+        font-weight: 900 !important;
+        background: #fff !important;
+    }
+    .white-bg .metric-card, .stApp[style*="background: #fff"] .metric-card, .stApp[style*="background: white"] .metric-card {
+        background: #fff !important;
+        color: #1e293b !important;
+        border: 2px solid #1e293b !important;
+        box-shadow: 0 0 0 2px #1e293b !important;
+    }
+    .white-bg .metric-number, .stApp[style*="background: #fff"] .metric-number, .stApp[style*="background: white"] .metric-number {
+        color: #1e293b !important;
+        text-shadow: none !important;
+    }
+    .white-bg .metric-label, .stApp[style*="background: #fff"] .metric-label, .stApp[style*="background: white"] .metric-label {
+        color: #1e293b !important;
+        text-shadow: none !important;
+    }
 </style>
 """, unsafe_allow_html=True)
+
 
 # --- Utility Functions ---
 def clean_design_name(name: str) -> str:
