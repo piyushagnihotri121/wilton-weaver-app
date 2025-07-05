@@ -34,143 +34,126 @@ if 'selected_colors' not in st.session_state:
 if 'search_history' not in st.session_state:
     st.session_state.search_history = []
 
-# Enhanced Professional Aviation Carpet Manufacturing Dashboard CSS
+# Premium Professional Aviation Carpet Manufacturing Dashboard CSS - High Contrast
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700&family=Source+Sans+Pro:wght@300;400;600;700&display=swap');
     
-    /* Global Professional Styling */
+    /* Global Professional Styling with High Contrast */
     .stApp {
-        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-        color: #fff;
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        color: #ffffff;
+        font-family: 'Inter', sans-serif;
+    }
+    
+    /* Force white text everywhere */
+    * {
+        color: #ffffff !important;
     }
     
     /* Executive Header */
     .main-header {
-        background: linear-gradient(135deg, #1e293b 0%, #334155 25%, #475569 50%, #64748b 75%, #475569 100%);
-        background-size: 300% 300%;
-        animation: subtleGradient 15s ease infinite;
+        background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #1e40af 100%);
+        background-size: 200% 200%;
+        animation: headerShine 8s ease infinite;
         padding: 4rem 3rem;
         border-radius: 16px;
-        color: #fff;
+        color: #ffffff;
         text-align: center;
         margin-bottom: 3rem;
         box-shadow: 
-            0 24px 48px rgba(0,0,0,0.4),
-            0 0 0 1px rgba(255,255,255,0.15),
-            inset 0 1px 0 rgba(255,255,255,0.2);
+            0 25px 50px rgba(0,0,0,0.6),
+            0 0 0 2px rgba(255,255,255,0.3);
         position: relative;
         overflow: hidden;
-        border: 1px solid rgba(255,255,255,0.2);
+        border: 3px solid #ffffff;
     }
     
-    @keyframes subtleGradient {
+    @keyframes headerShine {
         0% { background-position: 0% 50%; }
         50% { background-position: 100% 50%; }
         100% { background-position: 0% 50%; }
     }
     
-    /* Subtle Technical Pattern */
-    .main-header::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="tech-grid" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse"><rect fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1.2" width="10" height="10"/><circle cx="5" cy="5" r="0.7" fill="rgba(255,255,255,0.13)"/></pattern></defs><rect width="100" height="100" fill="url(%23tech-grid)"/></svg>');
-        opacity: 0.8;
-        z-index: 1;
-    }
-    
     .main-header h1 {
         font-family: 'Inter', sans-serif;
         font-size: 3.8rem;
-        font-weight: 800;
+        font-weight: 900;
         margin: 0;
-        text-shadow: 2px 2px 12px #fff, 2px 2px 8px rgba(0,0,0,0.7);
+        color: #ffffff !important;
+        text-shadow: 3px 3px 10px rgba(0,0,0,0.8);
         letter-spacing: -1px;
         position: relative;
         z-index: 2;
-        color: #fff;
     }
     
     .company-location {
-        font-family: 'Source Sans Pro', sans-serif;
-        font-size: 1.1rem;
+        font-family: 'Inter', sans-serif;
+        font-size: 1.2rem;
         font-weight: 700;
-        margin: 1.2rem 0;
-        color: #fff;
-        letter-spacing: 4px;
+        margin: 1.5rem 0;
+        color: #ffffff !important;
+        letter-spacing: 3px;
         text-transform: uppercase;
-        position: relative;
-        z-index: 2;
-        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
+        text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
     }
     
     .company-tagline {
         font-family: 'Inter', sans-serif;
-        font-size: 1.1rem;
-        font-weight: 400;
+        font-size: 1.2rem;
+        font-weight: 500;
         margin: 2rem auto 0;
         max-width: 700px;
-        line-height: 1.6;
-        color: #f1f5f9;
-        position: relative;
-        z-index: 2;
-        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
+        line-height: 1.7;
+        color: #ffffff !important;
+        text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
     }
     
     .heritage-badge {
-        background: linear-gradient(135deg, #8b4513 0%, #a0522d 50%, #654321 100%);
-        color: #fff;
-        padding: 0.8rem 2.5rem;
-        border-radius: 6px;
+        background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+        color: #ffffff !important;
+        padding: 1rem 3rem;
+        border-radius: 8px;
         font-family: 'Inter', sans-serif;
-        font-size: 0.95rem;
+        font-size: 1rem;
         font-weight: 800;
         margin: 2rem auto;
         display: inline-block;
-        box-shadow: 0 4px 16px rgba(139, 69, 19, 0.3);
-        position: relative;
-        z-index: 2;
+        box-shadow: 0 8px 25px rgba(220, 38, 38, 0.5);
         text-transform: uppercase;
         letter-spacing: 2px;
-        border: 2px solid #fff;
-        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
+        border: 2px solid #ffffff;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
     }
     
     .aviation-badge {
-        background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
-        color: #fff;
-        padding: 0.6rem 1.8rem;
-        border-radius: 6px;
-        font-size: 0.85rem;
+        background: linear-gradient(135deg, #059669 0%, #047857 100%);
+        color: #ffffff !important;
+        padding: 0.8rem 2rem;
+        border-radius: 8px;
+        font-size: 0.9rem;
         font-weight: 700;
         margin-left: 1rem;
         display: inline-block;
-        box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+        box-shadow: 0 6px 20px rgba(5, 150, 105, 0.4);
         text-transform: uppercase;
         letter-spacing: 1px;
-        border: 2px solid #fff;
-        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
+        border: 2px solid #ffffff;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
     }
     
     /* Executive Section Containers */
     .upload-section, .search-container {
-        background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
-        backdrop-filter: blur(10px);
+        background: linear-gradient(135deg, #374151 0%, #4b5563 100%);
         padding: 3rem;
-        border-radius: 12px;
-        margin-bottom: 2.5rem;
-        border: 2px solid #fff;
+        border-radius: 16px;
+        margin-bottom: 3rem;
+        border: 3px solid #ffffff;
         box-shadow: 
-            0 20px 40px rgba(0,0,0,0.3),
-            0 0 0 1px rgba(255,255,255,0.15),
-            inset 0 1px 0 rgba(255,255,255,0.2);
+            0 25px 50px rgba(0,0,0,0.5),
+            inset 0 2px 0 rgba(255,255,255,0.1);
         transition: all 0.3s ease;
         position: relative;
-        overflow: hidden;
     }
     
     .upload-section::before, .search-container::before {
@@ -179,582 +162,427 @@ st.markdown("""
         top: 0;
         left: 0;
         right: 0;
-        height: 3px;
-        background: linear-gradient(90deg, #fff 0%, #fff 50%, #fff 100%);
-        opacity: 1;
+        height: 4px;
+        background: linear-gradient(90deg, #1e40af 0%, #dc2626 50%, #059669 100%);
     }
     
     .upload-section:hover, .search-container:hover {
-        transform: translateY(-4px);
+        transform: translateY(-8px);
         box-shadow: 
-            0 28px 56px rgba(0,0,0,0.4),
-            0 0 0 1px #fff;
+            0 35px 70px rgba(0,0,0,0.6),
+            0 0 0 3px rgba(255,255,255,0.8);
     }
     
     .upload-section h3, .search-container h3 {
         font-family: 'Inter', sans-serif;
-        font-size: 1.8rem;
+        font-size: 2rem;
         font-weight: 800;
-        color: #fff;
-        margin-bottom: 1.5rem;
-        position: relative;
-        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
-    }
-    
-    .upload-section h3::after, .search-container h3::after {
-        content: '';
-        position: absolute;
-        bottom: -8px;
-        left: 0;
-        width: 40px;
-        height: 3px;
-        background: #fff;
+        color: #ffffff !important;
+        margin-bottom: 2rem;
+        text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
     }
     
     /* Premium Metric Cards */
     .metric-card {
-        background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #475569 100%);
-        padding: 2.5rem 2rem;
-        border-radius: 12px;
-        color: #fff;
+        background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+        padding: 3rem 2rem;
+        border-radius: 16px;
+        color: #ffffff !important;
         text-align: center;
-        margin: 0.8rem;
+        margin: 1rem;
         box-shadow: 
-            0 16px 32px rgba(0,0,0,0.3),
-            0 0 0 1px #fff,
-            inset 0 1px 0 rgba(255,255,255,0.2);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            0 20px 40px rgba(0,0,0,0.4),
+            0 0 0 2px rgba(255,255,255,0.3);
+        transition: all 0.3s ease;
+        border: 2px solid #ffffff;
         position: relative;
-        overflow: hidden;
-        border: 2px solid #fff;
-    }
-    
-    .metric-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: #fff;
-        opacity: 1;
     }
     
     .metric-card:hover {
-        transform: translateY(-6px) scale(1.02);
+        transform: translateY(-10px) scale(1.05);
         box-shadow: 
-            0 24px 48px rgba(0,0,0,0.4),
-            0 0 40px #fff;
+            0 30px 60px rgba(0,0,0,0.6),
+            0 0 50px rgba(30, 64, 175, 0.3);
     }
     
     .metric-number {
         font-family: 'Inter', sans-serif;
-        font-size: 3.2rem;
+        font-size: 3.5rem;
         font-weight: 900;
         display: block;
-        margin-bottom: 0.8rem;
-        color: #fff;
-        text-shadow: 0 2px 12px #fff, 0 2px 8px rgba(0,0,0,0.5);
+        margin-bottom: 1rem;
+        color: #ffffff !important;
+        text-shadow: 3px 3px 10px rgba(0,0,0,0.8);
     }
     
     .metric-label {
-        font-family: 'Source Sans Pro', sans-serif;
+        font-family: 'Inter', sans-serif;
         font-size: 1.1rem;
-        font-weight: 800;
-        color: #fff;
+        font-weight: 700;
+        color: #ffffff !important;
         text-transform: uppercase;
-        letter-spacing: 1px;
-        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
+        letter-spacing: 2px;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
     }
     
     /* Executive Status Messages */
     .success-message {
-        background: linear-gradient(135deg, #065f46 0%, #047857 50%, #059669 100%);
-        color: #fff;
-        padding: 2rem 2.5rem;
-        border-radius: 12px;
+        background: linear-gradient(135deg, #059669 0%, #047857 100%);
+        color: #ffffff !important;
+        padding: 2.5rem;
+        border-radius: 16px;
         margin: 2rem 0;
         text-align: center;
         font-family: 'Inter', sans-serif;
-        font-weight: 800;
-        font-size: 1.1rem;
-        box-shadow: 
-            0 12px 24px rgba(6, 95, 70, 0.3),
-            0 0 0 1px #fff;
-        border: 2px solid #fff;
-        position: relative;
-        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
-    }
-    
-    .success-message::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: #fff;
+        font-weight: 700;
+        font-size: 1.2rem;
+        box-shadow: 0 15px 30px rgba(5, 150, 105, 0.4);
+        border: 2px solid #ffffff;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
     }
     
     .error-message {
-        background: linear-gradient(135deg, #991b1b 0%, #b91c1c 50%, #dc2626 100%);
-        color: #fff;
-        padding: 2rem 2.5rem;
-        border-radius: 12px;
+        background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+        color: #ffffff !important;
+        padding: 2.5rem;
+        border-radius: 16px;
         margin: 2rem 0;
         text-align: center;
         font-family: 'Inter', sans-serif;
-        font-weight: 800;
-        font-size: 1.1rem;
-        box-shadow: 
-            0 12px 24px rgba(153, 27, 27, 0.3),
-            0 0 0 1px #fff;
-        border: 2px solid #fff;
-        position: relative;
-        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
-    }
-    
-    .error-message::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: #fff;
+        font-weight: 700;
+        font-size: 1.2rem;
+        box-shadow: 0 15px 30px rgba(220, 38, 38, 0.4);
+        border: 2px solid #ffffff;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
     }
     
     /* Executive Data Display */
     .dataframe-container {
         background: linear-gradient(135deg, #374151 0%, #4b5563 100%);
-        backdrop-filter: blur(10px);
-        padding: 2.5rem;
-        border-radius: 12px;
-        box-shadow: 
-            0 16px 32px rgba(0,0,0,0.3),
-            0 0 0 1px #fff,
-            inset 0 1px 0 rgba(255,255,255,0.2);
+        padding: 3rem;
+        border-radius: 16px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         margin: 2rem 0;
-        border: 2px solid #fff;
-        position: relative;
-    }
-    
-    .dataframe-container::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: #fff;
+        border: 3px solid #ffffff;
     }
     
     /* Executive Sidebar */
     .sidebar-content {
         background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-        padding: 2.5rem;
-        border-radius: 12px;
+        padding: 3rem;
+        border-radius: 16px;
         margin-bottom: 2rem;
-        color: #fff;
-        box-shadow: 
-            0 16px 32px rgba(0,0,0,0.3),
-            0 0 0 1px #fff;
-        position: relative;
-        overflow: hidden;
-        border: 2px solid #fff;
-    }
-    
-    .sidebar-content::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: #fff;
+        color: #ffffff !important;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        border: 3px solid #ffffff;
     }
     
     .sidebar-content h3 {
         font-family: 'Inter', sans-serif;
         font-weight: 800;
-        margin-bottom: 1.5rem;
-        position: relative;
-        z-index: 2;
-        color: #fff;
-        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
+        margin-bottom: 2rem;
+        color: #ffffff !important;
+        font-size: 1.8rem;
+        text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
     }
     
     /* Executive Welcome Section */
     .welcome-section {
         text-align: center;
-        padding: 5rem 3rem;
-        background: linear-gradient(135deg, #374151 0%, #4b5563 50%, #6b7280 100%);
-        border-radius: 16px;
+        padding: 6rem 3rem;
+        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+        border-radius: 20px;
         margin: 3rem 0;
-        position: relative;
-        overflow: hidden;
-        box-shadow: 
-            0 20px 40px rgba(0,0,0,0.3),
-            inset 0 1px 0 rgba(255,255,255,0.2);
-        border: 2px solid #fff;
-    }
-    
-    .welcome-section::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="executive-pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><rect fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1.2" width="20" height="20"/><circle cx="10" cy="10" r="1.2" fill="rgba(255,255,255,0.13)"/></pattern></defs><rect width="100" height="100" fill="url(%23executive-pattern)"/></svg>');
-        opacity: 0.8;
+        box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+        border: 3px solid #ffffff;
     }
     
     .welcome-section h2 {
         font-family: 'Inter', sans-serif;
-        font-size: 2.5rem;
+        font-size: 3rem;
         font-weight: 800;
-        color: #fff;
-        margin-bottom: 1.5rem;
-        position: relative;
-        z-index: 2;
-        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
+        color: #ffffff !important;
+        margin-bottom: 2rem;
+        text-shadow: 3px 3px 10px rgba(0,0,0,0.8);
     }
     
     /* Executive Feature Cards */
     .feature-card {
         text-align: center;
-        padding: 2.5rem 2rem;
-        background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
-        backdrop-filter: blur(10px);
-        border-radius: 12px;
-        box-shadow: 
-            0 16px 32px rgba(0,0,0,0.3),
-            0 0 0 1px #fff;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        margin: 1.5rem;
-        position: relative;
-        z-index: 2;
-        border: 2px solid #fff;
-    }
-    
-    .feature-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: #fff;
+        padding: 3rem 2rem;
+        background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+        border-radius: 16px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        transition: all 0.3s ease;
+        margin: 2rem;
+        border: 2px solid #ffffff;
     }
     
     .feature-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 
-            0 24px 48px rgba(0,0,0,0.4),
-            0 0 40px #fff;
+        transform: translateY(-12px);
+        box-shadow: 0 30px 60px rgba(0,0,0,0.6);
     }
     
     .feature-icon {
-        font-size: 3rem;
-        margin-bottom: 1.5rem;
+        font-size: 3.5rem;
+        margin-bottom: 2rem;
         display: block;
-        color: #fff;
-        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
+        color: #ffffff !important;
+        text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
     }
     
     .feature-card h4 {
         font-family: 'Inter', sans-serif;
-        font-size: 1.3rem;
+        font-size: 1.5rem;
         font-weight: 800;
-        color: #fff;
+        color: #ffffff !important;
         margin-bottom: 1rem;
-        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
+        text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
     }
     
     .feature-card p {
-        color: #f1f5f9;
-        font-size: 1rem;
-        line-height: 1.6;
-        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
+        color: #ffffff !important;
+        font-size: 1.1rem;
+        line-height: 1.8;
+        font-weight: 500;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
     }
     
     /* Executive Footer */
     .footer {
         text-align: center;
-        padding: 4rem 3rem;
-        background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
-        color: #fff;
+        padding: 5rem 3rem;
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        color: #ffffff !important;
         font-family: 'Inter', sans-serif;
         margin-top: 5rem;
-        border-radius: 16px 16px 0 0;
-        position: relative;
-        overflow: hidden;
-        border: 2px solid #fff;
-    }
-    
-    .footer::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 3px;
-        background: #fff;
+        border-radius: 20px;
+        border: 3px solid #ffffff;
+        box-shadow: 0 25px 50px rgba(0,0,0,0.5);
     }
     
     .footer a {
-        color: #fff;
+        color: #ffffff !important;
         text-decoration: none;
-        font-weight: 800;
-        transition: color 0.3s ease;
-        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
+        font-weight: 700;
+        transition: all 0.3s ease;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
     }
     
     .footer a:hover {
-        color: #fff;
-        text-decoration: underline;
+        color: #3b82f6 !important;
+        text-shadow: 0 0 10px rgba(59, 130, 246, 0.8);
     }
     
-    /* Executive Form Controls */
-    .stSelectbox > label, .stTextInput > label {
-        font-family: 'Inter', sans-serif;
-        font-weight: 800;
-        color: #fff !important;
-        font-size: 1.1rem;
-        margin-bottom: 0.5rem;
-        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
+    /* Streamlit Component Overrides - HIGH CONTRAST */
+    .stSelectbox > label, 
+    .stTextInput > label,
+    .stNumberInput > label,
+    .stDateInput > label,
+    .stTimeInput > label,
+    .stCheckbox > label,
+    .stRadio > label,
+    .stSlider > label,
+    .stMultiSelect > label,
+    .stFileUploader > label {
+        font-family: 'Inter', sans-serif !important;
+        font-weight: 800 !important;
+        color: #ffffff !important;
+        font-size: 1.1rem !important;
+        margin-bottom: 1rem !important;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.8) !important;
     }
     
-    .stSelectbox > div > div, .stTextInput > div > div {
-        background-color: #374151 !important;
-        border: 2px solid #fff !important;
-        color: #fff !important;
+    /* Input Fields */
+    .stSelectbox > div > div,
+    .stTextInput > div > div,
+    .stNumberInput > div > div,
+    .stDateInput > div > div,
+    .stTimeInput > div > div,
+    .stMultiSelect > div > div {
+        background-color: #1e293b !important;
+        border: 3px solid #ffffff !important;
+        border-radius: 12px !important;
+        color: #ffffff !important;
+        font-weight: 600 !important;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.3) !important;
     }
     
-    .stSelectbox > div > div input, .stTextInput > div > div input {
-        color: #fff !important;
+    .stSelectbox input,
+    .stTextInput input,
+    .stNumberInput input,
+    .stDateInput input,
+    .stTimeInput input,
+    .stMultiSelect input {
+        color: #ffffff !important;
+        font-weight: 600 !important;
+        font-size: 1rem !important;
     }
     
+    /* Buttons */
     .stButton > button {
-        background: linear-gradient(135deg, #fff 0%, #fff 100%);
-        color: #1e293b !important;
-        border: none;
-        border-radius: 8px;
-        padding: 0.875rem 2.5rem;
-        font-family: 'Inter', sans-serif;
-        font-weight: 800;
-        font-size: 1.1rem;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 
-            0 8px 16px #fff,
-            0 0 0 1px #fff;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        border: 2px solid #fff;
+        background: linear-gradient(135deg, #059669 0%, #047857 100%) !important;
+        color: #ffffff !important;
+        border: 3px solid #ffffff !important;
+        border-radius: 12px !important;
+        padding: 1rem 3rem !important;
+        font-family: 'Inter', sans-serif !important;
+        font-weight: 800 !important;
+        font-size: 1.1rem !important;
+        transition: all 0.3s ease !important;
+        box-shadow: 0 10px 20px rgba(5, 150, 105, 0.4) !important;
+        text-transform: uppercase !important;
+        letter-spacing: 2px !important;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.8) !important;
     }
     
     .stButton > button:hover {
-        transform: translateY(-2px);
-        box-shadow: 
-            0 12px 24px #fff,
-            0 0 20px #fff;
-        background: linear-gradient(135deg, #f1f5f9 0%, #fff 100%);
-        color: #1e293b !important;
+        transform: translateY(-4px) !important;
+        box-shadow: 0 15px 30px rgba(5, 150, 105, 0.6) !important;
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
     }
     
-    /* Executive Tabs */
+    /* Tabs */
     .stTabs [data-baseweb="tab-list"] {
-        background: linear-gradient(135deg, #374151 0%, #4b5563 100%);
-        border-radius: 12px;
-        padding: 0.8rem;
-        box-shadow: 
-            0 8px 16px rgba(0,0,0,0.3),
-            inset 0 1px 0 #fff;
-        border: 2px solid #fff;
+        background: linear-gradient(135deg, #1e293b 0%, #334155 100%) !important;
+        border-radius: 16px !important;
+        padding: 1rem !important;
+        border: 3px solid #ffffff !important;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.3) !important;
     }
     
     .stTabs [data-baseweb="tab"] {
-        font-family: 'Inter', sans-serif;
-        font-weight: 800;
-        border-radius: 8px;
-        color: #fff !important;
-        transition: all 0.3s ease;
-        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
+        font-family: 'Inter', sans-serif !important;
+        font-weight: 700 !important;
+        border-radius: 12px !important;
+        color: #ffffff !important;
+        transition: all 0.3s ease !important;
+        padding: 1rem 2rem !important;
+        margin: 0.5rem !important;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.8) !important;
     }
     
     .stTabs [data-baseweb="tab"]:hover {
-        background: #fff;
-        color: #1e293b !important;
-        font-weight: 900;
+        background: rgba(30, 64, 175, 0.3) !important;
+        color: #ffffff !important;
     }
     
     .stTabs [data-baseweb="tab"][aria-selected="true"] {
-        background: #fff;
-        color: #1e293b !important;
-        font-weight: 900;
-        border: 2px solid #1e293b;
+        background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%) !important;
+        color: #ffffff !important;
+        border: 2px solid #ffffff !important;
     }
     
-    /* Executive Scrollbar */
-    ::-webkit-scrollbar {
-        width: 8px;
+    /* Data Tables */
+    .dataframe {
+        background-color: #1e293b !important;
+        border: 3px solid #ffffff !important;
+        border-radius: 12px !important;
+        overflow: hidden !important;
     }
     
-    ::-webkit-scrollbar-track {
-        background: #374151;
-        border-radius: 4px;
-    }
-    
-    ::-webkit-scrollbar-thumb {
-        background: #fff;
-        border-radius: 4px;
-    }
-    
-    ::-webkit-scrollbar-thumb:hover {
-        background: #f1f5f9;
-    }
-    
-    /* Enhanced Text Colors for Better Visibility */
-    .stMarkdown, .stText, p, div, span {
-        color: #fff !important;
-        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
-    }
-    
-    /* Data Table Styling */
     .dataframe table {
-        background-color: #374151 !important;
-        color: #fff !important;
-        border: 2px solid #fff !important;
+        background-color: #1e293b !important;
+        color: #ffffff !important;
+        width: 100% !important;
     }
     
     .dataframe th {
-        background-color: #fff !important;
-        color: #1e293b !important;
-        border: 2px solid #1e293b !important;
-        font-weight: 900 !important;
-        text-shadow: none !important;
+        background-color: #0f172a !important;
+        color: #ffffff !important;
+        border: 2px solid #ffffff !important;
+        font-weight: 800 !important;
+        padding: 1rem !important;
+        text-align: center !important;
+        font-size: 1rem !important;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.8) !important;
     }
     
     .dataframe td {
-        background-color: #374151 !important;
-        color: #fff !important;
-        border: 1.5px solid #fff !important;
-        font-weight: 700 !important;
-        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
+        background-color: #1e293b !important;
+        color: #ffffff !important;
+        border: 1px solid #ffffff !important;
+        font-weight: 600 !important;
+        padding: 0.8rem !important;
+        text-align: center !important;
     }
     
-    /* Streamlit Native Component Overrides */
-    .stNumberInput > label, .stDateInput > label, .stTimeInput > label {
-        color: #fff !important;
-        font-weight: 800 !important;
-        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+        width: 12px;
     }
     
-    .stNumberInput input, .stDateInput input, .stTimeInput input {
-        background-color: #374151 !important;
-        color: #fff !important;
-        border: 2px solid #fff !important;
-        font-weight: 800 !important;
+    ::-webkit-scrollbar-track {
+        background: #1e293b;
+        border-radius: 6px;
+        border: 1px solid #ffffff;
     }
     
-    .stCheckbox > label {
-        color: #fff !important;
-        font-weight: 800 !important;
-        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
+    ::-webkit-scrollbar-thumb {
+        background: linear-gradient(135deg, #1e40af, #dc2626);
+        border-radius: 6px;
+        border: 1px solid #ffffff;
     }
     
-    .stRadio > label {
-        color: #fff !important;
-        font-weight: 800 !important;
-        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
+    ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(135deg, #3b82f6, #ef4444);
     }
     
-    .stSlider > label {
-        color: #fff !important;
-        font-weight: 800 !important;
-        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
+    /* Additional High Contrast Elements */
+    .stMarkdown, .stText, p, div, span, h1, h2, h3, h4, h5, h6 {
+        color: #ffffff !important;
+        font-weight: 600 !important;
     }
     
-    /* Multiselect Styling */
-    .stMultiSelect > label {
-        color: #fff !important;
-        font-weight: 800 !important;
-        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
+    .stSidebar {
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
+        border-right: 3px solid #ffffff !important;
     }
     
-    .stMultiSelect > div > div {
-        background-color: #374151 !important;
-        border: 2px solid #fff !important;
+    .stSidebar * {
+        color: #ffffff !important;
     }
     
     /* File Uploader */
-    .stFileUploader > label {
-        color: #fff !important;
-        font-weight: 800 !important;
-        text-shadow: 1px 1px 6px #fff, 0 0 2px #fff;
-    }
-    
     .stFileUploader > div {
-        background-color: #374151 !important;
-        border: 2px solid #fff !important;
+        background: linear-gradient(135deg, #1e293b 0%, #334155 100%) !important;
+        border: 3px solid #ffffff !important;
+        border-radius: 12px !important;
+        padding: 2rem !important;
+        text-align: center !important;
     }
     
-    /* Responsive Executive Design */
+    .stFileUploader label {
+        color: #ffffff !important;
+        font-weight: 800 !important;
+        font-size: 1.1rem !important;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.8) !important;
+    }
+    
+    /* Responsive Design */
     @media (max-width: 768px) {
         .main-header h1 {
-            font-size: 2.5rem;
+            font-size: 2.5rem !important;
         }
         
         .main-header {
-            padding: 2.5rem 1.5rem;
+            padding: 3rem 2rem !important;
         }
         
         .upload-section, .search-container {
-            padding: 2rem 1.5rem;
+            padding: 2rem !important;
         }
         
         .feature-card {
-            margin: 1rem 0.5rem;
+            margin: 1rem !important;
         }
-    }
-
-    /* For white backgrounds, use dark bold lines and text */
-    .white-bg, .stApp[style*="background: #fff"], .stApp[style*="background: white"] {
-        background: #fff !important;
-        color: #1e293b !important;
-    }
-    .white-bg *, .stApp[style*="background: #fff"] *, .stApp[style*="background: white"] * {
-        color: #1e293b !important;
-        border-color: #1e293b !important;
-        font-weight: 900 !important;
-        text-shadow: none !important;
-    }
-    .white-bg th, .white-bg td,
-    .stApp[style*="background: #fff"] th, .stApp[style*="background: #fff"] td,
-    .stApp[style*="background: white"] th, .stApp[style*="background: white"] td {
-        border: 2px solid #1e293b !important;
-        color: #1e293b !important;
-        font-weight: 900 !important;
-        background: #fff !important;
-    }
-    .white-bg .metric-card, .stApp[style*="background: #fff"] .metric-card, .stApp[style*="background: white"] .metric-card {
-        background: #fff !important;
-        color: #1e293b !important;
-        border: 2px solid #1e293b !important;
-        box-shadow: 0 0 0 2px #1e293b !important;
-    }
-    .white-bg .metric-number, .stApp[style*="background: #fff"] .metric-number, .stApp[style*="background: white"] .metric-number {
-        color: #1e293b !important;
-        text-shadow: none !important;
-    }
-    .white-bg .metric-label, .stApp[style*="background: #fff"] .metric-label, .stApp[style*="background: white"] .metric-label {
-        color: #1e293b !important;
-        text-shadow: none !important;
+        
+        .metric-card {
+            margin: 0.5rem !important;
+        }
     }
 </style>
 """, unsafe_allow_html=True)
-
 
 # --- Utility Functions ---
 def clean_design_name(name: str) -> str:
