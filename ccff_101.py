@@ -36,7 +36,12 @@ if 'search_history' not in st.session_state:
 
  
 
-<!DOCTYPE html>
+#!/usr/bin/env python3
+
+# Aviation Carpet Manufacturing Dashboard
+# Save this as a .py file and run it to serve the HTML
+
+html_content = """<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -671,7 +676,36 @@ if 'search_history' not in st.session_state:
         });
     </script>
 </body>
-</html>
+</html>"""
+
+def create_html_file():
+    """Create the HTML file from the string content"""
+    with open('aviation_dashboard.html', 'w', encoding='utf-8') as f:
+        f.write(html_content)
+    print("Dashboard HTML file created successfully!")
+
+def serve_dashboard():
+    """Simple HTTP server to serve the dashboard"""
+    import http.server
+    import socketserver
+    import webbrowser
+    import os
+    
+    PORT = 8000
+    
+    class Handler(http.server.SimpleHTTPRequestHandler):
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, directory=os.path.dirname(__file__), **kwargs)
+    
+    with socketserver.TCPServer(("", PORT), Handler) as httpd:
+        print(f"Dashboard running at http://localhost:{PORT}")
+        print("Press Ctrl+C to stop the server")
+        webbrowser.open(f'http://localhost:{PORT}/aviation_dashboard.html')
+        httpd.serve_forever()
+
+if __name__ == "__main__":
+    create_html_file()
+    serve_dashboard()
 
 # --- Utility Functions ---
 def clean_design_name(name: str) -> str:
