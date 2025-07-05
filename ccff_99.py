@@ -13,7 +13,7 @@ from typing import Dict, List, Tuple, Optional
 
 # Set page config
 st.set_page_config(
-    page_title="Wilton Weavers Piyush | Aviation Carpets & Fine Wool Broadloom | Kerala, India",
+    page_title="Wilton Weavers  | Aviation Carpets & Fine Wool Broadloom | Kerala, India",
     page_icon="✈️",
     layout="wide",
     initial_sidebar_state="expanded",
