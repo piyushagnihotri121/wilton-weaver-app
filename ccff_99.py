@@ -34,7 +34,7 @@ if 'selected_colors' not in st.session_state:
 if 'search_history' not in st.session_state:
     st.session_state.search_history = []
 
-# Premium Professional Aviation Carpet Manufacturing Dashboard CSS - Enhanced Visibility
+# Premium Professional Aviation Carpet Manufacturing Dashboard CSS
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700&family=Source+Sans+Pro:wght@300;400;600;700&display=swap');
@@ -42,7 +42,7 @@ st.markdown("""
     /* Global Professional Styling */
     .stApp {
         background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-        color: #ffffff;
+        color: #e5e5e5;
     }
     
     /* Executive Header */
@@ -57,11 +57,11 @@ st.markdown("""
         margin-bottom: 3rem;
         box-shadow: 
             0 24px 48px rgba(0,0,0,0.4),
-            0 0 0 1px rgba(255,255,255,0.15),
-            inset 0 1px 0 rgba(255,255,255,0.2);
+            0 0 0 1px rgba(255,255,255,0.05),
+            inset 0 1px 0 rgba(255,255,255,0.1);
         position: relative;
         overflow: hidden;
-        border: 1px solid rgba(255,255,255,0.2);
+        border: 1px solid rgba(255,255,255,0.08);
     }
     
     @keyframes subtleGradient {
@@ -78,8 +78,8 @@ st.markdown("""
         left: 0;
         right: 0;
         bottom: 0;
-        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="tech-grid" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse"><rect fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5" width="10" height="10"/><circle cx="5" cy="5" r="0.5" fill="rgba(255,255,255,0.08)"/></pattern></defs><rect width="100" height="100" fill="url(%23tech-grid)"/></svg>');
-        opacity: 0.6;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="tech-grid" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse"><rect fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="0.5" width="10" height="10"/><circle cx="5" cy="5" r="0.5" fill="rgba(255,255,255,0.02)"/></pattern></defs><rect width="100" height="100" fill="url(%23tech-grid)"/></svg>');
+        opacity: 0.4;
     }
     
     .main-header h1 {
@@ -99,7 +99,7 @@ st.markdown("""
         font-size: 1.1rem;
         font-weight: 600;
         margin: 1.2rem 0;
-        color: #ffffff;
+        color: #cbd5e1;
         letter-spacing: 4px;
         text-transform: uppercase;
         position: relative;
@@ -113,7 +113,7 @@ st.markdown("""
         margin: 2rem auto 0;
         max-width: 700px;
         line-height: 1.6;
-        color: #f1f5f9;
+        color: #94a3b8;
         position: relative;
         z-index: 2;
     }
@@ -133,7 +133,7 @@ st.markdown("""
         z-index: 2;
         text-transform: uppercase;
         letter-spacing: 2px;
-        border: 1px solid rgba(255,255,255,0.2);
+        border: 1px solid rgba(255,255,255,0.1);
     }
     
     .aviation-badge {
@@ -148,7 +148,7 @@ st.markdown("""
         box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
         text-transform: uppercase;
         letter-spacing: 1px;
-        border: 1px solid rgba(255,255,255,0.2);
+        border: 1px solid rgba(255,255,255,0.1);
     }
     
     /* Executive Section Containers */
@@ -158,11 +158,11 @@ st.markdown("""
         padding: 3rem;
         border-radius: 12px;
         margin-bottom: 2.5rem;
-        border: 1px solid rgba(255,255,255,0.2);
+        border: 1px solid rgba(255,255,255,0.08);
         box-shadow: 
             0 20px 40px rgba(0,0,0,0.3),
-            0 0 0 1px rgba(255,255,255,0.15),
-            inset 0 1px 0 rgba(255,255,255,0.2);
+            0 0 0 1px rgba(255,255,255,0.05),
+            inset 0 1px 0 rgba(255,255,255,0.1);
         transition: all 0.3s ease;
         position: relative;
         overflow: hidden;
@@ -182,7 +182,7 @@ st.markdown("""
         transform: translateY(-4px);
         box-shadow: 
             0 28px 56px rgba(0,0,0,0.4),
-            0 0 0 1px rgba(255,255,255,0.25);
+            0 0 0 1px rgba(255,255,255,0.1);
     }
     
     .upload-section h3, .search-container h3 {
@@ -214,12 +214,12 @@ st.markdown("""
         margin: 0.8rem;
         box-shadow: 
             0 16px 32px rgba(0,0,0,0.3),
-            0 0 0 1px rgba(255,255,255,0.15),
-            inset 0 1px 0 rgba(255,255,255,0.2);
+            0 0 0 1px rgba(255,255,255,0.05),
+            inset 0 1px 0 rgba(255,255,255,0.1);
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         position: relative;
         overflow: hidden;
-        border: 1px solid rgba(255,255,255,0.2);
+        border: 1px solid rgba(255,255,255,0.08);
     }
     
     .metric-card::before {
@@ -230,14 +230,14 @@ st.markdown("""
         right: 0;
         height: 2px;
         background: linear-gradient(90deg, #1e40af, #8b4513, #1e293b);
-        opacity: 1;
+        opacity: 0.8;
     }
     
     .metric-card:hover {
         transform: translateY(-6px) scale(1.02);
         box-shadow: 
             0 24px 48px rgba(0,0,0,0.4),
-            0 0 40px rgba(30, 64, 175, 0.25);
+            0 0 40px rgba(30, 64, 175, 0.15);
     }
     
     .metric-number {
@@ -254,7 +254,7 @@ st.markdown("""
         font-family: 'Source Sans Pro', sans-serif;
         font-size: 1rem;
         font-weight: 600;
-        color: #ffffff;
+        color: #cbd5e1;
         text-transform: uppercase;
         letter-spacing: 1px;
     }
@@ -272,8 +272,8 @@ st.markdown("""
         font-size: 1.1rem;
         box-shadow: 
             0 12px 24px rgba(6, 95, 70, 0.3),
-            0 0 0 1px rgba(255,255,255,0.15);
-        border: 1px solid rgba(255,255,255,0.2);
+            0 0 0 1px rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.08);
         position: relative;
     }
     
@@ -299,8 +299,8 @@ st.markdown("""
         font-size: 1.1rem;
         box-shadow: 
             0 12px 24px rgba(153, 27, 27, 0.3),
-            0 0 0 1px rgba(255,255,255,0.15);
-        border: 1px solid rgba(255,255,255,0.2);
+            0 0 0 1px rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.08);
         position: relative;
     }
     
@@ -322,10 +322,10 @@ st.markdown("""
         border-radius: 12px;
         box-shadow: 
             0 16px 32px rgba(0,0,0,0.3),
-            0 0 0 1px rgba(255,255,255,0.15),
-            inset 0 1px 0 rgba(255,255,255,0.2);
+            0 0 0 1px rgba(255,255,255,0.05),
+            inset 0 1px 0 rgba(255,255,255,0.1);
         margin: 2rem 0;
-        border: 1px solid rgba(255,255,255,0.2);
+        border: 1px solid rgba(255,255,255,0.08);
         position: relative;
     }
     
@@ -348,10 +348,10 @@ st.markdown("""
         color: #ffffff;
         box-shadow: 
             0 16px 32px rgba(0,0,0,0.3),
-            0 0 0 1px rgba(255,255,255,0.15);
+            0 0 0 1px rgba(255,255,255,0.05);
         position: relative;
         overflow: hidden;
-        border: 1px solid rgba(255,255,255,0.2);
+        border: 1px solid rgba(255,255,255,0.08);
     }
     
     .sidebar-content::before {
@@ -384,8 +384,8 @@ st.markdown("""
         overflow: hidden;
         box-shadow: 
             0 20px 40px rgba(0,0,0,0.3),
-            inset 0 1px 0 rgba(255,255,255,0.2);
-        border: 1px solid rgba(255,255,255,0.2);
+            inset 0 1px 0 rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.08);
     }
     
     .welcome-section::before {
@@ -395,8 +395,8 @@ st.markdown("""
         left: 0;
         right: 0;
         bottom: 0;
-        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="executive-pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><rect fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="0.5" width="20" height="20"/><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23executive-pattern)"/></svg>');
-        opacity: 0.7;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="executive-pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><rect fill="none" stroke="rgba(255,255,255,0.02)" stroke-width="0.5" width="20" height="20"/><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.01)"/></pattern></defs><rect width="100" height="100" fill="url(%23executive-pattern)"/></svg>');
+        opacity: 0.5;
     }
     
     .welcome-section h2 {
@@ -418,12 +418,12 @@ st.markdown("""
         border-radius: 12px;
         box-shadow: 
             0 16px 32px rgba(0,0,0,0.3),
-            0 0 0 1px rgba(255,255,255,0.15);
+            0 0 0 1px rgba(255,255,255,0.05);
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         margin: 1.5rem;
         position: relative;
         z-index: 2;
-        border: 1px solid rgba(255,255,255,0.2);
+        border: 1px solid rgba(255,255,255,0.08);
     }
     
     .feature-card::before {
@@ -440,14 +440,14 @@ st.markdown("""
         transform: translateY(-8px);
         box-shadow: 
             0 24px 48px rgba(0,0,0,0.4),
-            0 0 40px rgba(30, 64, 175, 0.2);
+            0 0 40px rgba(30, 64, 175, 0.1);
     }
     
     .feature-icon {
         font-size: 3rem;
         margin-bottom: 1.5rem;
         display: block;
-        color: #ffffff;
+        color: #cbd5e1;
     }
     
     .feature-card h4 {
@@ -458,24 +458,18 @@ st.markdown("""
         margin-bottom: 1rem;
     }
     
-    .feature-card p {
-        color: #f1f5f9;
-        font-size: 1rem;
-        line-height: 1.6;
-    }
-    
     /* Executive Footer */
     .footer {
         text-align: center;
         padding: 4rem 3rem;
         background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
-        color: #ffffff;
+        color: #cbd5e1;
         font-family: 'Inter', sans-serif;
         margin-top: 5rem;
         border-radius: 16px 16px 0 0;
         position: relative;
         overflow: hidden;
-        border: 1px solid rgba(255,255,255,0.2);
+        border: 1px solid rgba(255,255,255,0.08);
     }
     
     .footer::before {
@@ -489,38 +483,28 @@ st.markdown("""
     }
     
     .footer a {
-        color: #f1f5f9;
+        color: #94a3b8;
         text-decoration: none;
         font-weight: 600;
         transition: color 0.3s ease;
     }
     
     .footer a:hover {
-        color: #ffffff;
+        color: #cbd5e1;
     }
     
     /* Executive Form Controls */
     .stSelectbox > label, .stTextInput > label {
         font-family: 'Inter', sans-serif;
         font-weight: 600;
-        color: #ffffff !important;
+        color: #ffffff;
         font-size: 1rem;
         margin-bottom: 0.5rem;
     }
     
-    .stSelectbox > div > div, .stTextInput > div > div {
-        background-color: #374151 !important;
-        border: 1px solid rgba(255,255,255,0.2) !important;
-        color: #ffffff !important;
-    }
-    
-    .stSelectbox > div > div input, .stTextInput > div > div input {
-        color: #ffffff !important;
-    }
-    
     .stButton > button {
         background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
-        color: #ffffff !important;
+        color: #ffffff;
         border: none;
         border-radius: 8px;
         padding: 0.875rem 2.5rem;
@@ -530,10 +514,10 @@ st.markdown("""
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         box-shadow: 
             0 8px 16px rgba(30, 64, 175, 0.3),
-            0 0 0 1px rgba(255,255,255,0.15);
+            0 0 0 1px rgba(255,255,255,0.05);
         text-transform: uppercase;
         letter-spacing: 1px;
-        border: 1px solid rgba(255,255,255,0.2);
+        border: 1px solid rgba(255,255,255,0.08);
     }
     
     .stButton > button:hover {
@@ -551,26 +535,21 @@ st.markdown("""
         padding: 0.8rem;
         box-shadow: 
             0 8px 16px rgba(0,0,0,0.3),
-            inset 0 1px 0 rgba(255,255,255,0.2);
-        border: 1px solid rgba(255,255,255,0.2);
+            inset 0 1px 0 rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.08);
     }
     
     .stTabs [data-baseweb="tab"] {
         font-family: 'Inter', sans-serif;
         font-weight: 600;
         border-radius: 8px;
-        color: #ffffff !important;
+        color: #cbd5e1;
         transition: all 0.3s ease;
     }
     
     .stTabs [data-baseweb="tab"]:hover {
-        background: rgba(30, 64, 175, 0.2);
-        color: #ffffff !important;
-    }
-    
-    .stTabs [data-baseweb="tab"][aria-selected="true"] {
-        background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
-        color: #ffffff !important;
+        background: rgba(30, 64, 175, 0.1);
+        color: #ffffff;
     }
     
     /* Executive Scrollbar */
@@ -592,70 +571,9 @@ st.markdown("""
         background: linear-gradient(135deg, #1d4ed8, #a0522d);
     }
     
-    /* Enhanced Text Colors for Better Visibility */
-    .stMarkdown, .stText, p, div, span {
-        color: #ffffff !important;
-    }
-    
-    /* Data Table Styling */
-    .dataframe table {
-        background-color: #374151 !important;
-        color: #ffffff !important;
-    }
-    
-    .dataframe th {
-        background-color: #1e293b !important;
-        color: #ffffff !important;
-        border: 1px solid rgba(255,255,255,0.2) !important;
-    }
-    
-    .dataframe td {
-        background-color: #374151 !important;
-        color: #ffffff !important;
-        border: 1px solid rgba(255,255,255,0.1) !important;
-    }
-    
-    /* Streamlit Native Component Overrides */
-    .stNumberInput > label, .stDateInput > label, .stTimeInput > label {
-        color: #ffffff !important;
-    }
-    
-    .stNumberInput input, .stDateInput input, .stTimeInput input {
-        background-color: #374151 !important;
-        color: #ffffff !important;
-        border: 1px solid rgba(255,255,255,0.2) !important;
-    }
-    
-    .stCheckbox > label {
-        color: #ffffff !important;
-    }
-    
-    .stRadio > label {
-        color: #ffffff !important;
-    }
-    
-    .stSlider > label {
-        color: #ffffff !important;
-    }
-    
-    /* Multiselect Styling */
-    .stMultiSelect > label {
-        color: #ffffff !important;
-    }
-    
-    .stMultiSelect > div > div {
-        background-color: #374151 !important;
-        border: 1px solid rgba(255,255,255,0.2) !important;
-    }
-    
-    /* File Uploader */
-    .stFileUploader > label {
-        color: #ffffff !important;
-    }
-    
-    .stFileUploader > div {
-        background-color: #374151 !important;
-        border: 1px solid rgba(255,255,255,0.2) !important;
+    /* Text Colors */
+    .stMarkdown, .stText {
+        color: #e5e5e5;
     }
     
     /* Responsive Executive Design */
