@@ -36,676 +36,259 @@ if 'search_history' not in st.session_state:
 
  
 
-#!/usr/bin/env python3
+# Premium Professional Aviation Carpet Manufacturing Dashboard CSS
+import streamlit as st
 
-# Aviation Carpet Manufacturing Dashboard
-# Save this as a .py file and run it to serve the HTML
-
-html_content = """<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aviation Carpet Manufacturing Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        *,
-        *::before,
-        *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            font-size: 62.5%;
-        }
-
-        body {
-            font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, hsl(270, 50%, 15%), hsl(290, 60%, 25%), hsl(240, 50%, 20%));
-            min-height: 100vh;
-            color: hsl(0, 0%, 95%);
-            overflow-x: hidden;
-        }
-
-        .dashboard {
-            background: hsl(270, 50%, 8%);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 0 50px hsla(270, 30%, 5%, 0.8);
-        }
-
-        /* Header Section */
+st.markdown("""
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap');
+    
+    /* Base Dashboard Styles */
+    .dash {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        font-family: 'Inter', 'Roboto', sans-serif;
+        background-color: #ffffff;
+    }
+    
+    /* Header Styles */
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        background-color: #3f3f46;
+        color: #ffffff;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .header__heading a {
+        text-decoration: none;
+        font-size: 2rem;
+        color: #ffffff;
+        font-weight: 700;
+        font-family: 'Inter', sans-serif;
+    }
+    
+    .header__options {
+        display: flex;
+        gap: 1rem;
+    }
+    
+    .header__pro {
+        background: linear-gradient(45deg, #4f46e5, #7c3aed);
+        border: none;
+        padding: 0.5rem 1rem;
+        color: white;
+        border-radius: 0.5rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+    
+    .header__pro:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+    }
+    
+    /* Sidebar Styles */
+    .sidebar {
+        display: flex;
+        flex-direction: column;
+        width: 60px;
+        background-color: #1e1e1e;
+        padding: 1rem 0;
+        box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+    }
+    
+    .sidebar__icon {
+        margin: 1rem 0;
+        text-align: center;
+        color: #ffffff;
+        transition: all 0.3s ease;
+    }
+    
+    .sidebar__icon:hover {
+        background-color: #374151;
+        border-radius: 0.5rem;
+    }
+    
+    /* Main Content Styles */
+    .main {
+        display: flex;
+        flex: 1;
+        padding: 1rem;
+        background-color: #f9fafb;
+    }
+    
+    .main__col-1, .main__col-2 {
+        flex: 1;
+        padding: 1rem;
+    }
+    
+    .main__list-item {
+        padding: 0.5rem;
+        border-bottom: 1px solid #e5e7eb;
+        transition: background-color 0.3s ease;
+    }
+    
+    .main__list-item:hover {
+        background-color: #f3f4f6;
+    }
+    
+    /* Card Styles */
+    .main__card {
+        border-radius: 0.75rem;
+        overflow: hidden;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        background-color: #fff;
+        margin: 1rem 0;
+        transition: all 0.3s ease;
+    }
+    
+    .main__card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+    
+    .main__card-image {
+        width: 100%;
+        height: auto;
+    }
+    
+    .main__card-heading {
+        font-size: 1.2rem;
+        margin: 0.5rem;
+        font-weight: 600;
+        color: #1f2937;
+        font-family: 'Inter', sans-serif;
+    }
+    
+    .main__discover-place {
+        padding: 1rem;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.5rem;
+        margin-bottom: 0.5rem;
+        background-color: #ffffff;
+        transition: all 0.3s ease;
+    }
+    
+    .main__discover-place:hover {
+        border-color: #4f46e5;
+        box-shadow: 0 4px 12px rgba(79, 70, 229, 0.15);
+    }
+    
+    /* Professional Aviation Theme */
+    .aviation-theme {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+    
+    .carpet-manufacturing {
+        border-left: 4px solid #4f46e5;
+        padding-left: 1rem;
+    }
+    
+    /* Professional Buttons */
+    .btn-primary {
+        background: linear-gradient(45deg, #4f46e5, #7c3aed);
+        border: none;
+        padding: 0.75rem 1.5rem;
+        color: white;
+        border-radius: 0.5rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        font-family: 'Inter', sans-serif;
+    }
+    
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+    }
+    
+    /* Dashboard Metrics */
+    .metric-card {
+        background: white;
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        border-left: 4px solid #4f46e5;
+        margin-bottom: 1rem;
+    }
+    
+    .metric-value {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #1f2937;
+        margin-bottom: 0.5rem;
+    }
+    
+    .metric-label {
+        font-size: 0.875rem;
+        color: #6b7280;
+        font-weight: 500;
+    }
+    
+    /* Professional Tables */
+    .professional-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 0.75rem;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .professional-table th {
+        background: #f9fafb;
+        padding: 1rem;
+        text-align: left;
+        font-weight: 600;
+        color: #374151;
+        border-bottom: 1px solid #e5e7eb;
+    }
+    
+    .professional-table td {
+        padding: 1rem;
+        border-bottom: 1px solid #f3f4f6;
+    }
+    
+    .professional-table tr:hover {
+        background-color: #f9fafb;
+    }
+    
+    /* Upload and Search Sections */
+    .upload-section, .search-container {
+        background: white;
+        border-radius: 0.75rem;
+        padding: 2rem;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        margin-bottom: 2rem;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
         .header {
-            height: 8rem;
-            background: linear-gradient(135deg, hsl(270, 50%, 12%), hsl(270, 50%, 15%));
-            display: flex;
-            align-items: center;
-            padding: 0 3rem;
-            box-shadow: 0 4px 20px hsla(270, 30%, 3%, 0.5);
-            border-bottom: 1px solid hsla(270, 50%, 25%, 0.3);
-        }
-
-        .header__logo {
-            font-size: 2.4rem;
-            font-weight: 800;
-            color: hsl(220, 80%, 70%);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-right: 4rem;
-        }
-
-        .header__search {
-            flex-grow: 1;
-            max-width: 50rem;
-            position: relative;
-        }
-
-        .header__search-input {
-            width: 100%;
-            padding: 1.5rem 2rem;
-            background: hsl(270, 50%, 18%);
-            border: 2px solid hsl(270, 50%, 25%);
-            border-radius: 12px;
-            color: hsl(0, 0%, 90%);
-            font-size: 1.4rem;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-
-        .header__search-input:focus {
-            border-color: hsl(220, 80%, 60%);
-            box-shadow: 0 0 0 3px hsla(220, 80%, 60%, 0.2);
-        }
-
-        .header__search-input::placeholder {
-            color: hsl(0, 0%, 60%);
-        }
-
-        .header__nav {
-            display: flex;
-            align-items: center;
-            gap: 3rem;
-        }
-
-        .header__button {
-            background: linear-gradient(135deg, hsl(220, 80%, 60%), hsl(220, 80%, 70%));
-            color: white;
-            border: none;
-            padding: 1.2rem 2.4rem;
-            border-radius: 8px;
-            font-size: 1.3rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .header__button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px hsla(220, 80%, 60%, 0.4);
-        }
-
-        .header__link {
-            color: hsl(0, 0%, 80%);
-            text-decoration: none;
-            font-size: 1.4rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .header__link:hover {
-            color: hsl(220, 80%, 70%);
-        }
-
-        /* Main Content Area */
-        .main {
-            flex: 1;
-            display: flex;
-            background: linear-gradient(135deg, 
-                hsla(270, 50%, 8%, 0.9), 
-                hsla(270, 50%, 12%, 0.8) 30%, 
-                hsla(270, 50%, 6%, 0.9) 70%);
-        }
-
-        /* Sidebar */
-        .sidebar {
-            width: 10rem;
-            background: linear-gradient(180deg, hsl(270, 50%, 10%), hsl(270, 50%, 8%));
-            border-right: 1px solid hsla(270, 50%, 25%, 0.3);
-            padding: 3rem 0;
-            box-shadow: 2px 0 15px hsla(270, 30%, 3%, 0.4);
-        }
-
-        .sidebar__icon {
-            display: flex;
             flex-direction: column;
-            align-items: center;
-            padding: 2rem 0;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            color: hsl(0, 0%, 60%);
-        }
-
-        .sidebar__icon:hover {
-            color: hsl(220, 80%, 70%);
-            background: hsla(220, 80%, 60%, 0.1);
-        }
-
-        .sidebar__icon.active {
-            color: hsl(220, 80%, 70%);
-            background: hsla(220, 80%, 60%, 0.2);
-        }
-
-        .sidebar__icon svg {
-            width: 2.4rem;
-            height: 2.4rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .sidebar__label {
-            font-size: 1rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Content Area */
-        .content {
-            flex: 1;
-            padding: 4rem;
-            overflow-y: auto;
-        }
-
-        .content__header {
-            margin-bottom: 4rem;
-        }
-
-        .content__title {
-            font-size: 4rem;
-            font-weight: 300;
-            color: hsl(0, 0%, 95%);
-            margin-bottom: 1rem;
-        }
-
-        .content__subtitle {
-            font-size: 1.6rem;
-            color: hsl(0, 0%, 70%);
-            font-weight: 400;
-        }
-
-        /* Cards Section */
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
-            gap: 3rem;
-            margin-bottom: 4rem;
-        }
-
-        .card {
-            background: linear-gradient(135deg, hsl(270, 50%, 12%), hsl(270, 50%, 15%));
-            border-radius: 16px;
-            padding: 3rem;
-            box-shadow: 0 10px 30px hsla(270, 30%, 3%, 0.4);
-            border: 1px solid hsla(270, 50%, 25%, 0.3);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, hsl(220, 80%, 60%), hsl(280, 60%, 60%));
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 50px hsla(270, 30%, 3%, 0.6);
-        }
-
-        .card__header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-
-        .card__icon {
-            width: 4rem;
-            height: 4rem;
-            background: linear-gradient(135deg, hsl(220, 80%, 60%), hsl(220, 80%, 70%));
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 1.5rem;
-        }
-
-        .card__icon svg {
-            width: 2rem;
-            height: 2rem;
-            color: white;
-        }
-
-        .card__title {
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: hsl(0, 0%, 95%);
-        }
-
-        .card__value {
-            font-size: 3.2rem;
-            font-weight: 700;
-            color: hsl(220, 80%, 70%);
-            margin-bottom: 1rem;
-        }
-
-        .card__description {
-            font-size: 1.4rem;
-            color: hsl(0, 0%, 70%);
-            line-height: 1.6;
-        }
-
-        /* Production Timeline */
-        .timeline {
-            background: linear-gradient(135deg, hsl(270, 50%, 12%), hsl(270, 50%, 15%));
-            border-radius: 16px;
-            padding: 3rem;
-            margin-bottom: 4rem;
-            border: 1px solid hsla(270, 50%, 25%, 0.3);
-            box-shadow: 0 10px 30px hsla(270, 30%, 3%, 0.4);
-        }
-
-        .timeline__header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 3rem;
-        }
-
-        .timeline__title {
-            font-size: 2.4rem;
-            font-weight: 600;
-            color: hsl(0, 0%, 95%);
-        }
-
-        .timeline__filter {
-            display: flex;
             gap: 1rem;
         }
-
-        .timeline__filter-btn {
-            padding: 0.8rem 1.6rem;
-            background: hsl(270, 50%, 18%);
-            border: 1px solid hsl(270, 50%, 25%);
-            border-radius: 8px;
-            color: hsl(0, 0%, 80%);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1.2rem;
+        
+        .main {
+            flex-direction: column;
         }
-
-        .timeline__filter-btn:hover,
-        .timeline__filter-btn.active {
-            background: hsl(220, 80%, 60%);
-            color: white;
-            border-color: hsl(220, 80%, 60%);
+        
+        .sidebar {
+            width: 100%;
+            flex-direction: row;
+            justify-content: center;
         }
-
-        .timeline__list {
-            position: relative;
-            padding-left: 3rem;
+        
+        .upload-section, .search-container {
+            padding: 2rem 1.5rem;
         }
-
-        .timeline__list::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(180deg, hsl(220, 80%, 60%), hsl(280, 60%, 60%));
-        }
-
-        .timeline__item {
-            position: relative;
-            margin-bottom: 3rem;
-            padding-left: 2rem;
-        }
-
-        .timeline__item::before {
-            content: '';
-            position: absolute;
-            left: -2.5rem;
-            top: 0.5rem;
-            width: 8px;
-            height: 8px;
-            background: hsl(220, 80%, 60%);
-            border-radius: 50%;
-            box-shadow: 0 0 0 3px hsl(270, 50%, 12%);
-        }
-
-        .timeline__item-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .timeline__item-time {
-            font-size: 1.2rem;
-            color: hsl(0, 0%, 60%);
-            margin-right: 2rem;
-        }
-
-        .timeline__item-title {
-            font-size: 1.6rem;
-            font-weight: 600;
-            color: hsl(0, 0%, 95%);
-        }
-
-        .timeline__item-description {
-            font-size: 1.4rem;
-            color: hsl(0, 0%, 70%);
-            line-height: 1.6;
-        }
-
-        /* Status Badges */
-        .status {
-            display: inline-block;
-            padding: 0.4rem 1.2rem;
-            border-radius: 20px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .status--active {
-            background: hsla(120, 60%, 50%, 0.2);
-            color: hsl(120, 60%, 70%);
-        }
-
-        .status--pending {
-            background: hsla(45, 90%, 50%, 0.2);
-            color: hsl(45, 90%, 70%);
-        }
-
-        .status--completed {
-            background: hsla(220, 80%, 60%, 0.2);
-            color: hsl(220, 80%, 70%);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1200px) {
-            .cards {
-                grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
-            }
-        }
-
-        @media (max-width: 768px) {
-            html {
-                font-size: 55%;
-            }
-            
-            .header {
-                flex-direction: column;
-                height: auto;
-                padding: 2rem;
-                gap: 2rem;
-            }
-            
-            .header__nav {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .main {
-                flex-direction: column;
-            }
-            
-            .sidebar {
-                width: 100%;
-                height: auto;
-                display: flex;
-                justify-content: center;
-                gap: 2rem;
-                padding: 2rem;
-            }
-            
-            .sidebar__icon {
-                flex-direction: row;
-                padding: 1rem;
-            }
-            
-            .content {
-                padding: 2rem;
-            }
-            
-            .content__title {
-                font-size: 3rem;
-            }
-            
-            .cards {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="dashboard">
-        <!-- Header -->
-        <header class="header">
-            <div class="header__logo">AVICRAFT</div>
-            <div class="header__search">
-                <input type="text" class="header__search-input" placeholder="Search production data, orders, analytics...">
-            </div>
-            <nav class="header__nav">
-                <button class="header__button">Pro Dashboard</button>
-                <a href="#" class="header__link">Reports</a>
-                <a href="#" class="header__link">Analytics</a>
-                <a href="#" class="header__link">Settings</a>
-            </nav>
-        </header>
-
-        <!-- Main Content -->
-        <main class="main">
-            <!-- Sidebar -->
-            <aside class="sidebar">
-                <div class="sidebar__icon active">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
-                    </svg>
-                    <span class="sidebar__label">Dashboard</span>
-                </div>
-                <div class="sidebar__icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
-                    </svg>
-                    <span class="sidebar__label">Analytics</span>
-                </div>
-                <div class="sidebar__icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M20 6h-2.18c.11-.31.18-.65.18-1a2.996 2.996 0 0 0-5.5-1.65l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1z"/>
-                    </svg>
-                    <span class="sidebar__label">Production</span>
-                </div>
-                <div class="sidebar__icon">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                    </svg>
-                    <span class="sidebar__label">Quality</span>
-                </div>
-            </aside>
-
-            <!-- Content Area -->
-            <div class="content">
-                <div class="content__header">
-                    <h1 class="content__title">Aviation Carpet Manufacturing</h1>
-                    <p class="content__subtitle">Premium quality carpets for commercial aviation - Real-time production monitoring</p>
-                </div>
-
-                <!-- Metrics Cards -->
-                <div class="cards">
-                    <div class="card">
-                        <div class="card__header">
-                            <div class="card__icon">
-                                <svg viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
-                                </svg>
-                            </div>
-                            <h3 class="card__title">Daily Production</h3>
-                        </div>
-                        <div class="card__value">1,247</div>
-                        <p class="card__description">Square meters of premium aviation carpet produced today. <span class="status status--active">+12% from yesterday</span></p>
-                    </div>
-
-                    <div class="card">
-                        <div class="card__header">
-                            <div class="card__icon">
-                                <svg viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                                </svg>
-                            </div>
-                            <h3 class="card__title">Quality Score</h3>
-                        </div>
-                        <div class="card__value">99.7%</div>
-                        <p class="card__description">Current quality control rating for all production lines. <span class="status status--completed">Exceeding targets</span></p>
-                    </div>
-
-                    <div class="card">
-                        <div class="card__header">
-                            <div class="card__icon">
-                                <svg viewBox="0 0 24 24" fill="currentColor">
-                                    <path d="M20 6h-2.18c.11-.31.18-.65.18-1a2.996 2.996 0 0 0-5.5-1.65l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1z"/>
-                                </svg>
-                            </div>
-                            <h3 class="card__title">Active Orders</h3>
-                        </div>
-                        <div class="card__value">23</div>
-                        <p class="card__description">Current orders in production across all manufacturing lines. <span class="status status--pending">4 urgent</span></p>
-                    </div>
-                </div>
-
-                <!-- Production Timeline -->
-                <div class="timeline">
-                    <div class="timeline__header">
-                        <h2 class="timeline__title">Production Timeline</h2>
-                        <div class="timeline__filter">
-                            <button class="timeline__filter-btn active">Today</button>
-                            <button class="timeline__filter-btn">This Week</button>
-                            <button class="timeline__filter-btn">This Month</button>
-                        </div>
-                    </div>
-                    <div class="timeline__list">
-                        <div class="timeline__item">
-                            <div class="timeline__item-header">
-                                <span class="timeline__item-time">14:32</span>
-                                <h4 class="timeline__item-title">Boeing 787 Carpet Set - Completed</h4>
-                            </div>
-                            <p class="timeline__item-description">Premium class cabin carpet installation set for Boeing 787 successfully completed quality inspection. Ready for shipment to assembly facility.</p>
-                        </div>
-                        <div class="timeline__item">
-                            <div class="timeline__item-header">
-                                <span class="timeline__item-time">12:15</span>
-                                <h4 class="timeline__item-title">Airbus A350 Order - In Progress</h4>
-                            </div>
-                            <p class="timeline__item-description">Business class carpet production for Airbus A350 fleet. Currently 67% complete with expected delivery in 2 days.</p>
-                        </div>
-                        <div class="timeline__item">
-                            <div class="timeline__item-header">
-                                <span class="timeline__item-time">09:45</span>
-                                <h4 class="timeline__item-title">Quality Control Inspection</h4>
-                            </div>
-                            <p class="timeline__item-description">Routine quality control inspection completed for production line 3. All standards met with 99.8% pass rate.</p>
-                        </div>
-                        <div class="timeline__item">
-                            <div class="timeline__item-header">
-                                <span class="timeline__item-time">08:30</span>
-                                <h4 class="timeline__item-title">Material Delivery</h4>
-                            </div>
-                            <p class="timeline__item-description">Premium aviation-grade materials delivered and inspected. Fire-resistant fibers and specialized backing materials now in inventory.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <script>
-        // Add interactivity
-        document.addEventListener('DOMContentLoaded', function() {
-            // Sidebar navigation
-            const sidebarIcons = document.querySelectorAll('.sidebar__icon');
-            sidebarIcons.forEach(icon => {
-                icon.addEventListener('click', function() {
-                    sidebarIcons.forEach(i => i.classList.remove('active'));
-                    this.classList.add('active');
-                });
-            });
-
-            // Timeline filter buttons
-            const filterBtns = document.querySelectorAll('.timeline__filter-btn');
-            filterBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    filterBtns.forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                });
-            });
-
-            // Add some animation to cards
-            const cards = document.querySelectorAll('.card');
-            cards.forEach((card, index) => {
-                card.style.animationDelay = `${index * 0.1}s`;
-            });
-
-            // Search functionality
-            const searchInput = document.querySelector('.header__search-input');
-            searchInput.addEventListener('focus', function() {
-                this.style.transform = 'scale(1.02)';
-            });
-            searchInput.addEventListener('blur', function() {
-                this.style.transform = 'scale(1)';
-            });
-        });
-    </script>
-</body>
-</html>"""
-
-def create_html_file():
-    """Create the HTML file from the string content"""
-    with open('aviation_dashboard.html', 'w', encoding='utf-8') as f:
-        f.write(html_content)
-    print("Dashboard HTML file created successfully!")
-
-def serve_dashboard():
-    """Simple HTTP server to serve the dashboard"""
-    import http.server
-    import socketserver
-    import webbrowser
-    import os
-    
-    PORT = 8000
-    
-    class Handler(http.server.SimpleHTTPRequestHandler):
-        def __init__(self, *args, **kwargs):
-            super().__init__(*args, directory=os.path.dirname(__file__), **kwargs)
-    
-    with socketserver.TCPServer(("", PORT), Handler) as httpd:
-        print(f"Dashboard running at http://localhost:{PORT}")
-        print("Press Ctrl+C to stop the server")
-        webbrowser.open(f'http://localhost:{PORT}/aviation_dashboard.html')
-        httpd.serve_forever()
-
-if __name__ == "__main__":
-    create_html_file()
-    serve_dashboard()
+    }
+</style>
+""", unsafe_allow_html=True)
 
 # --- Utility Functions ---
 def clean_design_name(name: str) -> str:
