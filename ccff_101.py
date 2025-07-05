@@ -37,63 +37,136 @@ if 'search_history' not in st.session_state:
 # Premium Professional Aviation Carpet Manufacturing Dashboard CSS
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700&family=Source+Sans+Pro:wght@300;400;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap');
     
-    /* Global Professional Styling */
-    .stApp {
-        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-        color: #ffffff;
+    /* FORCE DARK THEME - Override all Streamlit defaults */
+    .stApp, .main, .block-container, .stMain {
+        background-color: #0f172a !important;
+        color: #f1f5f9 !important;
     }
     
-    /* CRITICAL: Force all text to be visible on dark backgrounds */
-    *, 
-    html, 
-    body, 
-    .stApp, 
-    .main, 
-    .block-container,
-    label, 
-    .stText, 
-    .stMarkdown, 
+    /* CRITICAL: Force all backgrounds to dark and text to light */
+    *, html, body, div, span, p, h1, h2, h3, h4, h5, h6, label, input, select, textarea, button {
+        background-color: transparent !important;
+        color: #f1f5f9 !important;
+    }
+    
+    /* Force all Streamlit components to dark theme */
+    .stSelectbox, .stTextInput, .stFileUploader, .stRadio, .stCheckbox, .stMultiSelect, .stNumberInput {
+        background-color: #1e293b !important;
+        color: #f1f5f9 !important;
+    }
+    
+    /* Force all labels to be visible */
     .stSelectbox > label, 
-    .stTextInput > label, 
-    .stTextInput, 
-    .stSelectbox, 
+    .stTextInput > label,
     .stFileUploader > label,
-    .stFileUploader,
     .stRadio > label,
-    .stRadio,
     .stCheckbox > label,
-    .stCheckbox,
     .stMultiSelect > label,
-    .stMultiSelect,
-    div[data-testid="stMarkdownContainer"], 
-    div[data-testid="stText"],
-    div[data-testid="stFileUploader"],
-    div[data-testid="stSelectbox"],
-    div[data-testid="stTextInput"],
-    div[data-testid="stRadio"],
-    div[data-testid="stCheckbox"],
-    div[data-testid="stMultiSelect"],
-    p, span, div, h1, h2, h3, h4, h5, h6 {
-        color: #ffffff !important;
+    .stNumberInput > label,
+    div[data-testid="stMarkdownContainer"] p,
+    div[data-testid="stText"] {
+        color: #f1f5f9 !important;
+        font-family: 'Inter', sans-serif !important;
+        font-weight: 600 !important;
+        font-size: 1.1rem !important;
+        margin-bottom: 0.5rem !important;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.8) !important;
     }
     
-    /* Force input placeholders and options to be visible */
-    input::placeholder, 
-    textarea::placeholder,
+    /* Force input fields to have dark backgrounds */
     .stSelectbox select,
-    .stSelectbox option,
+    .stTextInput input,
+    .stNumberInput input,
     .stMultiSelect select,
-    .stMultiSelect option {
-        color: #ffffff !important;
-        background-color: #374151 !important;
+    textarea {
+        background-color: #334155 !important;
+        color: #f1f5f9 !important;
+        border: 2px solid #475569 !important;
+        border-radius: 8px !important;
+        padding: 0.75rem !important;
+        font-size: 1rem !important;
+        font-weight: 500 !important;
     }
     
-    /* Force radio and checkbox labels */
-    .stRadio > div > label > div,
-    .stCheckbox > div > label > div {
+    /* Force dropdown options */
+    .stSelectbox select option,
+    .stMultiSelect select option {
+        background-color: #334155 !important;
+        color: #f1f5f9 !important;
+    }
+    
+    /* Force placeholder text */
+    input::placeholder, textarea::placeholder {
+        color: #94a3b8 !important;
+        opacity: 1 !important;
+    }
+    
+    /* Force radio button styling */
+    .stRadio > div {
+        background-color: #1e293b !important;
+        border: 1px solid #475569 !important;
+        border-radius: 8px !important;
+        padding: 1rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    .stRadio > div > label {
+        color: #f1f5f9 !important;
+        font-weight: 600 !important;
+    }
+    
+    .stRadio > div > label > div {
+        color: #f1f5f9 !important;
+    }
+    
+    /* Force checkbox styling */
+    .stCheckbox > div {
+        background-color: #1e293b !important;
+        border: 1px solid #475569 !important;
+        border-radius: 8px !important;
+        padding: 0.75rem !important;
+    }
+    
+    .stCheckbox > div > label {
+        color: #f1f5f9 !important;
+        font-weight: 600 !important;
+    }
+    
+    /* Force file uploader styling */
+    .stFileUploader section {
+        background-color: #1e293b !important;
+        border: 2px dashed #475569 !important;
+        border-radius: 12px !important;
+        padding: 2rem !important;
+        color: #f1f5f9 !important;
+    }
+    
+    .stFileUploader section small {
+        color: #94a3b8 !important;
+    }
+    
+    /* Force button styling */
+    .stButton > button {
+        background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%) !important;
         color: #ffffff !important;
+        border: none !important;
+        border-radius: 8px !important;
+        padding: 0.875rem 2.5rem !important;
+        font-family: 'Inter', sans-serif !important;
+        font-weight: 600 !important;
+        font-size: 1rem !important;
+        transition: all 0.3s ease !important;
+        box-shadow: 0 8px 16px rgba(30, 64, 175, 0.3) !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1px !important;
+    }
+    
+    .stButton > button:hover {
+        transform: translateY(-2px) !important;
+        box-shadow: 0 12px 24px rgba(30, 64, 175, 0.4) !important;
+        background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%) !important;
     }
     
     /* Executive Header */
@@ -121,18 +194,6 @@ st.markdown("""
         100% { background-position: 0% 50%; }
     }
     
-    /* Subtle Technical Pattern */
-    .main-header::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="tech-grid" x="0" y="0" width="10" height="10" patternUnits="userSpaceOnUse"><rect fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="0.5" width="10" height="10"/><circle cx="5" cy="5" r="0.5" fill="rgba(255,255,255,0.02)"/></pattern></defs><rect width="100" height="100" fill="url(%23tech-grid)"/></svg>');
-        opacity: 0.4;
-    }
-    
     .main-header h1 {
         font-family: 'Inter', sans-serif;
         font-size: 3.8rem;
@@ -146,7 +207,7 @@ st.markdown("""
     }
     
     .company-location {
-        font-family: 'Source Sans Pro', sans-serif;
+        font-family: 'Roboto', sans-serif;
         font-size: 1.1rem;
         font-weight: 600;
         margin: 1.2rem 0;
@@ -302,7 +363,7 @@ st.markdown("""
     }
     
     .metric-label {
-        font-family: 'Source Sans Pro', sans-serif;
+        font-family: 'Roboto', sans-serif;
         font-size: 1rem;
         font-weight: 600;
         color: #cbd5e1 !important;
@@ -391,248 +452,54 @@ st.markdown("""
         background: linear-gradient(90deg, #1e40af, #8b4513);
     }
     
-    /* Executive Sidebar */
-    .sidebar-content {
-        background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-        padding: 2.5rem;
-        border-radius: 12px;
-        margin-bottom: 2rem;
-        color: #ffffff !important;
-        box-shadow: 
-            0 16px 32px rgba(0,0,0,0.3),
-            0 0 0 1px rgba(255,255,255,0.05);
-        position: relative;
-        overflow: hidden;
-        border: 1px solid rgba(255,255,255,0.08);
-    }
-    
-    .sidebar-content::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: linear-gradient(90deg, #1e40af, #8b4513);
-    }
-    
-    .sidebar-content h3 {
-        font-family: 'Inter', sans-serif;
-        font-weight: 700;
-        margin-bottom: 1.5rem;
-        position: relative;
-        z-index: 2;
-        color: #ffffff !important;
-    }
-    
-    /* Executive Welcome Section */
-    .welcome-section {
-        text-align: center;
-        padding: 5rem 3rem;
-        background: linear-gradient(135deg, #374151 0%, #4b5563 50%, #6b7280 100%);
-        border-radius: 16px;
-        margin: 3rem 0;
-        position: relative;
-        overflow: hidden;
-        box-shadow: 
-            0 20px 40px rgba(0,0,0,0.3),
-            inset 0 1px 0 rgba(255,255,255,0.1);
-        border: 1px solid rgba(255,255,255,0.08);
-        color: #ffffff !important;
-    }
-    
-    .welcome-section::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="executive-pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><rect fill="none" stroke="rgba(255,255,255,0.02)" stroke-width="0.5" width="20" height="20"/><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.01)"/></pattern></defs><rect width="100" height="100" fill="url(%23executive-pattern)"/></svg>');
-        opacity: 0.5;
-    }
-    
-    .welcome-section h2 {
-        font-family: 'Inter', sans-serif;
-        font-size: 2.5rem;
-        font-weight: 700;
-        color: #ffffff !important;
-        margin-bottom: 1.5rem;
-        position: relative;
-        z-index: 2;
-    }
-    
-    /* Executive Feature Cards */
-    .feature-card {
-        text-align: center;
-        padding: 2.5rem 2rem;
-        background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
-        backdrop-filter: blur(10px);
-        border-radius: 12px;
-        box-shadow: 
-            0 16px 32px rgba(0,0,0,0.3),
-            0 0 0 1px rgba(255,255,255,0.05);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        margin: 1.5rem;
-        position: relative;
-        z-index: 2;
-        border: 1px solid rgba(255,255,255,0.08);
-        color: #ffffff !important;
-    }
-    
-    .feature-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: linear-gradient(90deg, #1e40af, #8b4513);
-    }
-    
-    .feature-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 
-            0 24px 48px rgba(0,0,0,0.4),
-            0 0 40px rgba(30, 64, 175, 0.1);
-    }
-    
-    .feature-icon {
-        font-size: 3rem;
-        margin-bottom: 1.5rem;
-        display: block;
-        color: #cbd5e1 !important;
-    }
-    
-    .feature-card h4 {
-        font-family: 'Inter', sans-serif;
-        font-size: 1.3rem;
-        font-weight: 700;
-        color: #ffffff !important;
-        margin-bottom: 1rem;
-    }
-    
-    /* Executive Footer */
-    .footer {
-        text-align: center;
-        padding: 4rem 3rem;
-        background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
-        color: #cbd5e1 !important;
-        font-family: 'Inter', sans-serif;
-        margin-top: 5rem;
-        border-radius: 16px 16px 0 0;
-        position: relative;
-        overflow: hidden;
-        border: 1px solid rgba(255,255,255,0.08);
-    }
-    
-    .footer::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 3px;
-        background: linear-gradient(90deg, #1e40af, #8b4513, #1e293b);
-    }
-    
-    .footer a {
-        color: #94a3b8 !important;
-        text-decoration: none;
-        font-weight: 600;
-        transition: color 0.3s ease;
-    }
-    
-    .footer a:hover {
-        color: #cbd5e1 !important;
-    }
-    
-    /* Executive Form Controls - Enhanced Visibility */
-    .stSelectbox > label, 
-    .stTextInput > label,
-    .stFileUploader > label,
-    .stRadio > label,
-    .stCheckbox > label,
-    .stMultiSelect > label {
-        font-family: 'Inter', sans-serif !important;
-        font-weight: 600 !important;
-        color: #ffffff !important;
-        font-size: 1.1rem !important;
-        margin-bottom: 0.8rem !important;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.5) !important;
-    }
-    
-    /* Force input field styling */
-    .stSelectbox select,
-    .stTextInput input,
-    .stMultiSelect select {
-        background-color: #374151 !important;
-        color: #ffffff !important;
-        border: 1px solid rgba(255,255,255,0.2) !important;
-        border-radius: 8px !important;
-        padding: 0.75rem !important;
-        font-size: 1rem !important;
-    }
-    
-    /* Dropdown options */
-    .stSelectbox select option {
-        background-color: #374151 !important;
-        color: #ffffff !important;
-    }
-    
-    .stButton > button {
-        background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
-        color: #ffffff !important;
-        border: none;
-        border-radius: 8px;
-        padding: 0.875rem 2.5rem;
-        font-family: 'Inter', sans-serif;
-        font-weight: 600;
-        font-size: 1rem;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 
-            0 8px 16px rgba(30, 64, 175, 0.3),
-            0 0 0 1px rgba(255,255,255,0.05);
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        border: 1px solid rgba(255,255,255,0.08);
-    }
-    
-    .stButton > button:hover {
-        transform: translateY(-2px);
-        box-shadow: 
-            0 12px 24px rgba(30, 64, 175, 0.4),
-            0 0 20px rgba(30, 64, 175, 0.2);
-        background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
-    }
-    
-    /* Executive Tabs */
+    /* Force Streamlit tabs to dark theme */
     .stTabs [data-baseweb="tab-list"] {
-        background: linear-gradient(135deg, #374151 0%, #4b5563 100%);
-        border-radius: 12px;
-        padding: 0.8rem;
+        background: linear-gradient(135deg, #1e293b 0%, #334155 100%) !important;
+        border-radius: 12px !important;
+        padding: 0.8rem !important;
         box-shadow: 
             0 8px 16px rgba(0,0,0,0.3),
-            inset 0 1px 0 rgba(255,255,255,0.1);
-        border: 1px solid rgba(255,255,255,0.08);
+            inset 0 1px 0 rgba(255,255,255,0.1) !important;
+        border: 1px solid rgba(255,255,255,0.08) !important;
     }
     
     .stTabs [data-baseweb="tab"] {
-        font-family: 'Inter', sans-serif;
-        font-weight: 600;
-        border-radius: 8px;
+        font-family: 'Inter', sans-serif !important;
+        font-weight: 600 !important;
+        border-radius: 8px !important;
         color: #cbd5e1 !important;
-        transition: all 0.3s ease;
+        background-color: transparent !important;
+        transition: all 0.3s ease !important;
     }
     
     .stTabs [data-baseweb="tab"]:hover {
-        background: rgba(30, 64, 175, 0.1);
+        background: rgba(30, 64, 175, 0.1) !important;
         color: #ffffff !important;
     }
     
     .stTabs [data-baseweb="tab"][aria-selected="true"] {
-        background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+        background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%) !important;
         color: #ffffff !important;
+    }
+    
+    /* Force markdown and text elements */
+    .stMarkdown, .stText, .stMarkdown p, .stText p {
+        color: #f1f5f9 !important;
+        font-family: 'Inter', sans-serif !important;
+    }
+    
+    /* Force sidebar styling */
+    .css-1d391kg {
+        background-color: #1e293b !important;
+    }
+    
+    /* Force metric styling */
+    .metric-container {
+        background: linear-gradient(135deg, #1e293b 0%, #334155 100%) !important;
+        border-radius: 12px !important;
+        padding: 2rem !important;
+        border: 1px solid rgba(255,255,255,0.08) !important;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.3) !important;
     }
     
     /* Executive Scrollbar */
@@ -641,7 +508,7 @@ st.markdown("""
     }
     
     ::-webkit-scrollbar-track {
-        background: #374151;
+        background: #1e293b;
         border-radius: 4px;
     }
     
@@ -654,39 +521,7 @@ st.markdown("""
         background: linear-gradient(135deg, #1d4ed8, #a0522d);
     }
     
-    /* Additional text visibility fixes */
-    .stMarkdown, .stText, .stMarkdown p, .stText p {
-        color: #ffffff !important;
-    }
-    
-    /* File uploader styling */
-    .stFileUploader section {
-        background: linear-gradient(135deg, #374151 0%, #4b5563 100%);
-        border: 2px dashed rgba(255,255,255,0.3);
-        border-radius: 12px;
-        padding: 2rem;
-        color: #ffffff !important;
-    }
-    
-    .stFileUploader section small {
-        color: #cbd5e1 !important;
-    }
-    
-    /* Radio button styling */
-    .stRadio > div {
-        background: linear-gradient(135deg, #374151 0%, #4b5563 100%);
-        border-radius: 8px;
-        padding: 1rem;
-        margin-bottom: 0.5rem;
-        border: 1px solid rgba(255,255,255,0.1);
-    }
-    
-    .stRadio > div > label {
-        color: #ffffff !important;
-        font-weight: 600;
-    }
-    
-    /* Responsive Executive Design */
+    /* Responsive Design */
     @media (max-width: 768px) {
         .main-header h1 {
             font-size: 2.5rem;
@@ -698,10 +533,6 @@ st.markdown("""
         
         .upload-section, .search-container {
             padding: 2rem 1.5rem;
-        }
-        
-        .feature-card {
-            margin: 1rem 0.5rem;
         }
     }
 </style>
