@@ -42,7 +42,7 @@ st.markdown("""
     /* Global Professional Styling */
     .stApp {
         background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-        color: #e2e2e2;
+        color: #cfe9fa;
     }
     
     /* Executive Header */
@@ -573,7 +573,7 @@ st.markdown("""
     
     /* Text Colors */
     .stMarkdown, .stText {
-        color: #e2e2e2;
+        color: #cfe9fa;
     }
     
     /* Responsive Executive Design */
