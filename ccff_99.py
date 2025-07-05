@@ -593,7 +593,23 @@ st.markdown("""
         .feature-card {
             margin: 1rem 0.5rem;
         }
-    }
+
+        /* 🔥 Force text, label, and placeholder color to bright white globally */
+        label,
+        .stText, 
+        .stMarkdown, 
+        .stSelectbox > label, 
+        .stTextInput > label, 
+        .stTextInput, 
+        .stSelectbox, 
+        div[data-testid="stMarkdownContainer"], 
+        div[data-testid="stText"] {
+            color: #ffffff !important;
+        }    
+        input::placeholder, textarea::placeholder {
+            color: #ffffff !important;
+        }
+    
 </style>
 """, unsafe_allow_html=True)
 
