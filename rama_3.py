@@ -104,6 +104,20 @@ def display_metrics_cards(metrics: Dict[str, int]):
             </div>
             """, unsafe_allow_html=True)
 
+def extract_color_from_yarn(yarn_desc: str) -> str:
+    """Extract just the color part from a yarn description"""
+    if pd.isna(yarn_desc):
+        return ""
+    
+    # Remove suffixes like -BB, -CN, etc.
+    yarn_desc = re.sub(r'(-BB|-CN|-BM|-SP|-PL|-XX|-ZZ)$', '', yarn_desc)
+    
+    # Extract the color part (after WOOL and before the next hyphen)
+    match = re.search(r'WOOL\s+([^-]+)', yarn_desc)
+    if match:
+        return match.group(1).strip()
+    return ""
+
 def process_yarn_description(desc: str) -> str:
     """Process yarn description according to business rules"""
     if pd.isna(desc):
@@ -124,11 +138,11 @@ def process_yarn_description(desc: str) -> str:
         if not part.startswith('WOOL'):
             continue
             
-        # Extract color part (remove suffixes)
-        color = re.sub(r'(-BB|-CN|-BM|-SP|-PL|-XX|-ZZ)$', '', part)
+        # Extract base yarn (without suffix)
+        base_yarn = re.sub(r'(-BB|-CN|-BM|-SP|-PL|-XX|-ZZ)$', '', part)
         
-        # Check if we already have this color (prefer BB over others)
-        existing = next((y for y in yarns if y.split('-')[0] == color.split('-')[0]), None)
+        # Check if we already have this yarn (prefer BB over others)
+        existing = next((y for y in yarns if re.sub(r'(-BB|-CN|-BM|-SP|-PL|-XX|-ZZ)$', '', y) == base_yarn), None)
         
         if existing:
             # Prefer BB suffix if available
@@ -137,9 +151,6 @@ def process_yarn_description(desc: str) -> str:
                 yarns.append(part)
         else:
             yarns.append(part)
-    
-    # Sort yarns to maintain consistent order
-    yarns.sort()
     
     return " - ".join(yarns)
 
@@ -158,22 +169,20 @@ def get_frame_wise_colors(design_df: pd.DataFrame, yarn_df: pd.DataFrame) -> pd.
     if not yarn_desc_col:
         return pd.DataFrame()
     
-    # Process yarn descriptions
+    # Process each yarn description to get only WOOL yarns with BB preference
     yarn_df['Processed_Yarn'] = yarn_df[yarn_desc_col].apply(process_yarn_description)
+    
+    # Extract just the color parts from the processed yarn descriptions
+    yarn_df['Extracted_Colors'] = yarn_df['Processed_Yarn'].apply(lambda x: " - ".join(
+        [extract_color_from_yarn(y) for y in x.split(" - ") if extract_color_from_yarn(y)]
+    ))
     
     # Merge with design data
     if 'Design Name' not in design_df.columns or 'Design Name' not in yarn_df.columns:
         return pd.DataFrame()
     
-    merged = pd.merge(
-        design_df[['Design Name']],
-        yarn_df[['Design Name', 'Processed_Yarn']],
-        on='Design Name',
-        how='left'
-    )
-    
-    # Group by design name and combine yarn descriptions
-    frame_colors = merged.groupby('Design Name')['Processed_Yarn'].apply(
+    # Group by design name and combine the extracted colors
+    frame_colors = yarn_df.groupby('Design Name')['Extracted_Colors'].apply(
         lambda x: " - ".join([y for y in x if pd.notna(y) and y])
     ).reset_index()
     
