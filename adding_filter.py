@@ -530,6 +530,56 @@ if (selected_colors or
     </div>
     """, unsafe_allow_html=True)
 
+
+
+    # --- Apply Filters and Display Results ---
+if color_search_button:
+    filtered_df = st.session_state.design_df.copy()
+
+    # --- Colors filter ---
+    if selected_colors:
+        color_columns = [col for col in filtered_df.columns if any(word in col.lower() for word in ['color', 'colour', 'shade', 'dye'])]
+
+        if match_type == "All Colors (AND)":
+            for color in selected_colors:
+                filtered_df = filtered_df[
+                    filtered_df[color_columns].apply(
+                        lambda row: any(color in str(cell).upper() for cell in row if pd.notna(cell)), axis=1
+                    )
+                ]
+        else:  # "Any Color (OR)"
+            filtered_df = filtered_df[
+                filtered_df[color_columns].apply(
+                    lambda row: any(any(c in str(cell).upper() for c in selected_colors) for cell in row if pd.notna(cell)), axis=1
+                )
+            ]
+
+    # --- Construction filter ---
+    if selected_construction != "Any":
+        construction_col = next((col for col in filtered_df.columns if 'construction' in col.lower()), None)
+        if construction_col:
+            filtered_df = filtered_df[filtered_df[construction_col] == selected_construction]
+
+    # --- Frames filter ---
+    if selected_frames != "Any":
+        frames_col = next((col for col in filtered_df.columns if 'frame' in col.lower()), None)
+        if frames_col:
+            filtered_df = filtered_df[filtered_df[frames_col] == selected_frames]
+
+    # --- Weft Head filter ---
+    if selected_weft_head != "Any":
+        weft_head_col = next((col for col in filtered_df.columns if 'weft' in col.lower() and 'head' in col.lower()), None)
+        if weft_head_col:
+            filtered_df = filtered_df[filtered_df[weft_head_col] == selected_weft_head]
+
+    # --- Display Results ---
+    if not filtered_df.empty:
+        st.markdown(f"**🎨 {len(filtered_df)} designs found matching your enhanced filter criteria:**")
+        st.dataframe(filtered_df)
+    else:
+        st.warning("❌ No designs found matching your enhanced filter criteria.")
+
+
 # --- File Processing ---
 if design_file is not None and yarn_file is not None:
     try:
