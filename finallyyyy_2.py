@@ -34,468 +34,205 @@ if 'selected_colors' not in st.session_state:
 if 'search_history' not in st.session_state:
     st.session_state.search_history = []
 
-# Modern Professional Aviation Carpet Manufacturing Dashboard CSS
+# --- CSS Styling ---
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
     
-    /* MODERN DARK THEME - Clean & Professional */
-    .stApp, .main, .block-container, .stMain {
-        background: linear-gradient(135deg, #1a1d29 0%, #2d3748 100%) !important;
-        color: #ffffff !important;
-        font-family: 'Inter', sans-serif !important;
-    }
-    
-    /* Force Modern Styling for All Components */
-    .stSelectbox, .stTextInput, .stFileUploader, .stRadio, .stCheckbox, .stMultiSelect, .stNumberInput {
-        background: rgba(255, 255, 255, 0.95) !important;
-        border-radius: 12px !important;
-        border: 1px solid #e2e8f0 !important;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05) !important;
-        margin-bottom: 1rem !important;
-    }
-    
-    /* Clean, Readable Labels */
-    .stSelectbox > label, 
-    .stTextInput > label,
-    .stFileUploader > label,
-    .stRadio > label,
-    .stCheckbox > label,
-    .stMultiSelect > label,
-    .stNumberInput > label {
-        color: #ffffff !important;
-        font-family: 'Inter', sans-serif !important;
-        font-weight: 600 !important;
-        font-size: 0.95rem !important;
-        margin-bottom: 0.5rem !important;
-        display: block !important;
-        text-transform: uppercase !important;
-        letter-spacing: 0.5px !important;
-    }
-    
-    /* Modern Input Fields */
-    .stSelectbox select,
-    .stTextInput input,
-    .stNumberInput input,
-    .stMultiSelect select,
-    textarea {
-        background: #ffffff !important;
-        color: #2d3748 !important;
-        border: 2px solid #e2e8f0 !important;
-        border-radius: 8px !important;
-        padding: 0.75rem 1rem !important;
-        font-size: 0.95rem !important;
-        font-weight: 500 !important;
-        font-family: 'Inter', sans-serif !important;
-        transition: all 0.3s ease !important;
-    }
-    
-    .stSelectbox select:focus,
-    .stTextInput input:focus,
-    .stNumberInput input:focus,
-    .stMultiSelect select:focus,
-    textarea:focus {
-        border-color: #3b82f6 !important;
-        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
-        outline: none !important;
-    }
-    
-    /* Dropdown Options */
-    .stSelectbox select option,
-    .stMultiSelect select option {
-        background: #ffffff !important;
-        color: #2d3748 !important;
-        padding: 0.5rem !important;
-    }
-    
-    /* Modern Buttons */
-    .stButton > button {
-        background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%) !important;
-        color: #ffffff !important;
-        border: none !important;
-        border-radius: 8px !important;
-        padding: 0.75rem 2rem !important;
-        font-family: 'Inter', sans-serif !important;
-        font-weight: 600 !important;
-        font-size: 0.95rem !important;
-        transition: all 0.3s ease !important;
-        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3) !important;
-        text-transform: uppercase !important;
-        letter-spacing: 0.5px !important;
-    }
-    
-    .stButton > button:hover {
-        transform: translateY(-2px) !important;
-        box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4) !important;
-        background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
-    }
-    
-    /* Professional Header */
     .main-header {
-        background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #1e40af 100%);
-        color: #ffffff;
-        padding: 3rem 2rem;
-        border-radius: 16px;
+        background: linear-gradient(135deg, #1e3c72, #2a5298);
+        color: white;
+        padding: 2rem;
+        border-radius: 20px;
         text-align: center;
         margin-bottom: 2rem;
-        box-shadow: 0 10px 30px rgba(30, 64, 175, 0.2);
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .main-header::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-        opacity: 0.3;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     }
     
     .main-header h1 {
-        font-family: 'Poppins', sans-serif;
-        font-size: 2.8rem;
+        font-size: 3rem;
         font-weight: 700;
         margin: 0;
-        position: relative;
-        z-index: 2;
-        color: #ffffff !important;
+        font-family: 'Inter', sans-serif;
     }
     
     .company-location {
-        font-family: 'Inter', sans-serif;
-        font-size: 1rem;
+        font-size: 1.2rem;
         font-weight: 500;
-        margin: 1rem 0;
-        color: rgba(255, 255, 255, 0.9) !important;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        position: relative;
-        z-index: 2;
-    }
-    
-    .company-tagline {
-        font-family: 'Inter', sans-serif;
-        font-size: 1rem;
-        font-weight: 400;
-        margin-top: 1rem;
-        color: rgba(255, 255, 255, 0.8) !important;
-        position: relative;
-        z-index: 2;
-        max-width: 600px;
-        margin-left: auto;
-        margin-right: auto;
+        margin: 0.5rem 0;
+        color: #ecf0f1;
     }
     
     .heritage-badge {
-        background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
-        color: #ffffff !important;
-        padding: 0.5rem 1.5rem;
+        background: rgba(255,255,255,0.2);
+        padding: 0.5rem 1rem;
         border-radius: 25px;
-        font-family: 'Inter', sans-serif;
-        font-size: 0.8rem;
-        font-weight: 600;
-        margin: 1rem 0;
         display: inline-block;
-        box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
-        position: relative;
-        z-index: 2;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-    
-    /* Clean Section Containers */
-    .upload-section, .search-container, .color-filter-section {
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-        padding: 2rem;
-        border-radius: 16px;
-        margin-bottom: 2rem;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        transition: all 0.3s ease;
-    }
-    
-    .upload-section:hover, .search-container:hover, .color-filter-section:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
-    }
-    
-    .upload-section h3, .search-container h3 {
-        font-family: 'Poppins', sans-serif;
-        font-size: 1.4rem;
-        font-weight: 600;
-        color: #1e40af !important;
-        margin-bottom: 1rem;
-        text-align: center;
-    }
-    
-    /* Modern Metric Cards */
-    .metric-card {
-        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-        padding: 2rem;
-        border-radius: 16px;
-        color: #1e40af !important;
-        text-align: center;
         margin: 1rem 0;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-        transition: all 0.3s ease;
-        border: 1px solid rgba(59, 130, 246, 0.1);
+        font-weight: 500;
     }
     
-    .metric-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 12px 48px rgba(59, 130, 246, 0.15);
-        border-color: rgba(59, 130, 246, 0.3);
+    .company-tagline {
+        font-size: 1.1rem;
+        font-weight: 400;
+        margin-top: 1rem;
+        color: #bdc3c7;
+    }
+    
+    .upload-section {
+        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        padding: 2rem;
+        border-radius: 15px;
+        margin-bottom: 2rem;
+        border-left: 4px solid #3498db;
+    }
+    
+    .upload-section h3 {
+        color: #2c3e50;
+        margin-bottom: 1rem;
+    }
+    
+    .metric-card {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        padding: 1.5rem;
+        border-radius: 15px;
+        text-align: center;
+        margin-bottom: 1rem;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
     
     .metric-number {
-        font-family: 'Poppins', sans-serif;
         font-size: 2.5rem;
         font-weight: 700;
         display: block;
-        margin-bottom: 0.5rem;
-        color: #1e40af !important;
     }
     
     .metric-label {
-        font-family: 'Inter', sans-serif;
         font-size: 0.9rem;
-        font-weight: 500;
-        color: #64748b !important;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
+        opacity: 0.9;
+        margin-top: 0.5rem;
     }
     
-    /* Professional Status Messages */
     .success-message {
-        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-        color: #ffffff !important;
-        padding: 1.5rem;
-        border-radius: 12px;
-        margin: 1.5rem 0;
+        background: linear-gradient(135deg, #00b894, #00a085);
+        color: white;
+        padding: 1rem;
+        border-radius: 10px;
+        margin: 1rem 0;
         text-align: center;
-        font-family: 'Inter', sans-serif;
         font-weight: 500;
-        font-size: 1rem;
-        box-shadow: 0 8px 32px rgba(16, 185, 129, 0.2);
     }
     
     .error-message {
-        background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
-        color: #ffffff !important;
-        padding: 1.5rem;
-        border-radius: 12px;
-        margin: 1.5rem 0;
+        background: linear-gradient(135deg, #e17055, #d63031);
+        color: white;
+        padding: 1rem;
+        border-radius: 10px;
+        margin: 1rem 0;
         text-align: center;
-        font-family: 'Inter', sans-serif;
         font-weight: 500;
-        font-size: 1rem;
-        box-shadow: 0 8px 32px rgba(220, 38, 38, 0.2);
     }
     
-    /* Clean Data Display */
-    .dataframe-container {
-        background: rgba(255, 255, 255, 0.95);
+    .search-container {
+        background: linear-gradient(135deg, #74b9ff, #0984e3);
+        color: white;
         padding: 2rem;
-        border-radius: 16px;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        margin: 2rem 0;
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        margin-bottom: 2rem;
+        text-align: center;
     }
     
-    /* Modern Color Chips */
+    .search-container h3 {
+        margin-bottom: 1rem;
+        font-size: 1.8rem;
+    }
+    
+    .dataframe-container {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        margin: 1rem 0;
+    }
+    
+    .color-filter-section {
+    background: linear-gradient(135deg, #0a3d62, #1e3799);
+    color: white;
+    padding: 2rem;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+    text-align: center;
+    
+    }
+
+    
     .color-chip {
-        background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-        color: #ffffff !important;
-        padding: 0.4rem 1rem;
+        background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+        color: white;
+        padding: 0.3rem 0.8rem;
         border-radius: 20px;
         display: inline-block;
-        margin: 0.3rem;
-        font-size: 0.85rem;
+        margin: 0.2rem;
+        font-size: 0.8rem;
         font-weight: 500;
-        font-family: 'Inter', sans-serif;
-        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
-        transition: all 0.3s ease;
-    }
-    
-    .color-chip:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
     }
     
     .match-type-info {
-        background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-        color: #1e40af !important;
-        padding: 1.5rem;
-        border-radius: 12px;
-        margin: 1.5rem 0;
+        background: linear-gradient(135deg, #ffecd2, #fcb69f);
+        color: #2c3e50;
+        padding: 1rem;
+        border-radius: 10px;
+        margin: 1rem 0;
         text-align: center;
-        font-family: 'Inter', sans-serif;
         font-weight: 500;
-        border: 1px solid rgba(59, 130, 246, 0.1);
     }
     
-    /* Professional Sidebar */
     .sidebar-content {
-        background: rgba(255, 255, 255, 0.95);
-        color: #1e40af !important;
-        padding: 2rem;
-        border-radius: 16px;
-        margin-bottom: 2rem;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        padding: 1.5rem;
+        border-radius: 15px;
+        margin-bottom: 1rem;
     }
     
     .sidebar-content h3 {
         margin-bottom: 1rem;
-        color: #1e40af !important;
-        font-family: 'Poppins', sans-serif;
-        font-weight: 600;
+        color: #ecf0f1;
     }
     
     .sidebar-content p {
-        margin: 0.8rem 0;
-        color: #64748b !important;
-        font-family: 'Inter', sans-serif;
-        line-height: 1.6;
+        margin: 0.5rem 0;
+        color: #bdc3c7;
     }
     
     .search-history {
-        background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-        color: #1e40af !important;
-        padding: 1.5rem;
-        border-radius: 12px;
-        margin-bottom: 1.5rem;
-        border: 1px solid rgba(59, 130, 246, 0.1);
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+        background: linear-gradient(135deg, #a8edea, #fed6e3);
+        color: #2c3e50;
+        padding: 1rem;
+        border-radius: 10px;
+        margin-bottom: 1rem;
     }
     
     .frame-colors-display {
-        background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-        color: #1e40af !important;
-        padding: 1.5rem;
-        border-radius: 12px;
-        margin: 2rem 0;
-        font-family: 'Inter', sans-serif;
+        background: linear-gradient(135deg, #ffecd2, #fcb69f);
+        color: #2c3e50;
+        padding: 1rem;
+        border-radius: 10px;
+        margin: 1rem 0;
         font-weight: 500;
-        border-left: 4px solid #3b82f6;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+        border-left: 4px solid #e17055;
     }
     
     .frame-color-item {
-        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-        color: #1e40af !important;
-        padding: 0.6rem 1rem;
+        background: rgba(255,255,255,0.7);
+        padding: 0.5rem;
         border-radius: 8px;
         margin: 0.3rem;
         display: inline-block;
         font-size: 0.9rem;
-        font-weight: 500;
-        font-family: 'Inter', sans-serif;
-        border: 1px solid rgba(59, 130, 246, 0.2);
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    }
-    
-    /* Modern File Uploader */
-    .stFileUploader section {
-        background: rgba(255, 255, 255, 0.95) !important;
-        border: 2px dashed #3b82f6 !important;
-        border-radius: 12px !important;
-        padding: 2rem !important;
-        color: #1e40af !important;
-        text-align: center !important;
-        font-family: 'Inter', sans-serif !important;
-        transition: all 0.3s ease !important;
-    }
-    
-    .stFileUploader section:hover {
-        background: rgba(59, 130, 246, 0.05) !important;
-        border-color: #2563eb !important;
-    }
-    
-    .stFileUploader section small {
-        color: #64748b !important;
-        font-size: 0.9rem !important;
-    }
-    
-    /* Modern Tabs */
-    .stTabs [data-baseweb="tab-list"] {
-        background: rgba(255, 255, 255, 0.95) !important;
-        border-radius: 12px !important;
-        padding: 0.5rem !important;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05) !important;
-        border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    }
-    
-    .stTabs [data-baseweb="tab"] {
-        font-family: 'Inter', sans-serif !important;
-        font-weight: 500 !important;
-        border-radius: 8px !important;
-        color: #64748b !important;
-        background-color: transparent !important;
-        transition: all 0.3s ease !important;
-    }
-    
-    .stTabs [data-baseweb="tab"]:hover {
-        background: rgba(59, 130, 246, 0.1) !important;
-        color: #1e40af !important;
-    }
-    
-    .stTabs [data-baseweb="tab"][aria-selected="true"] {
-        background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%) !important;
-        color: #ffffff !important;
-    }
-    
-    /* Text Visibility */
-    .stMarkdown, .stText, .stMarkdown p, .stText p {
-        color: #ffffff !important;
-        font-family: 'Inter', sans-serif !important;
-        line-height: 1.6 !important;
-    }
-    
-    /* Professional Scrollbar */
-    ::-webkit-scrollbar {
-        width: 8px;
-    }
-    
-    ::-webkit-scrollbar-track {
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 4px;
-    }
-    
-    ::-webkit-scrollbar-thumb {
-        background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-        border-radius: 4px;
-    }
-    
-    ::-webkit-scrollbar-thumb:hover {
-        background: linear-gradient(135deg, #2563eb, #1e40af);
-    }
-    
-    /* Responsive Design */
-    @media (max-width: 768px) {
-        .main-header h1 {
-            font-size: 2.2rem;
-        }
-        
-        .main-header {
-            padding: 2rem 1.5rem;
-        }
-        
-        .upload-section, .search-container, .color-filter-section {
-            padding: 1.5rem;
-        }
-        
-        .metric-card {
-            padding: 1.5rem;
-        }
-        
-        .metric-number {
-            font-size: 2rem;
-        }
+        font-weight: 600;
+        border: 1px solid rgba(0,0,0,0.1);
     }
 </style>
 """, unsafe_allow_html=True)
@@ -1205,4 +942,3 @@ if (
                     ❌ No Matching Aviation Carpet Designs Found for Selected Filters
                 </div>
                 """, unsafe_allow_html=True)
-
