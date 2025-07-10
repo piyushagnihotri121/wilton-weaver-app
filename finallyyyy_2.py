@@ -135,13 +135,15 @@ st.markdown("""
     }
     
     .search-container {
-        background: linear-gradient(135deg, #74b9ff, #0984e3);
-        color: white;
-        padding: 2rem;
-        border-radius: 15px;
-        margin-bottom: 2rem;
-        text-align: center;
+    background: linear-gradient(135deg, #0a3d62, #1e3799);
+    color: white;
+    padding: 2rem;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+    text-align: center;
+    
     }
+
     
     .search-container h3 {
         margin-bottom: 1rem;
