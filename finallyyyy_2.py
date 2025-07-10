@@ -34,185 +34,143 @@ if 'selected_colors' not in st.session_state:
 if 'search_history' not in st.session_state:
     st.session_state.search_history = []
 
-# Combined Professional Dark Theme CSS with Aviation Carpet Manufacturing Features
+# Modern Professional Aviation Carpet Manufacturing Dashboard CSS
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
     
-    /* FORCE DARK THEME - Override all Streamlit defaults */
+    /* MODERN DARK THEME - Clean & Professional */
     .stApp, .main, .block-container, .stMain {
-        background-color: #0f172a !important;
-        color: #f1f5f9 !important;
+        background: linear-gradient(135deg, #1a1d29 0%, #2d3748 100%) !important;
+        color: #ffffff !important;
+        font-family: 'Inter', sans-serif !important;
     }
     
-    /* CRITICAL: Force all backgrounds to dark and text to light */
-    *, html, body, div, span, p, h1, h2, h3, h4, h5, h6, label, input, select, textarea, button {
-        background-color: transparent !important;
-        color: #f1f5f9 !important;
-    }
-    
-    /* Force all Streamlit components to dark theme */
+    /* Force Modern Styling for All Components */
     .stSelectbox, .stTextInput, .stFileUploader, .stRadio, .stCheckbox, .stMultiSelect, .stNumberInput {
-        background-color: #1e293b !important;
-        color: #f1f5f9 !important;
+        background: rgba(255, 255, 255, 0.95) !important;
+        border-radius: 12px !important;
+        border: 1px solid #e2e8f0 !important;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05) !important;
+        margin-bottom: 1rem !important;
     }
     
-    /* Force all labels to be visible */
+    /* Clean, Readable Labels */
     .stSelectbox > label, 
     .stTextInput > label,
     .stFileUploader > label,
     .stRadio > label,
     .stCheckbox > label,
     .stMultiSelect > label,
-    .stNumberInput > label,
-    div[data-testid="stMarkdownContainer"] p,
-    div[data-testid="stText"] {
-        color: #f1f5f9 !important;
+    .stNumberInput > label {
+        color: #ffffff !important;
         font-family: 'Inter', sans-serif !important;
         font-weight: 600 !important;
-        font-size: 1.1rem !important;
+        font-size: 0.95rem !important;
         margin-bottom: 0.5rem !important;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.8) !important;
+        display: block !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.5px !important;
     }
     
-    /* Force input fields to have dark backgrounds */
+    /* Modern Input Fields */
     .stSelectbox select,
     .stTextInput input,
     .stNumberInput input,
     .stMultiSelect select,
     textarea {
-        background-color: #334155 !important;
-        color: #f1f5f9 !important;
-        border: 2px solid #475569 !important;
+        background: #ffffff !important;
+        color: #2d3748 !important;
+        border: 2px solid #e2e8f0 !important;
         border-radius: 8px !important;
-        padding: 0.75rem !important;
-        font-size: 1rem !important;
+        padding: 0.75rem 1rem !important;
+        font-size: 0.95rem !important;
         font-weight: 500 !important;
+        font-family: 'Inter', sans-serif !important;
+        transition: all 0.3s ease !important;
     }
     
-    /* Force dropdown options */
+    .stSelectbox select:focus,
+    .stTextInput input:focus,
+    .stNumberInput input:focus,
+    .stMultiSelect select:focus,
+    textarea:focus {
+        border-color: #3b82f6 !important;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+        outline: none !important;
+    }
+    
+    /* Dropdown Options */
     .stSelectbox select option,
     .stMultiSelect select option {
-        background-color: #334155 !important;
-        color: #f1f5f9 !important;
+        background: #ffffff !important;
+        color: #2d3748 !important;
+        padding: 0.5rem !important;
     }
     
-    /* Force placeholder text */
-    input::placeholder, textarea::placeholder {
-        color: #94a3b8 !important;
-        opacity: 1 !important;
-    }
-    
-    /* Force radio button styling */
-    .stRadio > div {
-        background-color: #1e293b !important;
-        border: 1px solid #475569 !important;
-        border-radius: 8px !important;
-        padding: 1rem !important;
-        margin-bottom: 0.5rem !important;
-    }
-    
-    .stRadio > div > label {
-        color: #f1f5f9 !important;
-        font-weight: 600 !important;
-    }
-    
-    .stRadio > div > label > div {
-        color: #f1f5f9 !important;
-    }
-    
-    /* Force checkbox styling */
-    .stCheckbox > div {
-        background-color: #1e293b !important;
-        border: 1px solid #475569 !important;
-        border-radius: 8px !important;
-        padding: 0.75rem !important;
-    }
-    
-    .stCheckbox > div > label {
-        color: #f1f5f9 !important;
-        font-weight: 600 !important;
-    }
-    
-    /* Force file uploader styling */
-    .stFileUploader section {
-        background-color: #1e293b !important;
-        border: 2px dashed #475569 !important;
-        border-radius: 12px !important;
-        padding: 2rem !important;
-        color: #f1f5f9 !important;
-    }
-    
-    .stFileUploader section small {
-        color: #94a3b8 !important;
-    }
-    
-    /* Force button styling */
+    /* Modern Buttons */
     .stButton > button {
-        background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%) !important;
+        background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%) !important;
         color: #ffffff !important;
         border: none !important;
         border-radius: 8px !important;
-        padding: 0.875rem 2.5rem !important;
+        padding: 0.75rem 2rem !important;
         font-family: 'Inter', sans-serif !important;
         font-weight: 600 !important;
-        font-size: 1rem !important;
+        font-size: 0.95rem !important;
         transition: all 0.3s ease !important;
-        box-shadow: 0 8px 16px rgba(30, 64, 175, 0.3) !important;
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3) !important;
         text-transform: uppercase !important;
-        letter-spacing: 1px !important;
+        letter-spacing: 0.5px !important;
     }
     
     .stButton > button:hover {
         transform: translateY(-2px) !important;
-        box-shadow: 0 12px 24px rgba(30, 64, 175, 0.4) !important;
-        background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%) !important;
+        box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4) !important;
+        background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
     }
     
-    /* Main Header - Executive Style with Aviation Theme */
+    /* Professional Header */
     .main-header {
-        background: linear-gradient(135deg, #1e293b 0%, #334155 25%, #475569 50%, #64748b 75%, #475569 100%);
-        background-size: 300% 300%;
-        animation: subtleGradient 15s ease infinite;
-        padding: 4rem 3rem;
-        border-radius: 16px;
+        background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #1e40af 100%);
         color: #ffffff;
+        padding: 3rem 2rem;
+        border-radius: 16px;
         text-align: center;
-        margin-bottom: 3rem;
-        box-shadow: 
-            0 24px 48px rgba(0,0,0,0.4),
-            0 0 0 1px rgba(255,255,255,0.05),
-            inset 0 1px 0 rgba(255,255,255,0.1);
+        margin-bottom: 2rem;
+        box-shadow: 0 10px 30px rgba(30, 64, 175, 0.2);
         position: relative;
         overflow: hidden;
-        border: 1px solid rgba(255,255,255,0.08);
     }
     
-    @keyframes subtleGradient {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
+    .main-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+        opacity: 0.3;
     }
     
     .main-header h1 {
-        font-family: 'Inter', sans-serif;
-        font-size: 3.8rem;
-        font-weight: 800;
+        font-family: 'Poppins', sans-serif;
+        font-size: 2.8rem;
+        font-weight: 700;
         margin: 0;
-        text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
-        letter-spacing: -1px;
         position: relative;
         z-index: 2;
         color: #ffffff !important;
     }
     
     .company-location {
-        font-family: 'Roboto', sans-serif;
-        font-size: 1.1rem;
-        font-weight: 600;
-        margin: 1.2rem 0;
-        color: #cbd5e1 !important;
-        letter-spacing: 4px;
+        font-family: 'Inter', sans-serif;
+        font-size: 1rem;
+        font-weight: 500;
+        margin: 1rem 0;
+        color: rgba(255, 255, 255, 0.9) !important;
+        letter-spacing: 2px;
         text-transform: uppercase;
         position: relative;
         z-index: 2;
@@ -220,493 +178,323 @@ st.markdown("""
     
     .company-tagline {
         font-family: 'Inter', sans-serif;
-        font-size: 1.1rem;
+        font-size: 1rem;
         font-weight: 400;
-        margin: 2rem auto 0;
-        max-width: 700px;
-        line-height: 1.6;
-        color: #94a3b8 !important;
+        margin-top: 1rem;
+        color: rgba(255, 255, 255, 0.8) !important;
         position: relative;
         z-index: 2;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
     }
     
     .heritage-badge {
-        background: linear-gradient(135deg, #8b4513 0%, #a0522d 50%, #654321 100%);
+        background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
         color: #ffffff !important;
-        padding: 0.8rem 2.5rem;
-        border-radius: 6px;
+        padding: 0.5rem 1.5rem;
+        border-radius: 25px;
         font-family: 'Inter', sans-serif;
-        font-size: 0.9rem;
-        font-weight: 700;
-        margin: 2rem auto;
+        font-size: 0.8rem;
+        font-weight: 600;
+        margin: 1rem 0;
         display: inline-block;
-        box-shadow: 0 4px 16px rgba(139, 69, 19, 0.3);
+        box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
         position: relative;
         z-index: 2;
         text-transform: uppercase;
-        letter-spacing: 2px;
-        border: 1px solid rgba(255,255,255,0.1);
-    }
-    
-    .aviation-badge {
-        background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
-        color: #ffffff !important;
-        padding: 0.6rem 1.8rem;
-        border-radius: 6px;
-        font-size: 0.8rem;
-        font-weight: 600;
-        margin-left: 1rem;
-        display: inline-block;
-        box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
-        text-transform: uppercase;
         letter-spacing: 1px;
-        border: 1px solid rgba(255,255,255,0.1);
     }
     
-    /* Upload Section - Dark Theme */
-    .upload-section {
-        background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+    /* Clean Section Containers */
+    .upload-section, .search-container, .color-filter-section {
+        background: rgba(255, 255, 255, 0.95);
         backdrop-filter: blur(10px);
-        padding: 3rem;
-        border-radius: 12px;
-        margin-bottom: 2.5rem;
-        border: 1px solid rgba(255,255,255,0.08);
-        box-shadow: 
-            0 20px 40px rgba(0,0,0,0.3),
-            0 0 0 1px rgba(255,255,255,0.05),
-            inset 0 1px 0 rgba(255,255,255,0.1);
+        padding: 2rem;
+        border-radius: 16px;
+        margin-bottom: 2rem;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
     }
     
-    .upload-section::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 3px;
-        background: linear-gradient(90deg, #1e40af 0%, #8b4513 50%, #1e293b 100%);
+    .upload-section:hover, .search-container:hover, .color-filter-section:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
     }
     
-    .upload-section:hover {
-        transform: translateY(-4px);
-        box-shadow: 
-            0 28px 56px rgba(0,0,0,0.4),
-            0 0 0 1px rgba(255,255,255,0.1);
-    }
-    
-    .upload-section h3 {
-        font-family: 'Inter', sans-serif;
-        font-size: 1.8rem;
-        font-weight: 700;
-        color: #ffffff !important;
-        margin-bottom: 1.5rem;
-        position: relative;
-    }
-    
-    .upload-section h3::after {
-        content: '';
-        position: absolute;
-        bottom: -8px;
-        left: 0;
-        width: 40px;
-        height: 2px;
-        background: linear-gradient(90deg, #1e40af, #8b4513);
-    }
-    
-    /* Premium Metric Cards */
-    .metric-card {
-        background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #475569 100%);
-        padding: 2.5rem 2rem;
-        border-radius: 12px;
-        color: #ffffff !important;
+    .upload-section h3, .search-container h3 {
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: #1e40af !important;
+        margin-bottom: 1rem;
         text-align: center;
-        margin: 0.8rem;
-        box-shadow: 
-            0 16px 32px rgba(0,0,0,0.3),
-            0 0 0 1px rgba(255,255,255,0.05),
-            inset 0 1px 0 rgba(255,255,255,0.1);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        position: relative;
-        overflow: hidden;
-        border: 1px solid rgba(255,255,255,0.08);
     }
     
-    .metric-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: linear-gradient(90deg, #1e40af, #8b4513, #1e293b);
-        opacity: 0.8;
+    /* Modern Metric Cards */
+    .metric-card {
+        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        padding: 2rem;
+        border-radius: 16px;
+        color: #1e40af !important;
+        text-align: center;
+        margin: 1rem 0;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+        border: 1px solid rgba(59, 130, 246, 0.1);
     }
     
     .metric-card:hover {
-        transform: translateY(-6px) scale(1.02);
-        box-shadow: 
-            0 24px 48px rgba(0,0,0,0.4),
-            0 0 40px rgba(30, 64, 175, 0.15);
+        transform: translateY(-4px);
+        box-shadow: 0 12px 48px rgba(59, 130, 246, 0.15);
+        border-color: rgba(59, 130, 246, 0.3);
     }
     
     .metric-number {
-        font-family: 'Inter', sans-serif;
-        font-size: 3.2rem;
-        font-weight: 800;
+        font-family: 'Poppins', sans-serif;
+        font-size: 2.5rem;
+        font-weight: 700;
         display: block;
-        margin-bottom: 0.8rem;
-        color: #ffffff !important;
-        text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        margin-bottom: 0.5rem;
+        color: #1e40af !important;
     }
     
     .metric-label {
-        font-family: 'Roboto', sans-serif;
-        font-size: 1rem;
-        font-weight: 600;
-        color: #cbd5e1 !important;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: #64748b !important;
         text-transform: uppercase;
-        letter-spacing: 1px;
+        letter-spacing: 0.5px;
     }
     
-    /* Executive Status Messages */
+    /* Professional Status Messages */
     .success-message {
-        background: linear-gradient(135deg, #065f46 0%, #047857 50%, #059669 100%);
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
         color: #ffffff !important;
-        padding: 2rem 2.5rem;
+        padding: 1.5rem;
         border-radius: 12px;
-        margin: 2rem 0;
+        margin: 1.5rem 0;
         text-align: center;
         font-family: 'Inter', sans-serif;
-        font-weight: 600;
-        font-size: 1.1rem;
-        box-shadow: 
-            0 12px 24px rgba(6, 95, 70, 0.3),
-            0 0 0 1px rgba(255,255,255,0.05);
-        border: 1px solid rgba(255,255,255,0.08);
-        position: relative;
-    }
-    
-    .success-message::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: linear-gradient(90deg, #10b981, #059669);
+        font-weight: 500;
+        font-size: 1rem;
+        box-shadow: 0 8px 32px rgba(16, 185, 129, 0.2);
     }
     
     .error-message {
-        background: linear-gradient(135deg, #991b1b 0%, #b91c1c 50%, #dc2626 100%);
+        background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
         color: #ffffff !important;
-        padding: 2rem 2.5rem;
+        padding: 1.5rem;
         border-radius: 12px;
-        margin: 2rem 0;
+        margin: 1.5rem 0;
         text-align: center;
         font-family: 'Inter', sans-serif;
-        font-weight: 600;
-        font-size: 1.1rem;
-        box-shadow: 
-            0 12px 24px rgba(153, 27, 27, 0.3),
-            0 0 0 1px rgba(255,255,255,0.05);
-        border: 1px solid rgba(255,255,255,0.08);
-        position: relative;
+        font-weight: 500;
+        font-size: 1rem;
+        box-shadow: 0 8px 32px rgba(220, 38, 38, 0.2);
     }
     
-    .error-message::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: linear-gradient(90deg, #dc2626, #b91c1c);
-    }
-    
-    /* Search Container */
-    .search-container {
-        background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
-        backdrop-filter: blur(10px);
-        padding: 3rem;
-        border-radius: 12px;
-        margin-bottom: 2.5rem;
-        border: 1px solid rgba(255,255,255,0.08);
-        box-shadow: 
-            0 20px 40px rgba(0,0,0,0.3),
-            0 0 0 1px rgba(255,255,255,0.05),
-            inset 0 1px 0 rgba(255,255,255,0.1);
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-        text-align: center;
-    }
-    
-    .search-container::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 3px;
-        background: linear-gradient(90deg, #1e40af 0%, #8b4513 50%, #1e293b 100%);
-    }
-    
-    .search-container:hover {
-        transform: translateY(-4px);
-        box-shadow: 
-            0 28px 56px rgba(0,0,0,0.4),
-            0 0 0 1px rgba(255,255,255,0.1);
-    }
-    
-    .search-container h3 {
-        font-family: 'Inter', sans-serif;
-        font-size: 1.8rem;
-        font-weight: 700;
-        color: #ffffff !important;
-        margin-bottom: 1.5rem;
-        position: relative;
-    }
-    
-    .search-container h3::after {
-        content: '';
-        position: absolute;
-        bottom: -8px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 40px;
-        height: 2px;
-        background: linear-gradient(90deg, #1e40af, #8b4513);
-    }
-    
-    /* Executive Data Display */
+    /* Clean Data Display */
     .dataframe-container {
-        background: linear-gradient(135deg, #374151 0%, #4b5563 100%);
-        backdrop-filter: blur(10px);
-        padding: 2.5rem;
-        border-radius: 12px;
-        box-shadow: 
-            0 16px 32px rgba(0,0,0,0.3),
-            0 0 0 1px rgba(255,255,255,0.05),
-            inset 0 1px 0 rgba(255,255,255,0.1);
+        background: rgba(255, 255, 255, 0.95);
+        padding: 2rem;
+        border-radius: 16px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         margin: 2rem 0;
-        border: 1px solid rgba(255,255,255,0.08);
-        position: relative;
-        color: #ffffff !important;
+        border: 1px solid rgba(255, 255, 255, 0.2);
     }
     
-    .dataframe-container::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: linear-gradient(90deg, #1e40af, #8b4513);
-    }
-    
-    /* Color Filter Section */
-    .color-filter-section {
-        background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
-        backdrop-filter: blur(10px);
-        padding: 3rem;
-        border-radius: 12px;
-        margin-bottom: 2.5rem;
-        border: 1px solid rgba(255,255,255,0.08);
-        box-shadow: 
-            0 20px 40px rgba(0,0,0,0.3),
-            0 0 0 1px rgba(255,255,255,0.05),
-            inset 0 1px 0 rgba(255,255,255,0.1);
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .color-filter-section::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 3px;
-        background: linear-gradient(90deg, #1e40af 0%, #8b4513 50%, #1e293b 100%);
-    }
-    
+    /* Modern Color Chips */
     .color-chip {
-        background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+        background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
         color: #ffffff !important;
-        padding: 0.5rem 1rem;
+        padding: 0.4rem 1rem;
         border-radius: 20px;
         display: inline-block;
         margin: 0.3rem;
-        font-size: 0.9rem;
-        font-weight: 600;
-        box-shadow: 0 4px 8px rgba(30, 64, 175, 0.3);
-        border: 1px solid rgba(255,255,255,0.1);
+        font-size: 0.85rem;
+        font-weight: 500;
+        font-family: 'Inter', sans-serif;
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+        transition: all 0.3s ease;
+    }
+    
+    .color-chip:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
     }
     
     .match-type-info {
-        background: linear-gradient(135deg, #374151 0%, #4b5563 100%);
-        color: #f1f5f9 !important;
+        background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+        color: #1e40af !important;
         padding: 1.5rem;
-        border-radius: 10px;
-        margin: 2rem 0;
+        border-radius: 12px;
+        margin: 1.5rem 0;
         text-align: center;
         font-family: 'Inter', sans-serif;
-        font-weight: 600;
-        border: 1px solid rgba(255,255,255,0.08);
-        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        font-weight: 500;
+        border: 1px solid rgba(59, 130, 246, 0.1);
     }
     
-    /* Sidebar Content */
+    /* Professional Sidebar */
     .sidebar-content {
-        background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-        color: #ffffff !important;
+        background: rgba(255, 255, 255, 0.95);
+        color: #1e40af !important;
         padding: 2rem;
-        border-radius: 12px;
-        margin-bottom: 1.5rem;
-        border: 1px solid rgba(255,255,255,0.08);
-        box-shadow: 
-            0 12px 24px rgba(0,0,0,0.3),
-            0 0 0 1px rgba(255,255,255,0.05);
+        border-radius: 16px;
+        margin-bottom: 2rem;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
     }
     
     .sidebar-content h3 {
-        margin-bottom: 1.5rem;
-        color: #ffffff !important;
-        font-family: 'Inter', sans-serif;
-        font-weight: 700;
+        margin-bottom: 1rem;
+        color: #1e40af !important;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
     }
     
     .sidebar-content p {
         margin: 0.8rem 0;
-        color: #cbd5e1 !important;
+        color: #64748b !important;
         font-family: 'Inter', sans-serif;
+        line-height: 1.6;
     }
     
     .search-history {
-        background: linear-gradient(135deg, #374151 0%, #4b5563 100%);
-        color: #f1f5f9 !important;
+        background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        color: #1e40af !important;
         padding: 1.5rem;
-        border-radius: 10px;
+        border-radius: 12px;
         margin-bottom: 1.5rem;
-        border: 1px solid rgba(255,255,255,0.08);
-        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        border: 1px solid rgba(59, 130, 246, 0.1);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
     }
     
     .frame-colors-display {
-        background: linear-gradient(135deg, #374151 0%, #4b5563 100%);
-        color: #f1f5f9 !important;
+        background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        color: #1e40af !important;
         padding: 1.5rem;
-        border-radius: 10px;
+        border-radius: 12px;
         margin: 2rem 0;
         font-family: 'Inter', sans-serif;
-        font-weight: 600;
-        border: 1px solid rgba(255,255,255,0.08);
-        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-        border-left: 4px solid #1e40af;
+        font-weight: 500;
+        border-left: 4px solid #3b82f6;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
     }
     
     .frame-color-item {
-        background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
-        color: #ffffff !important;
-        padding: 0.8rem 1rem;
+        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        color: #1e40af !important;
+        padding: 0.6rem 1rem;
         border-radius: 8px;
-        margin: 0.4rem;
+        margin: 0.3rem;
         display: inline-block;
         font-size: 0.9rem;
-        font-weight: 600;
-        border: 1px solid rgba(255,255,255,0.1);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        font-weight: 500;
+        font-family: 'Inter', sans-serif;
+        border: 1px solid rgba(59, 130, 246, 0.2);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     }
     
-    /* Force Streamlit tabs to dark theme */
-    .stTabs [data-baseweb="tab-list"] {
-        background: linear-gradient(135deg, #1e293b 0%, #334155 100%) !important;
+    /* Modern File Uploader */
+    .stFileUploader section {
+        background: rgba(255, 255, 255, 0.95) !important;
+        border: 2px dashed #3b82f6 !important;
         border-radius: 12px !important;
-        padding: 0.8rem !important;
-        box-shadow: 
-            0 8px 16px rgba(0,0,0,0.3),
-            inset 0 1px 0 rgba(255,255,255,0.1) !important;
-        border: 1px solid rgba(255,255,255,0.08) !important;
+        padding: 2rem !important;
+        color: #1e40af !important;
+        text-align: center !important;
+        font-family: 'Inter', sans-serif !important;
+        transition: all 0.3s ease !important;
+    }
+    
+    .stFileUploader section:hover {
+        background: rgba(59, 130, 246, 0.05) !important;
+        border-color: #2563eb !important;
+    }
+    
+    .stFileUploader section small {
+        color: #64748b !important;
+        font-size: 0.9rem !important;
+    }
+    
+    /* Modern Tabs */
+    .stTabs [data-baseweb="tab-list"] {
+        background: rgba(255, 255, 255, 0.95) !important;
+        border-radius: 12px !important;
+        padding: 0.5rem !important;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05) !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
     }
     
     .stTabs [data-baseweb="tab"] {
         font-family: 'Inter', sans-serif !important;
-        font-weight: 600 !important;
+        font-weight: 500 !important;
         border-radius: 8px !important;
-        color: #cbd5e1 !important;
+        color: #64748b !important;
         background-color: transparent !important;
         transition: all 0.3s ease !important;
     }
     
     .stTabs [data-baseweb="tab"]:hover {
-        background: rgba(30, 64, 175, 0.1) !important;
-        color: #ffffff !important;
+        background: rgba(59, 130, 246, 0.1) !important;
+        color: #1e40af !important;
     }
     
     .stTabs [data-baseweb="tab"][aria-selected="true"] {
-        background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%) !important;
+        background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%) !important;
         color: #ffffff !important;
     }
     
-    /* Force markdown and text elements */
+    /* Text Visibility */
     .stMarkdown, .stText, .stMarkdown p, .stText p {
-        color: #f1f5f9 !important;
+        color: #ffffff !important;
         font-family: 'Inter', sans-serif !important;
+        line-height: 1.6 !important;
     }
     
-    /* Force sidebar styling */
-    .css-1d391kg {
-        background-color: #1e293b !important;
-    }
-    
-    /* Force metric styling */
-    .metric-container {
-        background: linear-gradient(135deg, #1e293b 0%, #334155 100%) !important;
-        border-radius: 12px !important;
-        padding: 2rem !important;
-        border: 1px solid rgba(255,255,255,0.08) !important;
-        box-shadow: 0 8px 16px rgba(0,0,0,0.3) !important;
-    }
-    
-    /* Executive Scrollbar */
+    /* Professional Scrollbar */
     ::-webkit-scrollbar {
         width: 8px;
     }
     
     ::-webkit-scrollbar-track {
-        background: #1e293b;
+        background: rgba(255, 255, 255, 0.1);
         border-radius: 4px;
     }
     
     ::-webkit-scrollbar-thumb {
-        background: linear-gradient(135deg, #1e40af, #8b4513);
+        background: linear-gradient(135deg, #3b82f6, #1d4ed8);
         border-radius: 4px;
     }
     
     ::-webkit-scrollbar-thumb:hover {
-        background: linear-gradient(135deg, #1d4ed8, #a0522d);
+        background: linear-gradient(135deg, #2563eb, #1e40af);
     }
     
     /* Responsive Design */
     @media (max-width: 768px) {
         .main-header h1 {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
         }
         
         .main-header {
-            padding: 2.5rem 1.5rem;
+            padding: 2rem 1.5rem;
         }
         
         .upload-section, .search-container, .color-filter-section {
-            padding: 2rem 1.5rem;
+            padding: 1.5rem;
         }
         
         .metric-card {
-            padding: 2rem 1.5rem;
+            padding: 1.5rem;
+        }
+        
+        .metric-number {
+            font-size: 2rem;
         }
     }
 </style>
