@@ -208,6 +208,16 @@ st.markdown("""
     border-radius: 10px;
     margin-bottom: 1rem;
 }
+
+.debug-info {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 1rem;
+    margin: 1rem 0;
+    font-family: monospace;
+    font-size: 0.9rem;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -218,32 +228,53 @@ def clean_design_name(name: str) -> str:
     return str(name).strip().upper()
 
 def extract_colors_from_text(text: str) -> List[str]:
+    """Extract and clean colors from text with multiple separators"""
     if pd.isna(text) or not text:
         return []
-    separators = [',', ';', '/', '|', '+', '&', '-']
+    
+    # Convert to string and clean
+    text = str(text).strip()
+    if not text or text.upper() in ['NAN', 'NA', 'NULL', '']:
+        return []
+    
+    # Define separators
+    separators = [',', ';', '/', '|', '+', '&', '-', '\\', '\n', '\t']
+    
+    # Split by separators
     colors = [text]
     for sep in separators:
         new_colors = []
         for color in colors:
-            new_colors.extend(color.split(sep))
+            if sep in color:
+                new_colors.extend(color.split(sep))
+            else:
+                new_colors.append(color)
         colors = new_colors
+    
+    # Clean and filter colors
     cleaned_colors = []
     for color in colors:
         color = color.strip().upper()
-        if color and color != 'NAN' and len(color) > 1:
+        if color and color not in ['NAN', 'NA', 'NULL', ''] and len(color) > 1:
             cleaned_colors.append(color)
-    return list(set(cleaned_colors))
+    
+    return list(set(cleaned_colors))  # Remove duplicates
 
 def get_available_colors(df: pd.DataFrame) -> List[str]:
+    """Get all available colors from the dataframe"""
     if df is None or df.empty:
         return []
+    
     color_columns = [col for col in df.columns if 
                     any(word in col.lower() for word in ['color', 'colour', 'shade', 'dye', 'hue'])]
+    
     all_colors = set()
     for col in color_columns:
         for value in df[col].dropna():
             colors = extract_colors_from_text(str(value))
             all_colors.update(colors)
+    
+    # If no colors found, use default aviation carpet colors
     if not all_colors:
         all_colors = {
             'NAVY BLUE', 'ROYAL BLUE', 'DEEP BLUE', 'SKY BLUE', 'COBALT BLUE',
@@ -254,7 +285,26 @@ def get_available_colors(df: pd.DataFrame) -> List[str]:
             'GOLD', 'BRONZE', 'COPPER', 'AMBER', 'ANTIQUE GOLD',
             'BLACK', 'WHITE', 'PEARL', 'PLATINUM', 'STONE GREY'
         }
+    
     return sorted(list(all_colors))
+
+def check_row_colors(row, color_columns, selected_colors, match_type):
+    """Check if a row matches the color criteria"""
+    row_colors = set()
+    
+    # Extract all colors from the row
+    for col in color_columns:
+        if pd.notna(row[col]):
+            colors = extract_colors_from_text(str(row[col]))
+            row_colors.update(colors)
+    
+    # Apply matching logic
+    if match_type == "All Colors (AND)":
+        # All selected colors must be present
+        return all(color in row_colors for color in selected_colors)
+    else:  # "Any Color (OR)"
+        # At least one selected color must be present
+        return any(color in row_colors for color in selected_colors)
 
 def create_export_excel(data_dict: Dict[str, pd.DataFrame], filename_prefix: str) -> bytes:
     buffer = io.BytesIO()
@@ -338,12 +388,13 @@ with st.sidebar:
         for search in st.session_state.search_history[-3:]:
             if st.button(f"🔄 {search}", key=f"history_{search}"):
                 st.session_state.search_input = search
-                st.experimental_rerun()
+                st.rerun()
     
     st.markdown("---")
     st.subheader("🎯 Advanced Features")
     show_analytics = st.checkbox("📈 Analytics Dashboard", value=True)
     show_export = st.checkbox("📥 Export Options", value=True)
+    show_debug = st.checkbox("🔧 Debug Mode", value=False, help="Show debug information for troubleshooting")
     auto_refresh = st.checkbox("🔄 Auto-refresh Results", value=False)
     case_sensitive = st.checkbox("🔤 Case Sensitive Search", value=False)
     
@@ -388,7 +439,7 @@ with col2:
         key="yarn_upload"
     )
 
-# --- Enhanced Multi-Filter Section (Color, Construction, No. of Frames, Weft Head) ---
+# --- Enhanced Multi-Filter Section ---
 st.markdown("""
 <div class="color-filter-section">
     <h3>🎨 Enhanced Multi-Filter Design Search</h3>
@@ -410,8 +461,9 @@ if st.session_state.design_df is not None:
     # Colors
     color_columns = [col for col in df.columns if any(word in col.lower() for word in ['color', 'colour', 'shade', 'dye'])]
     for col in color_columns:
-        colors_in_col = df[col].dropna().astype(str).str.split(',|;|/|\\|').explode().str.strip().str.upper().unique()
-        available_colors.extend(colors_in_col)
+        for value in df[col].dropna():
+            colors = extract_colors_from_text(str(value))
+            available_colors.extend(colors)
     available_colors = sorted(list(set([color for color in available_colors if color and color != 'NAN'])))
     
     # Construction
@@ -432,7 +484,7 @@ if st.session_state.design_df is not None:
     if frames_col:
         available_frames = sorted(df[frames_col].dropna().astype(str).str.strip().unique())
     
-    # Weft Head - NEW FILTER
+    # Weft Head
     weft_head_col = None
     for col in df.columns:
         if 'weft' in col.lower() and 'head' in col.lower():
@@ -516,7 +568,7 @@ if (selected_colors or
     if selected_frames and selected_frames != "Any":
         chips += f'<span class="color-chip" style="background:#8b4513;">{selected_frames} Frames</span> '
     
-    # Weft Head chip - NEW
+    # Weft Head chip
     if selected_weft_head and selected_weft_head != "Any":
         chips += f'<span class="color-chip" style="background:#7c3aed;">{selected_weft_head}</span> '
     
@@ -529,52 +581,6 @@ if (selected_colors or
         {"All selected colors must be present in the design" if match_type == "All Colors (AND)" else "At least one selected color must be present in the design"}
     </div>
     """, unsafe_allow_html=True)
-
-
-
-    # --- Apply Filters and Display Results ---
-if color_search_button:
-    filtered_df = st.session_state.design_df.copy()
-
-    # --- Colors filter ---
-if selected_colors:
-    color_columns = [col for col in filtered_df.columns if any(word in col.lower() for word in ['color', 'colour', 'shade', 'dye'])]
-
-    if match_type == "All Colors (AND)":
-        # Keep rows where all selected_colors are present somewhere in color columns
-        def row_has_all_selected_colors(row):
-            colors_in_row = set()
-            for cell in row:
-                if pd.notna(cell):
-                    split_colors = [c.strip().upper() for c in str(cell).replace("\\", "/").replace(";", "/").replace(",", "/").split("/")]
-                    colors_in_row.update(split_colors)
-            return set(selected_colors).issubset(colors_in_row)
-
-        filtered_df = filtered_df[
-            filtered_df[color_columns].apply(row_has_all_selected_colors, axis=1)
-        ]
-
-    else:  # "Any Color (OR)"
-        def row_has_any_selected_colors(row):
-            for cell in row:
-                if pd.notna(cell):
-                    split_colors = [c.strip().upper() for c in str(cell).replace("\\", "/").replace(";", "/").split("/")]
-                    if any(c in split_colors for c in selected_colors):
-                        return True
-            return False
-
-        filtered_df = filtered_df[
-            filtered_df[color_columns].apply(row_has_any_selected_colors, axis=1)
-        ]
-
-
-    # --- Display Results ---
-    if not filtered_df.empty:
-        st.markdown(f"**🎨 {len(filtered_df)} designs found matching your enhanced filter criteria:**")
-        st.dataframe(filtered_df)
-    else:
-        st.warning("❌ No designs found matching your enhanced filter criteria.")
-
 
 # --- File Processing ---
 if design_file is not None and yarn_file is not None:
@@ -695,205 +701,192 @@ if design_file is not None and yarn_file is not None:
                     with tab1:
                         st.markdown('<div class="dataframe-container">', unsafe_allow_html=True)
                         st.subheader("🔧 Complete Aviation Carpet Specification")
-                        st.markdown("*Combined design and yarn specifications for aviation-grade floor coverings*")
-                        st.dataframe(merged, use_container_width=True, height=400)
+
+                        st.dataframe(merged, use_container_width=True)
+                        st.markdown('</div>', unsafe_allow_html=True)
                         
                         if show_export:
-                            buffer = io.BytesIO()
-                            with pd.ExcelWriter(buffer, engine='openpyxl') as writer:
-                                merged.to_excel(writer, sheet_name='Complete_Specification', index=False)
-                                design_matches.to_excel(writer, sheet_name='Design_Details', index=False)
-                                yarn_matches.to_excel(writer, sheet_name='Yarn_Specifications', index=False)
-                            
+                            excel_data = create_export_excel(
+                                {"Complete_Specification": merged},
+                                f"Aviation_Carpet_{design_input_clean}"
+                            )
                             st.download_button(
                                 label="📥 Download Complete Specification",
-                                data=buffer.getvalue(),
-                                file_name=f"WiltonWeavers_AviationCarpet_{design_input_clean}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx",
+                                data=excel_data,
+                                file_name=f"Aviation_Carpet_Specification_{design_input_clean}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx",
                                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
                             )
-                        
-                        st.markdown('</div>', unsafe_allow_html=True)
                     
                     with tab2:
                         st.markdown('<div class="dataframe-container">', unsafe_allow_html=True)
-                        st.subheader("🎨 Aviation Carpet Design Details")
-                        st.markdown("*Comprehensive design specifications, patterns, and aviation compliance standards*")
-                        st.dataframe(design_matches, use_container_width=True, height=400)
-
-
-                        if len(design_matches) > 0:
-                            col1, col2, col3 = st.columns(3)
-                            with col1:
-                                st.metric("Design Matches", len(design_matches))
-                            with col2:
-                                unique_patterns = design_matches['Design Name'].nunique()
-                                st.metric("Unique Patterns", unique_patterns)
-                            with col3:
-                                if 'Construction' in design_matches.columns:
-                                    construction_types = design_matches['Construction'].nunique()
-                                    st.metric("Construction Types", construction_types)
-                        
+                        st.subheader("🎨 Design Master Details")
+                        st.dataframe(design_matches, use_container_width=True)
                         st.markdown('</div>', unsafe_allow_html=True)
+                        
+                        if show_export:
+                            excel_data = create_export_excel(
+                                {"Design_Details": design_matches},
+                                f"Design_Details_{design_input_clean}"
+                            )
+                            st.download_button(
+                                label="📥 Download Design Details",
+                                data=excel_data,
+                                file_name=f"Design_Details_{design_input_clean}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx",
+                                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                            )
                     
                     with tab3:
                         st.markdown('<div class="dataframe-container">', unsafe_allow_html=True)
                         st.subheader("🧶 Yarn & Material Specifications")
-                        st.markdown("*Premium wool specifications and aviation-grade material properties*")
-                        st.dataframe(yarn_matches, use_container_width=True, height=400)
-                        
-                        if len(yarn_matches) > 0:
-                            col1, col2, col3 = st.columns(3)
-                            with col1:
-                                st.metric("Yarn Records", len(yarn_matches))
-                            with col2:
-                                if 'Material Type' in yarn_matches.columns:
-                                    material_types = yarn_matches['Material Type'].nunique()
-                                    st.metric("Material Types", material_types)
-                            with col3:
-                                if 'Quality Grade' in yarn_matches.columns:
-                                    quality_grades = yarn_matches['Quality Grade'].nunique()
-                                    st.metric("Quality Grades", quality_grades)
-                        
+                        st.dataframe(yarn_matches, use_container_width=True)
                         st.markdown('</div>', unsafe_allow_html=True)
+                        
+                        if show_export:
+                            excel_data = create_export_excel(
+                                {"Yarn_Specifications": yarn_matches},
+                                f"Yarn_Specifications_{design_input_clean}"
+                            )
+                            st.download_button(
+                                label="📥 Download Yarn Specifications",
+                                data=excel_data,
+                                file_name=f"Yarn_Specifications_{design_input_clean}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx",
+                                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                            )
                     
                     with tab4:
                         if show_analytics:
                             st.subheader("📈 Quality Analytics Dashboard")
                             
-                            # Create analytics visualizations
-                            col1, col2 = st.columns(2)
+                            # Quality metrics
+                            col1, col2, col3 = st.columns(3)
                             
                             with col1:
-                                if 'Construction' in design_matches.columns:
-                                    construction_counts = design_matches['Construction'].value_counts()
-                                    fig_construction = px.pie(
-                                        values=construction_counts.values,
-                                        names=construction_counts.index,
-                                        title="Construction Type Distribution"
+                                if 'Quality Grade' in merged.columns:
+                                    quality_counts = merged['Quality Grade'].value_counts()
+                                    fig = px.pie(
+                                        values=quality_counts.values,
+                                        names=quality_counts.index,
+                                        title="Quality Grade Distribution"
                                     )
-                                    st.plotly_chart(fig_construction, use_container_width=True)
+                                    st.plotly_chart(fig, use_container_width=True)
                             
                             with col2:
-                                if 'Weft Head' in design_matches.columns:
-                                    weft_head_counts = design_matches['Weft Head'].value_counts()
-                                    fig_weft = px.bar(
-                                        x=weft_head_counts.index,
-                                        y=weft_head_counts.values,
-                                        title="Weft Head Specifications"
+                                if 'Construction' in merged.columns:
+                                    construction_counts = merged['Construction'].value_counts()
+                                    fig = px.bar(
+                                        x=construction_counts.index,
+                                        y=construction_counts.values,
+                                        title="Construction Type Analysis"
                                     )
-                                    st.plotly_chart(fig_weft, use_container_width=True)
+                                    st.plotly_chart(fig, use_container_width=True)
                             
-                            # Color analysis
-                            color_columns = [col for col in design_matches.columns if 'color' in col.lower()]
-                            if color_columns:
-                                st.subheader("🎨 Color Analysis")
-                                all_colors = []
-                                for col in color_columns:
-                                    for value in design_matches[col].dropna():
-                                        colors = extract_colors_from_text(str(value))
-                                        all_colors.extend(colors)
-                                
-                                if all_colors:
-                                    color_counts = pd.Series(all_colors).value_counts()
-                                    fig_colors = px.bar(
-                                        x=color_counts.values,
-                                        y=color_counts.index,
-                                        orientation='h',
-                                        title="Color Usage Frequency"
-                                    )
-                                    st.plotly_chart(fig_colors, use_container_width=True)
-                        else:
-                            st.info("Enable Analytics Dashboard in sidebar to view quality metrics")
+                            with col3:
+                                color_columns = [col for col in merged.columns if any(word in col.lower() for word in ['color', 'colour'])]
+                                if color_columns:
+                                    all_colors = []
+                                    for col in color_columns:
+                                        for value in merged[col].dropna():
+                                            colors = extract_colors_from_text(str(value))
+                                            all_colors.extend(colors)
+                                    
+                                    if all_colors:
+                                        color_counts = pd.Series(all_colors).value_counts()
+                                        fig = px.bar(
+                                            x=color_counts.values,
+                                            y=color_counts.index,
+                                            orientation='h',
+                                            title="Color Usage Analysis"
+                                        )
+                                        st.plotly_chart(fig, use_container_width=True)
                 
                 elif not design_matches.empty:
                     st.markdown("""
                     <div class="error-message">
-                        ⚠️ Partial Match: Design Found but Yarn Specifications Missing
+                        ⚠️ Design Found but No Matching Yarn Specifications. Please check your yarn database.
                     </div>
                     """, unsafe_allow_html=True)
                     
+                    st.markdown('<div class="dataframe-container">', unsafe_allow_html=True)
                     st.subheader("🎨 Available Design Details")
                     st.dataframe(design_matches, use_container_width=True)
-                    
-                    if show_export:
-                        buffer = io.BytesIO()
-                        design_matches.to_excel(buffer, index=False)
-                        st.download_button(
-                            label="📥 Download Design Details",
-                            data=buffer.getvalue(),
-                            file_name=f"WiltonWeavers_Design_{design_input_clean}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx",
-                            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                        )
+                    st.markdown('</div>', unsafe_allow_html=True)
                 
                 elif not yarn_matches.empty:
                     st.markdown("""
                     <div class="error-message">
-                        ⚠️ Partial Match: Yarn Specifications Found but Design Details Missing
+                        ⚠️ Yarn Specifications Found but No Matching Design Details. Please check your design database.
                     </div>
                     """, unsafe_allow_html=True)
                     
+                    st.markdown('<div class="dataframe-container">', unsafe_allow_html=True)
                     st.subheader("🧶 Available Yarn Specifications")
                     st.dataframe(yarn_matches, use_container_width=True)
-                    
-                    if show_export:
-                        buffer = io.BytesIO()
-                        yarn_matches.to_excel(buffer, index=False)
-                        st.download_button(
-                            label="📥 Download Yarn Specifications",
-                            data=buffer.getvalue(),
-                            file_name=f"WiltonWeavers_Yarn_{design_input_clean}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx",
-                            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                        )
+                    st.markdown('</div>', unsafe_allow_html=True)
                 
                 else:
                     st.markdown("""
                     <div class="error-message">
-                        ❌ No Matches Found: Design not found in aviation carpet database
+                        ❌ No matches found for your search criteria. Please try different keywords or check your data.
                     </div>
                     """, unsafe_allow_html=True)
                     
-                    st.info("💡 **Search Tips:**\n- Try partial design names\n- Check spelling\n- Use aircraft model numbers\n- Try pattern categories")
+                    # Add search suggestions
+                    if 'Design Name' in design_df.columns:
+                        st.subheader("💡 Search Suggestions")
+                        unique_designs = design_df['Design Name'].dropna().unique()[:10]
+                        cols = st.columns(2)
+                        for i, design in enumerate(unique_designs):
+                            with cols[i % 2]:
+                                if st.button(f"🔍 {design}", key=f"suggest_{i}"):
+                                    st.session_state.search_input = design
+                                    st.rerun()
                 
                 # Add to search history
-                if design_input_clean not in st.session_state.search_history:
+                if design_input_clean and design_input_clean not in st.session_state.search_history:
                     st.session_state.search_history.append(design_input_clean)
                     if len(st.session_state.search_history) > 10:
                         st.session_state.search_history.pop(0)
         
-        # Enhanced Color Filter Search
-        if color_search_button and st.session_state.design_df is not None:
-            with st.spinner('🔍 Searching by Enhanced Filters...'):
-                df = st.session_state.design_df.copy()
-                filtered_df = df.copy()
+        # Enhanced Color Filter Search - FIXED VERSION
+        if color_search_button and (selected_colors or 
+                                   (selected_construction and selected_construction != "Any") or 
+                                   (selected_frames and selected_frames != "Any") or 
+                                   (selected_weft_head and selected_weft_head != "Any")):
+            
+            with st.spinner('🔍 Searching with Enhanced Filters...'):
+                filtered_df = design_df.copy()
                 
-                # Apply color filters
+                # Apply color filter
                 if selected_colors:
-                    color_columns = [col for col in df.columns if any(word in col.lower() for word in ['color', 'colour', 'shade', 'dye'])]
+                    color_columns = [col for col in filtered_df.columns if any(word in col.lower() for word in ['color', 'colour', 'shade', 'dye'])]
                     
                     if color_columns:
-                        color_mask = pd.Series([False] * len(df))
+                        color_mask = pd.Series([False] * len(filtered_df))
                         
-                        for idx, row in df.iterrows():
-                            row_colors = []
+                        for idx, row in filtered_df.iterrows():
+                            row_colors = set()
+                            # Extract all colors from the row
                             for col in color_columns:
                                 if pd.notna(row[col]):
-                                    row_colors.extend(extract_colors_from_text(str(row[col])))
+                                    colors = extract_colors_from_text(str(row[col]))
+                                    row_colors.update(colors)
                             
+                            # Apply matching logic
                             if match_type == "All Colors (AND)":
                                 # All selected colors must be present
-                                if all(color in row_colors for color in selected_colors):
-                                    color_mask[idx] = True
-                            else:
-                                # Any selected color must be present
-                                if any(color in row_colors for color in selected_colors):
-                                    color_mask[idx] = True
+                                if row_colors and all(color in row_colors for color in selected_colors):
+                                    color_mask.iloc[idx] = True
+                            else:  # "Any Color (OR)"
+                                # At least one selected color must be present
+                                if row_colors and any(color in row_colors for color in selected_colors):
+                                    color_mask.iloc[idx] = True
                         
                         filtered_df = filtered_df[color_mask]
                 
                 # Apply construction filter
                 if selected_construction and selected_construction != "Any":
                     construction_col = None
-                    for col in df.columns:
+                    for col in filtered_df.columns:
                         if 'construction' in col.lower():
                             construction_col = col
                             break
@@ -904,7 +897,7 @@ if design_file is not None and yarn_file is not None:
                 # Apply frames filter
                 if selected_frames and selected_frames != "Any":
                     frames_col = None
-                    for col in df.columns:
+                    for col in filtered_df.columns:
                         if 'frame' in col.lower():
                             frames_col = col
                             break
@@ -912,10 +905,10 @@ if design_file is not None and yarn_file is not None:
                     if frames_col:
                         filtered_df = filtered_df[filtered_df[frames_col].astype(str).str.strip() == selected_frames]
                 
-                # Apply weft head filter - NEW FILTER
+                # Apply weft head filter
                 if selected_weft_head and selected_weft_head != "Any":
                     weft_head_col = None
-                    for col in df.columns:
+                    for col in filtered_df.columns:
                         if 'weft' in col.lower() and 'head' in col.lower():
                             weft_head_col = col
                             break
@@ -927,85 +920,176 @@ if design_file is not None and yarn_file is not None:
                 if not filtered_df.empty:
                     st.markdown(f"""
                     <div class="success-message">
-                        ✅ Found {len(filtered_df)} Aviation Carpet Design(s) Matching Your Enhanced Filter Criteria
+                        ✅ Found {len(filtered_df)} designs matching your enhanced filter criteria!
                     </div>
                     """, unsafe_allow_html=True)
                     
-                    # Metrics
-                    col1, col2, col3, col4 = st.columns(4)
-                    with col1:
-                        st.metric("Total Matches", len(filtered_df))
-                    with col2:
-                        unique_designs = filtered_df['Design Name'].nunique() if 'Design Name' in filtered_df.columns else 0
-                        st.metric("Unique Designs", unique_designs)
-                    with col3:
-                        if 'Construction' in filtered_df.columns:
-                            construction_types = filtered_df['Construction'].nunique()
-                            st.metric("Construction Types", construction_types)
-                    with col4:
-                        if 'Weft Head' in filtered_df.columns:
-                            weft_head_types = filtered_df['Weft Head'].nunique()
-                            st.metric("Weft Head Types", weft_head_types)
+                    # Display metrics
+                    display_metrics_cards({
+                        "Total Matches": len(filtered_df),
+                        "Unique Designs": filtered_df['Design Name'].nunique() if 'Design Name' in filtered_df.columns else 0,
+                        "Color Matches": len(selected_colors) if selected_colors else 0,
+                        "Filter Applied": 1 if (selected_construction != "Any" or selected_frames != "Any" or selected_weft_head != "Any") else 0
+                    })
                     
-                    # Display filtered results
+                    # Show filtered results
+                    st.markdown('<div class="dataframe-container">', unsafe_allow_html=True)
                     st.subheader("🎯 Filtered Aviation Carpet Designs")
-                    st.dataframe(filtered_df, use_container_width=True, height=500)
+                    st.dataframe(filtered_df, use_container_width=True)
+                    st.markdown('</div>', unsafe_allow_html=True)
                     
                     # Export options
                     if show_export:
-                        filter_description = f"Colors_{'-'.join(selected_colors) if selected_colors else 'Any'}"
-                        if selected_construction != "Any":
-                            filter_description += f"_Construction_{selected_construction}"
-                        if selected_frames != "Any":
-                            filter_description += f"_Frames_{selected_frames}"
-                        if selected_weft_head != "Any":
-                            filter_description += f"_WeftHead_{selected_weft_head}"
-                        
-                        buffer = io.BytesIO()
-                        filtered_df.to_excel(buffer, index=False)
+                        excel_data = create_export_excel(
+                            {"Filtered_Designs": filtered_df},
+                            "Enhanced_Filter_Results"
+                        )
                         st.download_button(
                             label="📥 Download Filtered Results",
-                            data=buffer.getvalue(),
-                            file_name=f"WiltonWeavers_FilteredDesigns_{filter_description}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx",
+                            data=excel_data,
+                            file_name=f"Enhanced_Filter_Results_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx",
                             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
                         )
                     
                     # Analytics for filtered results
-                    if show_analytics and len(filtered_df) > 1:
+                    if show_analytics:
                         st.subheader("📊 Filtered Results Analytics")
                         
                         col1, col2 = st.columns(2)
                         
                         with col1:
-                            if 'Construction' in filtered_df.columns:
-                                construction_counts = filtered_df['Construction'].value_counts()
-                                if len(construction_counts) > 1:
-                                    fig_construction = px.pie(
-                                        values=construction_counts.values,
-                                        names=construction_counts.index,
-                                        title="Construction Distribution in Filtered Results"
-                                    )
-                                    st.plotly_chart(fig_construction, use_container_width=True)
+                            # Color distribution in filtered results
+                            if selected_colors:
+                                color_columns = [col for col in filtered_df.columns if any(word in col.lower() for word in ['color', 'colour'])]
+                                if color_columns:
+                                    all_colors = []
+                                    for col in color_columns:
+                                        for value in filtered_df[col].dropna():
+                                            colors = extract_colors_from_text(str(value))
+                                            all_colors.extend(colors)
+                                    
+                                    if all_colors:
+                                        color_counts = pd.Series(all_colors).value_counts()
+                                        fig = px.bar(
+                                            x=color_counts.index,
+                                            y=color_counts.values,
+                                            title="Color Distribution in Filtered Results"
+                                        )
+                                        st.plotly_chart(fig, use_container_width=True)
                         
                         with col2:
-                            if 'Weft Head' in filtered_df.columns:
-                                weft_head_counts = filtered_df['Weft Head'].value_counts()
-                                if len(weft_head_counts) > 1:
-                                    fig_weft = px.bar(
-                                        x=weft_head_counts.index,
-                                        y=weft_head_counts.values,
-                                        title="Weft Head Distribution in Filtered Results"
-                                    )
-                                    st.plotly_chart(fig_weft, use_container_width=True)
+                            # Construction type distribution if available
+                            construction_col = None
+                            for col in filtered_df.columns:
+                                if 'construction' in col.lower():
+                                    construction_col = col
+                                    break
+                            
+                            if construction_col:
+                                construction_counts = filtered_df[construction_col].value_counts()
+                                fig = px.pie(
+                                    values=construction_counts.values,
+                                    names=construction_counts.index,
+                                    title="Construction Type Distribution"
+                                )
+                                st.plotly_chart(fig, use_container_width=True)
                 
                 else:
                     st.markdown("""
                     <div class="error-message">
-                        ❌ No designs found matching your enhanced filter criteria
+                        ❌ No designs found matching your enhanced filter criteria. Please try different combinations.
                     </div>
                     """, unsafe_allow_html=True)
                     
-                    st.info("💡 **Filter Tips:**\n- Try selecting fewer colors\n- Use 'Any Color (OR)' instead of 'All Colors (AND)'\n- Check if construction/frames/weft head values exist in your data\n- Try different filter combinations")
+                    # Debug information
+                    if show_debug:
+                        st.markdown("""
+                        <div class="debug-info">
+                            <h4>🔧 Debug Information</h4>
+                            <p><strong>Selected Colors:</strong> {}</p>
+                            <p><strong>Match Type:</strong> {}</p>
+                            <p><strong>Construction:</strong> {}</p>
+                            <p><strong>Frames:</strong> {}</p>
+                            <p><strong>Weft Head:</strong> {}</p>
+                            <p><strong>Total Records Before Filter:</strong> {}</p>
+                            <p><strong>Records After Filter:</strong> {}</p>
+                        </div>
+                        """.format(
+                            selected_colors,
+                            match_type,
+                            selected_construction,
+                            selected_frames,
+                            selected_weft_head,
+                            len(design_df),
+                            len(filtered_df)
+                        ), unsafe_allow_html=True)
+                        
+                        # Show available values for debugging
+                        st.subheader("🔍 Available Values in Database")
+                        
+                        col1, col2 = st.columns(2)
+                        with col1:
+                            if available_colors:
+                                st.write("**Available Colors:**")
+                                st.write(available_colors[:20])  # Show first 20
+                        
+                        with col2:
+                            if available_constructions:
+                                st.write("**Available Constructions:**")
+                                st.write(available_constructions)
+        
+        # Display sample data if no search performed
+        if not design_input and not color_search_button:
+            st.markdown("""
+            <div style="background: linear-gradient(135deg, #f39c12, #e67e22); color: white; padding: 1.5rem; border-radius: 15px; margin: 1rem 0; text-align: center;">
+                <h4>👀 Database Preview</h4>
+                <p>Here's a preview of your aviation carpet database. Use the search above to find specific designs.</p>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            tab1, tab2 = st.tabs(["🎨 Design Preview", "🧶 Yarn Preview"])
+            
+            with tab1:
+                st.markdown('<div class="dataframe-container">', unsafe_allow_html=True)
+                st.subheader("🎨 Design Master Database Preview")
+                st.dataframe(design_df.head(10), use_container_width=True)
+                st.markdown('</div>', unsafe_allow_html=True)
+                
+                st.info(f"📊 Showing first 10 records out of {len(design_df)} total design records")
+            
+            with tab2:
+                st.markdown('<div class="dataframe-container">', unsafe_allow_html=True)
+                st.subheader("🧶 Yarn Database Preview")
+                st.dataframe(yarn_df.head(10), use_container_width=True)
+                st.markdown('</div>', unsafe_allow_html=True)
+                
+                st.info(f"📊 Showing first 10 records out of {len(yarn_df)} total yarn records")
+        
+        # Debug information
+        if show_debug:
+            st.markdown("---")
+            st.subheader("🔧 Debug Information")
+            
+            col1, col2 = st.columns(2)
+            with col1:
+                st.markdown("**Design DataFrame Info:**")
+                st.write(f"Shape: {design_df.shape}")
+                st.write(f"Columns: {list(design_df.columns)}")
+                
+                if 'Design Name' in design_df.columns:
+                    st.write(f"Unique Design Names: {design_df['Design Name'].nunique()}")
+                    st.write("Sample Design Names:")
+                    st.write(design_df['Design Name'].dropna().head().tolist())
+            
+            with col2:
+                st.markdown("**Yarn DataFrame Info:**")
+                st.write(f"Shape: {yarn_df.shape}")
+                st.write(f"Columns: {list(yarn_df.columns)}")
+                
+                if 'Design Name' in yarn_df.columns:
+                    st.write(f"Unique Design Names: {yarn_df['Design Name'].nunique()}")
+                    st.write("Sample Design Names:")
+                    st.write(yarn_df['Design Name'].dropna().head().tolist())
     
     except Exception as e:
         st.markdown(f"""
@@ -1013,77 +1097,73 @@ if design_file is not None and yarn_file is not None:
             ❌ Error processing files: {str(e)}
         </div>
         """, unsafe_allow_html=True)
-        st.info("💡 **Troubleshooting:**\n- Ensure Excel files are not corrupted\n- Check that both files have 'Design Name' columns\n- Verify file formats are .xlsx or .xls")
+        
+        if show_debug:
+            st.exception(e)
 
 else:
     st.markdown("""
-    <div style="background: linear-gradient(135deg, #3498db, #2980b9); color: white; padding: 3rem; border-radius: 20px; text-align: center; margin: 2rem 0;">
-        <h2 style="margin-bottom: 1rem; font-size: 2.5rem;">🚀 Welcome to Wilton Weavers BOM Search Platform</h2>
-        <p style="font-size: 1.3rem; line-height: 1.8; margin-bottom: 2rem;">
+    <div style="background: linear-gradient(135deg, #3498db, #2980b9); color: white; padding: 2rem; border-radius: 15px; margin: 2rem 0; text-align: center;">
+        <h3>🚀 Welcome to Wilton Weavers BOM Search Platform</h3>
+        <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.5rem;">
             Your comprehensive solution for aviation carpet design management and yarn specification analysis.
-            Upload your Excel files to begin exploring our extensive database of premium floor coverings.
         </p>
-        <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 15px; margin-top: 2rem;">
-            <h3 style="margin-bottom: 1rem;">✨ Platform Features</h3>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
-                <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 10px;">
-                    <h4>🎨 Multi-Color Search</h4>
-                    <p>Advanced color filtering with AND/OR logic</p>
-                </div>
-                <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 10px;">
-                    <h4>🏗️ Construction Filter</h4>
-                    <p>Filter by carpet construction types</p>
-                </div>
-                <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 10px;">
-                    <h4>🖼️ Frame Analysis</h4>
-                    <p>Number of frames specification search</p>
-                </div>
-                <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 10px;">
-                    <h4>🧵 Weft Head Filter</h4>
-                    <p>Advanced weft head specifications</p>
-                </div>
-                <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 10px;">
-                    <h4>📊 Analytics Dashboard</h4>
-                    <p>Comprehensive data visualization</p>
-                </div>
-                <div style="background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 10px;">
-                    <h4>📥 Export Options</h4>
-                    <p>Download filtered results as Excel</p>
-                </div>
-            </div>
-        </div>
+        <p style="font-size: 1rem; opacity: 0.9;">
+            📋 Please upload both Design Master Database and Yarn Specifications files to begin your professional search experience.
+        </p>
     </div>
     """, unsafe_allow_html=True)
     
-    st.markdown("""
-    <div style="background: linear-gradient(135deg, #f39c12, #e67e22); color: white; padding: 2rem; border-radius: 15px; text-align: center; margin: 2rem 0;">
-        <h3 style="margin-bottom: 1rem;">📋 Getting Started</h3>
-        <p style="font-size: 1.1rem; line-height: 1.6;">
-            <strong>Step 1:</strong> Upload your Design Master Excel file containing aviation carpet specifications<br>
-            <strong>Step 2:</strong> Upload your Yarn Specifications Excel file with material details<br>
-            <strong>Step 3:</strong> Use our advanced search and filtering capabilities to find perfect matches<br>
-            <strong>Step 4:</strong> Export results and analyze quality metrics
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
+    # Feature highlights
+    col1, col2, col3 = st.columns(3)
+    
+    with col1:
+        st.markdown("""
+        <div style="background: #ffffff; padding: 1.5rem; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 1rem 0; text-align: center;">
+            <h4 style="color: #2c3e50; margin-bottom: 1rem;">🎨 Multi-Color Search</h4>
+            <p style="color: #7f8c8d; font-size: 0.9rem;">
+                Advanced color filtering with AND/OR logic for precise aviation carpet design matching.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col2:
+        st.markdown("""
+        <div style="background: #ffffff; padding: 1.5rem; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 1rem 0; text-align: center;">
+            <h4 style="color: #2c3e50; margin-bottom: 1rem;">🏗️ Construction Filter</h4>
+            <p style="color: #7f8c8d; font-size: 0.9rem;">
+                Filter by construction type, frames, and weft head specifications for technical accuracy.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col3:
+        st.markdown("""
+        <div style="background: #ffffff; padding: 1.5rem; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 1rem 0; text-align: center;">
+            <h4 style="color: #2c3e50; margin-bottom: 1rem;">📊 Analytics Dashboard</h4>
+            <p style="color: #7f8c8d; font-size: 0.9rem;">
+                Comprehensive analytics and export capabilities for professional reporting.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
 
-# --- Footer ---
+# Footer
 st.markdown("---")
 st.markdown("""
 <div style="text-align: center; padding: 2rem; background: linear-gradient(135deg, #2c3e50, #34495e); color: white; border-radius: 15px; margin-top: 2rem;">
     <h3 style="margin-bottom: 1rem;">✈️ WILTON WEAVERS</h3>
-    <p style="font-size: 1.1rem; margin-bottom: 1rem;">
-        <strong>Specialists in Aviation Carpets & Fine Wool Broadloom</strong><br>
-        Kerala, India | Est. 1982 | 40+ Years of Excellence
+    <p style="margin: 0.5rem 0; font-size: 1rem;">
+        <strong>Kerala, India</strong> | Est. 1982 | Aviation Carpets & Fine Wool Broadloom Specialists
     </p>
-    <p style="font-size: 0.9rem; opacity: 0.8;">
-        Premium Floor Coverings • Aviation Grade Quality • Innovative Manufacturing Solutions
+    <p style="margin: 0.5rem 0; font-size: 0.9rem; opacity: 0.8;">
+        40+ Years of Excellence in Quality Floor Coverings | Innovators Par Excellence
     </p>
-    <div style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.7;">
-        BOM Search Platform v2.0 | Powered by Streamlit | Enhanced Multi-Filter Search
-    </div>
+    <p style="margin: 1rem 0; font-size: 0.9rem;">
+        🌐 <a href="https://www.wilton.in" target="_blank" style="color: #3498db;">www.wilton.in</a> | 
+        📧 <a href="mailto:info@wilton.in" style="color: #3498db;">info@wilton.in</a>
+    </p>
+    <p style="margin: 0; font-size: 0.8rem; opacity: 0.7;">
+        © 2024 Wilton Weavers. All rights reserved. | BOM Search Platform v2.0
+    </p>
 </div>
 """, unsafe_allow_html=True)
-                        
-                         
-                         
