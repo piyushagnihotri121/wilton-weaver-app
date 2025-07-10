@@ -157,7 +157,7 @@ st.markdown("""
     }
     
     .color-filter-section {
-        background: linear-gradient(135deg, #90b1ee, #e84393);
+        background: linear-gradient(135deg, #45bfbd, #e84393);
         color: white;
         padding: 2rem;
         border-radius: 15px;
